@@ -1,0 +1,13 @@
+services:
+  postgis:
+    image: postgis/postgis:17-3.5
+    container_name: glosis_db
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=glosis
+      - POSTGRES_PASSWORD=glosis
+    ports:
+      - "5442:5432"
+    volumes:
+      - ./data/postgis:/var/lib/postgresql/data
