@@ -5,12 +5,12 @@
 ###############################################
 
 # Input and output directories
-INPUT_DIR="/home/carva014/Downloads/FAO/SIS/VNM_tmp"                    # << EDIT THIS LINE!
-OUTPUT_DIR="/home/carva014/Downloads/FAO/SIS/VNM_output"                # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Downloads/FAO/SIS/PH/Original/GSAS_tmp"                    # << EDIT THIS LINE!
+OUTPUT_DIR="/home/carva014/Downloads/FAO/SIS/PH/Original/GSAS_output"                # << EDIT THIS LINE!
 
 # Define resolution
-XRES=0.008333333300000                                                  # << EDIT THIS LINE!
-YRES=0.008333333300000                                                  # << EDIT THIS LINE!
+XRES=1000                                                  # << EDIT THIS LINE!
+YRES=1000                                                  # << EDIT THIS LINE!
 
 # Create output directory if it doesn't exist
 mkdir -p "$OUTPUT_DIR"
@@ -40,7 +40,7 @@ for FILE in "$INPUT_DIR"/*.tif; do
     printf "%-15s %-15s %-15s %-15s %-15s %-15s %s\n" "$CURRENT_XMIN" "$CURRENT_YMIN" "$CURRENT_XMAX" "$CURRENT_YMAX" "$CURRENT_PIXEL_SIZE" "$CURRENT_NODATA" "$BASENAME"
 
     # Update overall extent
-    XMIN=$(echo "$CURRENT_XMIN $XMIN" | awk '{print ($1 > $2) ? $1 : $2}')
+    XMIN=$(echo "$CURRENT_XMIN $XMIN" | awk '{print ($1 < $2) ? $1 : $2}')
     YMIN=$(echo "$CURRENT_YMIN $YMIN" | awk '{print ($1 < $2) ? $1 : $2}')
     XMAX=$(echo "$CURRENT_XMAX $XMAX" | awk '{print ($1 > $2) ? $1 : $2}')
     YMAX=$(echo "$CURRENT_YMAX $YMAX" | awk '{print ($1 < $2) ? $1 : $2}')
