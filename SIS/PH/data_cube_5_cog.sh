@@ -9,10 +9,6 @@ INPUT_DIR="/home/carva014/Downloads/FAO/SIS/PH/TMP"                    # << EDIT
 OUTPUT_DIR="/home/carva014/Downloads/FAO/SIS/PH/Processed"             # << EDIT THIS LINE!
 cd $INPUT_DIR
 
-# Define resolution
-XRES=1000
-YRES=1000
-
 # Create output directory if it doesn't exist
 mkdir -p "$OUTPUT_DIR"
 
@@ -49,7 +45,6 @@ done
 
 echo
 echo "Computed extent: $XMIN $YMIN $XMAX $YMAX"
-echo "Resolution: $XRES x $YRES"
 echo
 
 # Loop through all GeoTIFFs to align them and convert them into COG's
@@ -57,6 +52,15 @@ for FILE in *.tif; do
     BASENAME=$(basename "$FILE")
     OUTPUT_TMP_FILE="$OUTPUT_DIR/tmp_${BASENAME}"
     OUTPUT_FILE="$OUTPUT_DIR/$BASENAME"
+
+    # Set resolution based on filename
+    if [[ "$BASENAME" == *"SOILP"* ]]; then
+        XRES=250
+        YRES=250
+    else
+        XRES=1000
+        YRES=1000
+    fi
 
     # Align GeoTIFFs
     gdalwarp -q -r near -tr $XRES $YRES -te $XMIN $YMIN $XMAX $YMAX "$FILE" "$OUTPUT_TMP_FILE"
