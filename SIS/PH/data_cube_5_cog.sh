@@ -44,7 +44,7 @@ for FILE in *.tif; do
 done
 
 echo
-echo "Computed extent: $XMIN $YMIN $XMAX $YMAX"
+echo "Computing extent to $XMIN $YMIN $XMAX $YMAX ..."
 echo
 
 # Loop through all GeoTIFFs to align them and convert them into COG's

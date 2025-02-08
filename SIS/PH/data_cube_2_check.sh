@@ -10,7 +10,7 @@ cd $INPUT_DIR
 
 # Chcek NoData values before processing
 printf "%-8s %-8s %-12s %-12s %-8s %s\n" "Minimum" "Maximum" "Mean" "StdDev" "NoData" "File"
-for FILE in "$INPUT_DIR"/*.tif; do
+for FILE in *.tif; do
     BASENAME=$(basename "$FILE")
 
     # Extract NoData and stat values
@@ -83,14 +83,14 @@ rm *.tif.aux.xml
 #         After nodata script       #
 #####################################
 # Minimum  Maximum  Mean         StdDev       NoData   File
-# 0.008    1.215    0.228        0.051        -1       PH-GSAS-EC-2024-0-30.tif
-# 0.011    2.007    0.132        0.058        -1       PH-GSAS-EC-2024-30-100.tif
-# 0.250    24.347   3.183        0.747        -1       PH-GSAS-ESP-2024-0-30.tif
-# 0.022    9.892    5.794        1.434        -1       PH-GSAS-ESP-2024-30-100.tif
-# 4.446    7.825    6.169        0.229        -1       PH-GSAS-PH-2024-0-30.tif
-# 4.508    8.343    6.005        0.189        -1       PH-GSAS-PH-2024-30-100.tif
-# 1.000    3.000    1.001        0.029        -1       PH-GSAS-SALT-2024-0-30.tif
-# 1.000    4.000    2.002        0.045        -1       PH-GSAS-SALT-2024-30-100.tif
+# 0.008    1.215    0.214        0.120        -1       PH-GSAS-EC-2024-0-30.tif
+# 0.011    2.007    0.152        0.135        -1       PH-GSAS-EC-2024-30-100.tif
+# 0.250    24.347   2.905        1.871        -1       PH-GSAS-ESP-2024-0-30.tif
+# 0.022    9.892    2.844        1.980        -1       PH-GSAS-ESP-2024-30-100.tif
+# 4.446    7.825    5.805        0.363        -1       PH-GSAS-PH-2024-0-30.tif
+# 4.508    8.343    5.956        0.445        -1       PH-GSAS-PH-2024-30-100.tif
+# 2.000    3.000    2.065        0.246        -1       PH-GSAS-SALT-2024-0-30.tif
+# 1.000    4.000    3.000        0.032        -1       PH-GSAS-SALT-2024-30-100.tif
 # 0.000    12.408   0.796        0.642        -1       PH-GSOCS-ADBAU-2024-0-30.tif
 # 0.000    16.162   1.518        1.042        -1       PH-GSOCS-ADSSM1-2024-0-30.tif
 # 0.000    19.916   2.448        1.439        -1       PH-GSOCS-ADSSM2-2024-0-30.tif
@@ -138,14 +138,14 @@ rm *.tif.aux.xml
 #          After epsg script        #
 #####################################
 # Minimum  Maximum  Mean         StdDev       NoData   File
-# 0.008    1.215    0.228        0.051        -1       PH-GSAS-EC-2024-0-30.tif
-# 0.011    2.007    0.132        0.058        -1       PH-GSAS-EC-2024-30-100.tif
-# 0.250    24.347   3.183        0.747        -1       PH-GSAS-ESP-2024-0-30.tif
-# 0.022    9.892    5.794        1.434        -1       PH-GSAS-ESP-2024-30-100.tif
-# 4.446    7.825    6.169        0.229        -1       PH-GSAS-PH-2024-0-30.tif
-# 4.508    8.343    6.005        0.189        -1       PH-GSAS-PH-2024-30-100.tif
-# 1.000    3.000    1.001        0.029        -1       PH-GSAS-SALT-2024-0-30.tif
-# 1.000    4.000    2.002        0.045        -1       PH-GSAS-SALT-2024-30-100.tif
+# 0.008    1.215    0.214        0.120        -1       PH-GSAS-EC-2024-0-30.tif
+# 0.011    2.007    0.152        0.135        -1       PH-GSAS-EC-2024-30-100.tif
+# 0.250    24.347   2.905        1.871        -1       PH-GSAS-ESP-2024-0-30.tif
+# 0.022    9.892    2.844        1.980        -1       PH-GSAS-ESP-2024-30-100.tif
+# 4.446    7.825    5.805        0.363        -1       PH-GSAS-PH-2024-0-30.tif
+# 4.508    8.343    5.956        0.445        -1       PH-GSAS-PH-2024-30-100.tif
+# 2.000    3.000    2.065        0.246        -1       PH-GSAS-SALT-2024-0-30.tif
+# 1.000    4.000    3.000        0.032        -1       PH-GSAS-SALT-2024-30-100.tif
 # 0.000    12.408   0.800        0.642        -1       PH-GSOCS-ADBAU-2024-0-30.tif
 # 0.000    16.162   1.523        1.043        -1       PH-GSOCS-ADSSM1-2024-0-30.tif
 # 0.000    19.916   2.454        1.441        -1       PH-GSOCS-ADSSM2-2024-0-30.tif
@@ -193,14 +193,14 @@ rm *.tif.aux.xml
 #           After cog script        #
 #####################################
 # Minimum  Maximum  Mean         StdDev       NoData   File
-# 0.008    1.215    0.228        0.051        -1       PH-GSAS-EC-2024-0-30.tif
-# 0.011    2.007    0.132        0.058        -1       PH-GSAS-EC-2024-30-100.tif
-# 0.250    24.347   3.183        0.747        -1       PH-GSAS-ESP-2024-0-30.tif
-# 0.022    9.892    5.794        1.434        -1       PH-GSAS-ESP-2024-30-100.tif
-# 4.446    7.825    6.169        0.229        -1       PH-GSAS-PH-2024-0-30.tif
-# 4.508    8.343    6.005        0.189        -1       PH-GSAS-PH-2024-30-100.tif
-# 1.000    3.000    1.001        0.029        -1       PH-GSAS-SALT-2024-0-30.tif
-# 1.000    4.000    2.002        0.045        -1       PH-GSAS-SALT-2024-30-100.tif
+# 0.008    1.215    0.214        0.120        -1       PH-GSAS-EC-2024-0-30.tif
+# 0.011    2.007    0.152        0.135        -1       PH-GSAS-EC-2024-30-100.tif
+# 0.250    24.347   2.905        1.871        -1       PH-GSAS-ESP-2024-0-30.tif
+# 0.022    9.892    2.844        1.980        -1       PH-GSAS-ESP-2024-30-100.tif
+# 4.446    7.825    5.805        0.363        -1       PH-GSAS-PH-2024-0-30.tif
+# 4.508    8.343    5.956        0.445        -1       PH-GSAS-PH-2024-30-100.tif
+# 2.000    3.000    2.065        0.246        -1       PH-GSAS-SALT-2024-0-30.tif
+# 1.000    4.000    3.000        0.032        -1       PH-GSAS-SALT-2024-30-100.tif
 # 0.000    12.408   0.800        0.642        -1       PH-GSOCS-ADBAU-2024-0-30.tif
 # 0.000    16.162   1.523        1.043        -1       PH-GSOCS-ADSSM1-2024-0-30.tif
 # 0.000    19.916   2.454        1.441        -1       PH-GSOCS-ADSSM2-2024-0-30.tif

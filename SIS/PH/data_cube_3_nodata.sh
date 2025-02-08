@@ -14,13 +14,14 @@ echo
 echo "Assigning NoData to $NODATA ..."
 
 # NoData NULL
-gdal_edit.py -a_nodata $NODATA PH-GSAS-EC-2024-30-100.tif
-gdal_edit.py -a_nodata $NODATA PH-GSAS-ESP-2024-0-30.tif
-gdal_edit.py -a_nodata $NODATA PH-GSAS-ESP-2024-30-100.tif
-gdal_edit.py -a_nodata $NODATA PH-GSAS-PH-2024-0-30.tif
-gdal_edit.py -a_nodata $NODATA PH-GSAS-PH-2024-30-100.tif
-gdal_edit.py -a_nodata $NODATA PH-GSAS-SALT-2024-0-30.tif
-gdal_edit.py -a_nodata $NODATA PH-GSAS-SALT-2024-30-100.tif
+gdal_calc.py --quiet -A PH-GSAS-EC-2024-0-30.tif --outfile=temp.tif --calc="A*(A!=0.23120065033435822) + ($NODATA)*(A==0.23120065033435822)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-EC-2024-0-30.tif
+gdal_calc.py --quiet -A PH-GSAS-EC-2024-30-100.tif --outfile=temp.tif --calc="A*(A!=0.1270795613527298) + ($NODATA)*(A==0.1270795613527298)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-EC-2024-30-100.tif
+gdal_calc.py --quiet -A PH-GSAS-ESP-2024-0-30.tif --outfile=temp.tif --calc="A*(A!=3.2343051433563232) + ($NODATA)*(A==3.2343051433563232)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-ESP-2024-0-30.tif
+gdal_calc.py --quiet -A PH-GSAS-ESP-2024-30-100.tif --outfile=temp.tif --calc="A*(A!=6.29727840423584) + ($NODATA)*(A==6.29727840423584)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-ESP-2024-30-100.tif
+gdal_calc.py --quiet -A PH-GSAS-PH-2024-0-30.tif --outfile=temp.tif --calc="A*(A!=6.248271942138672) + ($NODATA)*(A==6.248271942138672)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-PH-2024-0-30.tif
+gdal_calc.py --quiet -A PH-GSAS-PH-2024-30-100.tif --outfile=temp.tif --calc="A*(A!=6.0150837898254395) + ($NODATA)*(A==6.0150837898254395)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-PH-2024-30-100.tif
+gdal_calc.py --quiet -A PH-GSAS-SALT-2024-0-30.tif --outfile=temp.tif --calc="A*(A!=1) + ($NODATA)*(A==1)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-SALT-2024-0-30.tif
+gdal_calc.py --quiet -A PH-GSAS-SALT-2024-30-100.tif --outfile=temp.tif --calc="A*(A!=2) + ($NODATA)*(A==2)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-SALT-2024-30-100.tif
 
 # Rewrite pixels with -99999 to -1
 gdal_calc.py --quiet -A PH-GSOCS-ADBAU-2024-0-30.tif --outfile=temp.tif --calc="A*(A!=-99999) + ($NODATA)*(A==-99999)" --NoDataValue=$NODATA && mv temp.tif PH-GSOCS-ADBAU-2024-0-30.tif
