@@ -54,7 +54,7 @@ for FILE in *.tif; do
     OUTPUT_FILE="$OUTPUT_DIR/$BASENAME"
 
     # Set resolution based on filename
-    if [[ "$BASENAME" == *"SOILP"* ]]; then
+    if [[ "$BASENAME" == *"GSNM"* ]]; then
         XRES=250
         YRES=250
     else
