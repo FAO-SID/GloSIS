@@ -20,8 +20,10 @@ gdal_calc.py --quiet -A PH-GSAS-NAEXC-2020-0-30.tif --outfile=temp.tif --calc="A
 gdal_calc.py --quiet -A PH-GSAS-NAEXC-2020-30-100.tif --outfile=temp.tif --calc="A*(A!=6.29727840423584) + ($NODATA)*(A==6.29727840423584)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-NAEXC-2020-30-100.tif
 gdal_calc.py --quiet -A PH-GSAS-PHX-2020-0-30.tif --outfile=temp.tif --calc="A*(A!=6.248271942138672) + ($NODATA)*(A==6.248271942138672)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-PHX-2020-0-30.tif
 gdal_calc.py --quiet -A PH-GSAS-PHX-2020-30-100.tif --outfile=temp.tif --calc="A*(A!=6.0150837898254395) + ($NODATA)*(A==6.0150837898254395)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-PHX-2020-30-100.tif
-# gdal_calc.py --quiet -A PH-GSAS-SALT-2020-0-30.tif --outfile=temp.tif --calc="A*(A!=1) + ($NODATA)*(A==1)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-SALT-2020-0-30.tif
-# gdal_calc.py --quiet -A PH-GSAS-SALT-2020-30-100.tif --outfile=temp.tif --calc="A*(A!=2) + ($NODATA)*(A==2)" --NoDataValue=$NODATA && mv temp.tif PH-GSAS-SALT-2020-30-100.tif
+
+# Transfer the -1 pixels from Geotiff A to Geotiff B
+gdal_calc.py --quiet -A PH-GSAS-PHX-2020-0-30.tif -B PH-GSAS-SALT-2020-0-30.tif --outfile=temp.tif --calc="where(A==-1, -1, B)" --NoDataValue=-1 --overwrite && mv temp.tif PH-GSAS-SALT-2020-0-30.tif
+gdal_calc.py --quiet -A PH-GSAS-PHX-2020-0-30.tif -B PH-GSAS-SALT-2020-30-100.tif --outfile=temp.tif --calc="where(A==-1, -1, B)" --NoDataValue=-1 --overwrite && mv temp.tif PH-GSAS-SALT-2020-30-100.tif
 
 # Rewrite pixels with -99999 to -1
 gdal_calc.py --quiet -A PH-GSOC-CORGADBAU-2021-0-30.tif --outfile=temp.tif --calc="A*(A!=-99999) + ($NODATA)*(A==-99999)" --NoDataValue=$NODATA && mv temp.tif PH-GSOC-CORGADBAU-2021-0-30.tif
