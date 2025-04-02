@@ -1,2 +1,2 @@
-# glosis-sis
-GLOSIS Soil Information System
+# GloSIS
+Global Soil Information System
