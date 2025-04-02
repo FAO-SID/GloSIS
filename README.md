@@ -2,7 +2,7 @@
 
 Here's a recommended structure for your project that will make it maintainable and easy to use:
 
-## Project Structure
+## Project Structure (in constructions)
 
 ```
 GloSIS/
