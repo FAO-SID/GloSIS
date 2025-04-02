@@ -1,0 +1,4 @@
+// mapserver template
+{
+    "class": %class
+}

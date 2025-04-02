@@ -1,0 +1,19 @@
+{
+  "name": "openlayers-docker",
+  "version": "1.0.0",
+  "description": "OpenLayers in Docker",
+  "source": "index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "start": "npx parcel serve --host 0.0.0.0 index.html",
+    "build": "npx parcel build --public-url . index.html"
+  },
+  "dependencies": {
+    "ol": "^7.5.1",
+    "ol-layerswitcher": "^4.1.1",
+    "proj4": "^2.9.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.10.0"
+  }
+}

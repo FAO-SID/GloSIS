@@ -1,0 +1,9 @@
+services:
+  mapserver:
+    image: camptocamp/mapserver
+    container_name: glosis-ws
+    restart: always
+    ports:
+      - "8082:80"
+    volumes:
+      - ./data:/etc/mapserver:ro
