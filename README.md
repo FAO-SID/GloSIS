@@ -1,7 +1,4 @@
-# GloSIS
-Global Soil Information System
-
-# Organizing Your Spatial Data Infrastructure with Docker
+# GloSIS - Global Soil Information System
 
 Here's a recommended structure for your project that will make it maintainable and easy to use:
 
