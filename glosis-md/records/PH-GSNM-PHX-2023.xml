@@ -126,7 +126,7 @@
         </gmd:CI_Citation>
       </gmd:citation>
       <gmd:abstract>
-        <gco:CharacterString>This indicates the soil reaction at 0-30, 30-60 and 60-100 cm depth. pH are classified accordingly:  pH < 4.5 Extremely acid soils include Acid Sulfate Soils (Mangrove soils, cat clays). Do not drain because by oxidation sulfuric acid will be produced and pH will drop lower still. pH 4.5 – 5.5 Very acid soils suffering often from Al toxicity. Some crops are tolerant for these conditions (Tea, Pineapple). pH 5.5 –7.2 Acid to neutral soils: these are the best pH conditions for nutrient availability and suitable for most crops. pH 7.2 – 8.5 These pH values are indicative of carbonate rich soils. Depending on the form and concentration of calcium carbonate they may result in well structured soils which may however have depth limitations when the calcium carbonate hardens in an impermeable layer and chemically forms less available carbonates affecting nutrient availability (Phosphorus, Iron). pH > 8.5 Indicates alkaline soils often highly sodic (Na reaching toxic levels), badly structured (columnar structure) and easily dispersed surface clays. </gco:CharacterString>
+        <gco:CharacterString>This indicates the soil reaction at 0-30, 30-60 and 60-100 cm depth. pH are classified accordingly: pH lower than 4.5 Extremely acid soils include Acid Sulfate Soils (Mangrove soils, cat clays). Do not drain because by oxidation sulfuric acid will be produced and pH will drop lower still. pH 4.5 to 5.5 Very acid soils suffering often from Al toxicity. Some crops are tolerant for these conditions (Tea, Pineapple). pH 5.5 to 7.2 Acid to neutral soils: these are the best pH conditions for nutrient availability and suitable for most crops. pH 7.2 to 8.5 These pH values are indicative of carbonate rich soils. Depending on the form and concentration of calcium carbonate they may result in well structured soils which may however have depth limitations when the calcium carbonate hardens in an impermeable layer and chemically forms less available carbonates affecting nutrient availability (Phosphorus, Iron). pH bigger than 8.5 Indicates alkaline soils often highly sodic (Na reaching toxic levels), badly structured (columnar structure) and easily dispersed surface clays.</gco:CharacterString>
       </gmd:abstract>
       <gmd:status>
         <gmd:MD_ProgressCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ProgressCode" codeListValue="completed" />
@@ -258,7 +258,7 @@
             <gmd:MD_RestrictionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" codeListValue="license" />
           </gmd:useConstraints>
           <gmd:otherConstraints>
-            <gco:CharacterString>Creative Commons Attribution 4.0</gco:CharacterString>
+            <gco:CharacterString>Creative Commons Attribution 4.0 International licence (CC-BY-4.0)</gco:CharacterString>
           </gmd:otherConstraints>
         </gmd:MD_LegalConstraints>
       </gmd:resourceConstraints>
