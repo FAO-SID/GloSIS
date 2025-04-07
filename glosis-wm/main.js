@@ -78,8 +78,8 @@ const clayWMSSource = new ImageWMS({
 const ecWMSSource = new ImageWMS({
   url: 'http://localhost:8082/',
   params: {
-    'MAP': '/etc/mapserver/PH-GSAS-EC-2020-0-30.map',
-    'LAYERS': 'PH-GSAS-EC-2020-0-30',
+    'MAP': '/etc/mapserver/PH-GSAS-ECX-2020-0-30.map',
+    'LAYERS': 'PH-GSAS-ECX-2020-0-30',
     'TRANSPARENT': true,
     'FORMAT': 'image/png'
   },
@@ -314,7 +314,7 @@ document.head.appendChild(styleSheet);
 function getActiveLayerName() {
   const layers = [
     { layer: clayLayer, name: 'PH-GSNM-CLAY-2023-0-30' },
-    { layer: ecLayer, name: 'PH-GSAS-EC-2020-0-30' },
+    { layer: ecLayer, name: 'PH-GSAS-ECX-2020-0-30' },
     { layer: phLayer, name: 'PH-GSAS-PHX-2020-0-30' },
     { layer: gsocLayer, name: 'GSOC' }
   ];
@@ -332,7 +332,7 @@ function formatLayerValue(layerName, value) {
         label: 'Clay Content:',
         value: `${value.toFixed(1)}%`
       };
-    case 'PH-GSAS-EC-2020-0-30':
+    case 'PH-GSAS-ECX-2020-0-30':
       return {
         label: 'El. Conductivity:',
         value: `${value.toFixed(2)} dS/m`
@@ -497,7 +497,7 @@ clayLayer.on('change:visible', function(e) {
 ecLayer.on('change:visible', function(e) {
   if (e.target.getVisible()) {
     showOnlySoilLayer(ecLayer);
-    updateLegend('PH-GSAS-EC-2020-0-30');
+    updateLegend('PH-GSAS-ECX-2020-0-30');
   }
 });
 
