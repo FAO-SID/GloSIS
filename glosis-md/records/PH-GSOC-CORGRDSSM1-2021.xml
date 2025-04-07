@@ -27,7 +27,7 @@
         <gco:CharacterString>Andrew B. Flores</gco:CharacterString>
       </gmd:individualName>
       <gmd:organisationName>
-        <gco:CharacterString> Departement of Agriculture - Bureau of Soils and Water Management</gco:CharacterString>
+        <gco:CharacterString>Departement of Agriculture - Bureau of Soils and Water Management</gco:CharacterString>
       </gmd:organisationName>
       <gmd:positionName>
         <gco:CharacterString>Science Research Specialist</gco:CharacterString>
@@ -101,7 +101,7 @@
       <gmd:citation>
         <gmd:CI_Citation>
           <gmd:title>
-            <gco:CharacterString>Soil Organic Carbon Sequestration Potential RelDiff SSM1 (Philippines - 1 km)</gco:CharacterString>
+            <gco:CharacterString>Soil organic carbon sequestration potential RelDiff SSM1 (Philippines - 1 km)</gco:CharacterString>
           </gmd:title>
           <gmd:date>
             <gmd:CI_Date>
@@ -147,7 +147,7 @@
                 <gco:CharacterString>Andrew B. Flores</gco:CharacterString>
               </gmd:individualName>
               <gmd:organisationName>
-                <gco:CharacterString> Departement of Agriculture - Bureau of Soils and Water Management</gco:CharacterString>
+                <gco:CharacterString>Departement of Agriculture - Bureau of Soils and Water Management</gco:CharacterString>
               </gmd:organisationName>
               <gmd:positionName>
                 <gco:CharacterString>Science Research Specialist</gco:CharacterString>
@@ -350,7 +350,7 @@
           <gmd:onLine>
             <gmd:CI_OnlineResource>
               <gmd:linkage>
-                <gmd:URL>https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GLOSIS/mapsets/PH-GSOC-CORGRDSSM1-2021&amp;tilematrixset=EPSG:4326&amp;Service=WMTS&amp;request=GetTile&amp;Version=1.0.0&amp;Format=image/png&amp;TileMatrix={z}&amp;TileCol={y}&amp;TileRow={x}&amp;layertype=Image</gmd:URL>
+                <gmd:URL>https://data.apps.fao.org/map/wmts/wmts?service=WMTS&amp;request=GetCapabilities&amp;version=1.0.0&amp;workspace=GLOSIS</gmd:URL>
               </gmd:linkage>
               <gmd:protocol>
                 <gco:CharacterString>OGC:WMTS</gco:CharacterString>
