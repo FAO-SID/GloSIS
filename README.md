@@ -10,29 +10,29 @@ GloSIS/
 ├── README.md                   # Project documentation
 ├── .env                        # Environment variables
 │
-├── glosis-api/                 # API service (TODO)
-│   ├── Dockerfile              # API container definition
-│   ├── src/                    # Your API source code
-│   └── requirements.txt        # Python/Node dependencies if applicable
-│
 ├── glosis-db/                  # Database service (DONE)
 │   ├── initdb/                 # Initialization scripts
 │   │   ├── 01_schema.sql       # Database schema
 │   │   └── 02_data.sql         # Sample data
 │   └── pgdata/                 # Persistent data (added to .gitignore)
 │
-├── glosis-md/                  # GeoNetwork metadata catalog (TODO)
+├── glosis-ws/                  # MapServer (DONE)
+|   └── data/                   # Mapfiles and data
+|       ├── mapfiles/           # Your .map configuration files
+|       └── data/               # Spatial data files
+│
+├── glosis-md/                  # GeoNetwork metadata catalog (DONE)
 │   └── config/                 # Custom configuration files
 │
 ├── glosis-wm/                  # Web mapping (DONE)
-│   ├── Dockerfile              # Web mapping container definition
-│   ├── src/                    # Your OpenLayers code
-│   └── public/                 # Static assets
-│
-└── glosis-ws/                  # MapServer (DONE)
-    └── data/                   # Mapfiles and data
-        ├── mapfiles/           # Your .map configuration files
-        └── data/               # Spatial data files
+|   ├── Dockerfile              # Web mapping container definition
+|   ├── src/                    # Your OpenLayers code
+|   └── public/                 # Static assets
+|
+└── glosis-api/                 # API service (TODO)
+    ├── Dockerfile              # API container definition
+    ├── src/                    # Your API source code
+    └── requirements.txt        # Python/Node dependencies if applicable
 ```
 
 ## Docker Compose File

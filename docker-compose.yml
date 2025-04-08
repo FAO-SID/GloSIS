@@ -1,7 +1,7 @@
 services:
-  postgis:
-    image: luislado/glosis-postgis:latest
+  glosis-db:
     container_name: glosis-db
+    image: postgis/postgis:17-3.5
     restart: always
     environment:
       DB_HOST: postgis
@@ -13,44 +13,68 @@ services:
     ports:
       - "5442:5432"
     volumes:
-      - ./data/postgis:/var/lib/postgresql/data
-      - ./init-scripts:/docker-entrypoint-initdb.d
+      - ./glosis-db/data/postgresql:/var/lib/postgresql/data
+      # - ./glosis-db/initdb:/docker-entrypoint-initdb.d
     networks:
       - glosis-net
 
-  shinyapp:
-    image: luislado/glosis-shiny:latest
-    container_name: glosis-shiny
-    restart: always
-    environment:
-      USER: shiny
-      PASSWORD: shiny
-      DB_HOST: postgis
-      DB_PORT: 5442
-      DB_NAME: postgres
-      DB_USER: postgres
-      DB_PASSWORD: glosis
-    ports:
-      - "3838:3838"
-    volumes:
-      - ./init-scripts:/srv/shiny-server/init-scripts
-    depends_on:
-      - postgis
-    networks:
-      - glosis-net
-
-  mapserver:
-    image: camptocamp/mapserver
+  glosis-ws:
     container_name: glosis-ws
+    image: camptocamp/mapserver
     restart: always
     ports:
       - "8082:80"
     volumes:
-      - ./data/mapserver:/etc/mapserver:ro
+      - ./glosis-ws/data/mapserver:/etc/mapserver:ro
     depends_on:
-      - postgis
+      - glosis-db
     networks:
       - glosis-net
+
+  glosis-md:
+    container_name: glosis-md
+    image: geopython/pycsw:latest
+    environment:
+        PYCSW_SERVER_URL: http://localhost:8001
+    ports:
+      - 8001:8000
+    volumes:
+      - ./glosis-md/pycsw.yml:/etc/pycsw/pycsw.yml
+      - ./glosis-md/records:/records
+    networks:
+      - glosis-net
+
+  glosis-wm:
+    container_name: glosis-wm
+    build: ./glosis-wm/.
+    ports:
+      - "1234:1234"
+    volumes:
+      - ./glosis-wm/:/app
+      - /glosis-wm/app/node_modules
+    environment:
+      - NODE_ENV=development
+
+  # glosis-shiny:
+  #   container_name: glosis-shiny
+  #   image: luislado/glosis-shiny:latest
+  #   restart: always
+  #   environment:
+  #     USER: shiny
+  #     PASSWORD: shiny
+  #     DB_HOST: glosis-db
+  #     DB_PORT: 5442
+  #     DB_NAME: postgres
+  #     DB_USER: postgres
+  #     DB_PASSWORD: glosis
+  #   ports:
+  #     - "3838:3838"
+  #   volumes:
+  #     - ./init-scripts:/srv/shiny-server/init-scripts
+  #   depends_on:
+  #     - glosis-db
+  #   networks:
+  #     - glosis-net
 
 networks:
   glosis-net:
