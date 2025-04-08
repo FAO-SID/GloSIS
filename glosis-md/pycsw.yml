@@ -84,4 +84,10 @@ metadata:
  
 repository:
     database: 'postgresql://glosis:glosis@pycsw-db:5432/pycsw'
-    table: records
+    table: public.records
+    facets:
+        - type
+        - date
+        # - title
+        # - keywords
+        

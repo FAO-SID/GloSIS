@@ -40,35 +40,17 @@ docker-compose exec pycsw pycsw-admin.py load-records -c /etc/pycsw/pycsw.yml -p
 docker-compose exec pycsw-db psql -U glosis -d pycsw -c "SELECT identifier, title FROM public.records ORDER BY title;"
 
 # custumization - https://docs.pycsw.org/en/latest/configuration.html
-docker-compose exec pycsw cp pycsw/default-sample.yml pycsw/default.yml
-docker-compose exec pycsw sed -i 's/csw_harvest_pagesize: 50/csw_harvest_pagesize: 10/g' pycsw/default.yml
+# docker-compose exec pycsw cp pycsw/default-sample.yml pycsw/default.yml
+docker-compose exec pycsw sed -i 's/pycsw website/Philippines SIS metadata/g' pycsw/pycsw/ogc/api/templates/_base.html
+docker-compose exec pycsw sed -i 's/https:\/\/pycsw.org\/img\/pycsw-logo-vertical.png/https:\/\/www.bswm.da.gov.ph\/wp-content\/uploads\/BAGONG-PILIPINAS.png/g' pycsw/pycsw/ogc/api/templates/_base.html
+docker-compose exec pycsw sed -i 's/https:\/\/pycsw.org/http:\/\/localhost:8001\/collections\/metadata:main\/items/g' pycsw/pycsw/ogc/api/templates/_base.html
 
-
-
-
-
-
-# RUN sed -i -e 's#${jdbc.database}?${jdbc.connectionProperties}#${jdbc.database}#g' $CATALINA_HOME/webapps/geonetwork/WEB-INF/config-db/postgres.xml
-# COPY ./lib/jdk8/java.security $JAVA_HOME/jre/lib/security/java.security
-
-
-
-# https://docs.pycsw.org/en/latest/configuration.html
-# pycsw.server.baseurl = http://localhost:8001/csw
-# pycsw.server.maxrecords = 10
-# pycsw.server.maxrecords = 10  
-
-# https://docs.pycsw.org/en/latest/configuration.html
-# pycsw.server.baseurl = http://localhost:8001/csw
-# pycsw.server.maxrecords = 10
-# pycsw.server.maxrecords = 10  
-
-# table: the table name for metadata records (default is records). If you are using PostgreSQL with a DB schema other than public, qualify the table like myschema.table
-docker-compose exec pycsw pycsw-admin.py update-config --config /etc/pycsw/pycsw.yml --key "pycsw.database.table" --value "pycsw.records"
-
+# access pycsw container
 docker exec -it pycsw /bin/bash
 
 
-
+# notes
+# RUN sed -i -e 's#${jdbc.database}?${jdbc.connectionProperties}#${jdbc.database}#g' $CATALINA_HOME/webapps/geonetwork/WEB-INF/config-db/postgres.xml
+# COPY ./lib/jdk8/java.security $JAVA_HOME/jre/lib/security/java.security
 
 
