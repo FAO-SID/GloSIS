@@ -13,7 +13,7 @@ services:
     ports:
       - "5442:5432"
     volumes:
-      - ./glosis-db/data/postgresql:/var/lib/postgresql/data
+      - ./glosis-db/pgdata:/var/lib/postgresql/data
       # - ./glosis-db/initdb:/docker-entrypoint-initdb.d
     networks:
       - glosis-net
