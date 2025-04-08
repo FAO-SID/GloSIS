@@ -343,7 +343,7 @@
                 <gco:CharacterString>OGC:WMTS</gco:CharacterString>
               </gmd:protocol>
               <gmd:name>
-                <gco:CharacterString>Web Map Tile Service (self hosted)</gco:CharacterString>
+                <gco:CharacterString>WMTS (Philippines SIS)</gco:CharacterString>
               </gmd:name>
               <gmd:description gco:nilReason="missing">
                 <gco:CharacterString />
@@ -362,7 +362,7 @@
                 <gco:CharacterString>OGC:WMTS</gco:CharacterString>
               </gmd:protocol>
               <gmd:name>
-                <gco:CharacterString>Web Map Tile Service (self hosted)</gco:CharacterString>
+                <gco:CharacterString>WMTS (Philippines SIS)</gco:CharacterString>
               </gmd:name>
               <gmd:description gco:nilReason="missing">
                 <gco:CharacterString />
@@ -381,7 +381,7 @@
                 <gco:CharacterString>OGC:WMTS</gco:CharacterString>
               </gmd:protocol>
               <gmd:name>
-                <gco:CharacterString>Web Map Tile Service (FAO)</gco:CharacterString>
+                <gco:CharacterString>WMTS (FAO)</gco:CharacterString>
               </gmd:name>
               <gmd:description gco:nilReason="missing">
                 <gco:CharacterString />

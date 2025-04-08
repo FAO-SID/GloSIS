@@ -3,10 +3,10 @@ server:
     mimetype: application/xml; charset=UTF-8
     encoding: UTF-8
     language: en-US
-    maxrecords: 10
+    maxrecords: 50
     timeout: 30
     #ogc_schemas_location: http://foo
-    #pretty_print: true
+    # pretty_print: true
     gzip_compresslevel: 9
     #domainquerytype: range
     #domaincounts: true
@@ -31,12 +31,14 @@ manager:
 
 metadata:
     identification:
-        title: pycsw Geospatial Catalogue
-        description: pycsw is an OARec and OGC CSW server implementation written in Python
+        title: Philippines SIS metadata
+        description: This metadata catalogue lists a set of datasets of soil data from the Philippines Soil Information System (SIS).
         keywords:
             - catalogue
             - discovery
             - metadata
+            - Philippines Soil Information System
+            - Soil
         keywords_type: theme
         fees: None
         accessconstraints: None
@@ -46,19 +48,19 @@ metadata:
         name: CC-BY 4.0 license
         url: https://creativecommons.org/licenses/by/4.0
     provider:
-        name: Organization Name
-        url: https://pycsw.org
+        name: Departement of Agriculture - Bureau of Soils and Water Management
+        url: http://www.bswm.da.gov.ph
     contact:
-        name: Lastname, Firstname
+        name: Flores, Andrew
         position: Position Title
-        address: Mailing Address
-        city: City
-        stateorprovince: Administrative Area
-        postalcode: Zip or Postal Code
-        country: Country
+        address: SRDC Bldg. Elliptical Road corner Visayas Avenue, Diliman
+        city: Quezon
+        stateorprovince: Quezon
+        postalcode: 1128
+        country: Philippines
         phone: +xx-xxx-xxx-xxxx
         fax: +xx-xxx-xxx-xxxx
-        email: you@example.org
+        email: andrew.flores@bswm.da.gov.ph
         url: Contact URL
         hours: Mo-Fr 08:00-17:00
         instructions: During hours of service. Off on weekends.
