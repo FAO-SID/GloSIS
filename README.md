@@ -1,6 +1,6 @@
 # GloSIS - Global Soil Information System
 
-Here's a recommended structure for your project that will make it maintainable and easy to use:
+GloSIS software stack structure:
 
 ## Project Structure
 
@@ -32,8 +32,7 @@ GloSIS/
 │
 ├── glosis-md/                      # GeoNetwork metadata catalog (DONE)
 │   ├── records/                    # Metadata records in XML
-|   ├── pycsw.yml                    # Configuration file
-|   └── setup.sh                    # Set up script
+|   └── pycsw.yml                    # Configuration file
 |
 ├── glosis-shiny/                   # Shiny app to help with ingest soil profile data into PostgreSQL (DONE)
 │   ├── init-scripts/               # Init scripts
@@ -49,12 +48,10 @@ GloSIS/
 |   ├── logo.png                    # Logo image
 |   ├── main.js                     # OpenLayers js code
 |   ├── package.json                # Dependencies
-|   ├── .gitignore                  # gitignore
+|   └── .gitignore                  # gitignore
 │
 └── glosis-ws/                      # MapServer (DONE)
-    ├── data/                       # GeoTIFFs and mapfiles
-    ├── deploy.sh                   # Instructions
-    └── .gitignore                  # gitignore
+    └── data/                       # GeoTIFFs and mapfiles
 ```
 
 ## Docker Compose File
@@ -68,9 +65,8 @@ Create a `.env` file in your project root:
 
 ## Implementation Steps
 
-1. **Database Setup**:
-   - Create schema and data initialization scripts in `db/initdb/`
-   - These will run automatically when the container starts
+1. **GloSIS database**:
+   - GLOSIS Database. Based on the [ISRIC implementation](https://github.com/ISRICWorldSoil/iso-28258) with accompaning [documentation](https://iso28258.isric.org/) of the [domain model ISO 28258](https://www.iso.org/standard/44595.html).
 
 2. **API Service**:
    - Create a Dockerfile in `api/` based on your tech stack (Python/Node/etc.)
