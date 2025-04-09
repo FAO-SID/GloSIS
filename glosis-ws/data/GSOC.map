@@ -30,7 +30,7 @@ MAP
       CLASS
         NAME "Organic Carbon"
         STYLE
-            COLORRANGE "#F4E7D3" "#5C4033"  # Start and end colors (blue to brown)
+            COLORRANGE "#bf8730" "#030201"  # Start and end colors (blue to brown)
             DATARANGE 0 750
             RANGEITEM "pixel"
           END # STYLE

@@ -1,36 +1,24 @@
 services:
+
+  # API (TODO)
+
+  # Database (PostgreSQL)
   glosis-db:
     container_name: glosis-db
     image: postgis/postgis:17-3.5
     restart: always
     environment:
-      DB_HOST: postgis
-      DB_PORT: 5432
-      DB_NAME: postgres
-      DB_USER: postgres
-      DB_PASSWORD: glosis
+      POSTGRES_DB: glosis
+      POSTGRES_USER: glosis
       POSTGRES_PASSWORD: glosis
     ports:
       - "5442:5432"
     volumes:
       - ./glosis-db/pgdata:/var/lib/postgresql/data
-      # - ./glosis-db/initdb:/docker-entrypoint-initdb.d
     networks:
       - glosis-net
 
-  glosis-ws:
-    container_name: glosis-ws
-    image: camptocamp/mapserver
-    restart: always
-    ports:
-      - "8082:80"
-    volumes:
-      - ./glosis-ws/data/mapserver:/etc/mapserver:ro
-    depends_on:
-      - glosis-db
-    networks:
-      - glosis-net
-
+  # Metadata (pyCSW)
   glosis-md:
     container_name: glosis-md
     image: geopython/pycsw:latest
@@ -44,37 +32,53 @@ services:
     networks:
       - glosis-net
 
+  # Data ingestion tool (Shiny)
+  glosis-shiny:
+    container_name: glosis-shiny
+    image: luislado/glosis-shiny:latest
+    restart: always
+    environment:
+      USER: shiny
+      PASSWORD: shiny
+      DB_HOST: glosis
+      DB_PORT: 5442
+      DB_NAME: glosis
+      DB_USER: glosis
+      DB_PASSWORD: glosis
+    ports:
+      - "3838:3838"
+    volumes:
+      - ./glosis-shiny/init-scripts:/srv/shiny-server/init-scripts
+    depends_on:
+      - glosis-db
+    networks:
+      - glosis-net
+
+  # Web Mapping (Openlayers)
   glosis-wm:
     container_name: glosis-wm
     build: ./glosis-wm/.
     ports:
       - "1234:1234"
     volumes:
-      - ./glosis-wm/:/app
+      - ./glosis-wm:/app
       - /glosis-wm/app/node_modules
     environment:
       - NODE_ENV=development
 
-  # glosis-shiny:
-  #   container_name: glosis-shiny
-  #   image: luislado/glosis-shiny:latest
-  #   restart: always
-  #   environment:
-  #     USER: shiny
-  #     PASSWORD: shiny
-  #     DB_HOST: glosis-db
-  #     DB_PORT: 5442
-  #     DB_NAME: postgres
-  #     DB_USER: postgres
-  #     DB_PASSWORD: glosis
-  #   ports:
-  #     - "3838:3838"
-  #   volumes:
-  #     - ./init-scripts:/srv/shiny-server/init-scripts
-  #   depends_on:
-  #     - glosis-db
-  #   networks:
-  #     - glosis-net
+  # Web Services (MapServer)
+  glosis-ws:
+    container_name: glosis-ws
+    image: camptocamp/mapserver:8.4
+    restart: always
+    ports:
+      - "8082:80"
+    volumes:
+      - ./glosis-ws/data:/etc/mapserver:ro
+    depends_on:
+      - glosis-db
+    networks:
+      - glosis-net
 
 networks:
   glosis-net:
