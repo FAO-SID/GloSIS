@@ -583,19 +583,19 @@ plot	bleachedSandProperty	BleachedSandCover	Bleached Sand Cover	1 - Low (2 - 15 
 plot	bleachedSandProperty	BleachedSandCover	Bleached Sand Cover	2 - Moderate (15 - 40 %)	3	http://w3id.org/glosis/model/common/bleachedSandProperty	FAO GfSD 2006	
 plot	bleachedSandProperty	BleachedSandCover	Bleached Sand Cover	3 - High (40 - 80 %)	4	http://w3id.org/glosis/model/common/bleachedSandProperty	FAO GfSD 2006	
 plot	bleachedSandProperty	BleachedSandCover	Bleached Sand Cover	4 - Dominant (> 80 %)	5	http://w3id.org/glosis/model/common/bleachedSandProperty	FAO GfSD 2006	
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	MP - Permanently submerged by seawater (below mean low water springs)	1		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	MT - Tidal area (between mean low and mean high water springs)	2		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	MO - Occasional storm surges (above mean high water springs)	3		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	FP - Permanently submerged by inland water	4		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	FF - Submerged by remote flowing inland water at least once a year	5		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	FO - Submerged by remote flowing inland water less than once a year	6		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	GF - Submerged by rising local groundwater at least once a year	7		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	GO - Submerged by rising local groundwater less than once a year	8		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	RF - Submerged by local rainwater at least once a year	9		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	RO - Submerged by local rainwater less than once a year	10		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	UF - Submerged by inland water of unknown origin at least once a year	11		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	UO - Submerged by inland water of unknown origin less than once a year	12		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
-plot	PresenceOfWater	PresenceOfWater	Presence Of Water	NO - None of the above	13		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	MP - Permanently submerged by seawater (below mean low water springs)	1		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	MT - Tidal area (between mean low and mean high water springs)	2		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	MO - Occasional storm surges (above mean high water springs)	3		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	FP - Permanently submerged by inland water	4		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	FF - Submerged by remote flowing inland water at least once a year	5		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	FO - Submerged by remote flowing inland water less than once a year	6		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	GF - Submerged by rising local groundwater at least once a year	7		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	GO - Submerged by rising local groundwater less than once a year	8		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	RF - Submerged by local rainwater at least once a year	9		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	RO - Submerged by local rainwater less than once a year	10		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	UF - Submerged by inland water of unknown origin at least once a year	11		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	UO - Submerged by inland water of unknown origin less than once a year	12		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
+plot		PresenceOfWater	Presence Of Water	NO - None of the above	13		WRB_fourth_edition_2022	New property. WBR 4th Ed 2022 Table 8.17: Water above the soil surface
 plot	MoistureConditions	MoistureConditions	Moisture Conditions	D - Dry	1		FAO GfSD 1990	Need confirmation using GfSD 1990
 plot	MoistureConditions	MoistureConditions	Moisture Conditions	S - Slightly moist	2		FAO GfSD 1990	Need confirmation using GfSD 1990
 plot	MoistureConditions	MoistureConditions	Moisture Conditions	M - Moist	3		FAO GfSD 1990	Need confirmation using GfSD 1990
