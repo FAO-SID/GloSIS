@@ -39,9 +39,6 @@ docker exec -it glosis-db psql -d glosis -U glosis -f /tmp/init-03.sql
 ####################
 
 # load records
-# conda activate db
-# python /home/carva014/Work/Code/FAO/GloSIS-private/Metadata/table2xml.py
-# python /home/carva014/Work/Code/FAO/GloSIS-private/Metadata/export.py
 cp /home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/output/*.xml /home/carva014/Work/Code/FAO/GloSIS/glosis-md/records
 docker-compose exec glosis-md ls -l /records
 docker-compose exec glosis-md pycsw-admin.py load-records -c /etc/pycsw/pycsw.yml -p /records -r -y
