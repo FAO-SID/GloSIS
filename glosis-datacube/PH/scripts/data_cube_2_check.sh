@@ -5,7 +5,7 @@
 ###############################################
 
 # Variables
-INPUT_DIR="/home/carva014/Downloads/FAO/SIS/PH/TMP"                    # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/tmp"                          # << EDIT THIS LINE!
 cd $INPUT_DIR
 
 # Chcek NoData values before processing

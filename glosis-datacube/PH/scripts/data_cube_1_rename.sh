@@ -4,8 +4,8 @@
 #                    Rename                   #
 ###############################################
 
-INPUT_DIR="/home/carva014/Downloads/FAO/SIS/PH/Original/GSAS"                          # << EDIT THIS LINE!
-OUTPUT_DIR="/home/carva014/Downloads/FAO/SIS/PH/TMP"                                   # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/input/GSAS"                          # << EDIT THIS LINE!
+OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/tmp"                                # << EDIT THIS LINE!
 cp $INPUT_DIR/Top0_30ECse.tif $OUTPUT_DIR/PH-GSAS-ECX-2020-0-30.tif
 cp $INPUT_DIR/Sub30_100ECse.tif $OUTPUT_DIR/PH-GSAS-ECX-2020-30-100.tif
 cp $INPUT_DIR/Top0_30ESP.tif $OUTPUT_DIR/PH-GSAS-NAEXC-2020-0-30.tif
@@ -15,8 +15,8 @@ cp $INPUT_DIR/Sub30_100PH.tif $OUTPUT_DIR/PH-GSAS-PHX-2020-30-100.tif
 cp $INPUT_DIR/Top0_30saltaffected.tif $OUTPUT_DIR/PH-GSAS-SALT-2020-0-30.tif
 cp $INPUT_DIR/Sub30_100saltaffected.tif $OUTPUT_DIR/PH-GSAS-SALT-2020-30-100.tif
 
-INPUT_DIR="/home/carva014/Downloads/FAO/SIS/PH/Original/GSOC"                          # << EDIT THIS LINE!
-OUTPUT_DIR="/home/carva014/Downloads/FAO/SIS/PH/TMP"                                   # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/input/GSOC"                          # << EDIT THIS LINE!
+OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/tmp"                                # << EDIT THIS LINE!
 cp $INPUT_DIR/PHL_GSOCseq_AbsDiff_BAU_Map030.tif $OUTPUT_DIR/PH-GSOC-CORGADBAU-2021-0-30.tif
 cp $INPUT_DIR/PHL_GSOCseq_AbsDiff_SSM1_Map030.tif $OUTPUT_DIR/PH-GSOC-CORGADSSM1-2021-0-30.tif
 cp $INPUT_DIR/PHL_GSOCseq_AbsDiff_SSM2_Map030.tif $OUTPUT_DIR/PH-GSOC-CORGADSSM2-2021-0-30.tif
@@ -41,8 +41,8 @@ cp $INPUT_DIR/PHL_GSOCseq_RSR_SSM3_UncertaintyMap030.tif $OUTPUT_DIR/PH-GSOC-COR
 cp $INPUT_DIR/PHL_GSOCseq_SSM_UncertaintyMap030.tif $OUTPUT_DIR/PH-GSOC-CORGSSMU-2021-0-30.tif
 cp $INPUT_DIR/PHL_GSOCseq_T0_Map030.tif $OUTPUT_DIR/PH-GSOC-CORGT0-2021-0-30.tif
 
-INPUT_DIR="/home/carva014/Downloads/FAO/SIS/PH/Original/GSNM"                          # << EDIT THIS LINE!
-OUTPUT_DIR="/home/carva014/Downloads/FAO/SIS/PH/TMP"                                   # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/input/GSNM"                          # << EDIT THIS LINE!
+OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/tmp"                                # << EDIT THIS LINE!
 cp $INPUT_DIR/ak_0_30_Mean_PHL.tif $OUTPUT_DIR/PH-GSNM-KXX-2023-0-30.tif
 cp $INPUT_DIR/ak_30_60_Mean_PHL.tif $OUTPUT_DIR/PH-GSNM-KXX-2023-30-60.tif
 # cp $INPUT_DIR/ak_60_100_Mean_PHL.tif $OUTPUT_DIR/PH-GSNM-KXX-2023-60-100.tif
