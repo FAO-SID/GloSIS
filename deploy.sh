@@ -59,6 +59,10 @@ docker-compose exec glosis-md sed -i 's/https:\/\/pycsw.org/http:\/\/localhost:8
 #  MapServer (ws)  #
 ####################
 
+# copy geotiffs and map files
+cp /home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/output/*.tif /home/carva014/Work/Code/FAO/GloSIS/glosis-ws/data/
+cp /home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/output/*.map /home/carva014/Work/Code/FAO/GloSIS/glosis-ws/data/
+
 # Test WMS
 # GetCapabilities
 http://localhost:8082/?map=/etc/mapserver/LGN6.map&SERVICE=WMS&REQUEST=GetCapabilities
