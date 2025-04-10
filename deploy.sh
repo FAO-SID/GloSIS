@@ -26,9 +26,12 @@ docker-compose up --build
 #  PostgreSQL (db) #
 ####################
 
+# copy sql scripts to db container
 docker cp /home/carva014/Work/Code/FAO/GloSIS/glosis-db/initdb/init-01.sql glosis-db:/tmp/init-01.sql
 docker cp /home/carva014/Work/Code/FAO/GloSIS/glosis-db/versions/glosis-db_latest.sql glosis-db:/tmp/init-02.sql
 docker cp /home/carva014/Work/Code/FAO/GloSIS/glosis-db/initdb/init-03.sql glosis-db:/tmp/init-03.sql
+
+# execute sql scripts
 docker exec -it glosis-db psql -d glosis -U glosis -f /tmp/init-01.sql
 docker exec -it glosis-db psql -d glosis -U glosis -f /tmp/init-02.sql
 docker exec -it glosis-db psql -d glosis -U glosis -f /tmp/init-03.sql
