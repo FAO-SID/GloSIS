@@ -62,21 +62,12 @@ cp /home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/output/*.map /home/car
 
 # Test WMS
 # GetCapabilities
-http://localhost:8082/?map=/etc/mapserver/LGN6.map&SERVICE=WMS&REQUEST=GetCapabilities
+http://localhost:8082/?map=/etc/mapserver/PH-GSAS-ECX-2020-0-30.map&SERVICE=WMS&REQUEST=GetCapabilities
 # GetMap
-http://localhost:8082/?map=/etc/mapserver/LGN6.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS=EPSG:28992&BBOX=-40000,300000,300000,650000&WIDTH=500&HEIGHT=500&LAYERS=LGN6&STYLES=default&FORMAT=image/png
+http://localhost:8082/?map=/etc/mapserver/PH-GSAS-ECX-2020-0-30.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=4.584249999999999936%2C116.5172270000000054%2C21.22970700000000122%2C126.8480870000000067&CRS=EPSG%3A4326&WIDTH=567&HEIGHT=914&LAYERS=PH-GSAS-ECX-2020-0-30&STYLES=&FORMAT=image%2Fpng&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi%3A96&TRANSPARENT=TRUE
 # GetLegendGraphic
-http://localhost:8082/?map=/etc/mapserver/LGN6.map&SERVICE=WMS&VERSION=1.1.1&LAYER=LGN6&REQUEST=getlegendgraphic&FORMAT=image/png
+http://localhost:8082/?map=/etc/mapserver/PH-GSAS-ECX-2020-0-30.map&SERVICE=WMS&VERSION=1.1.1&LAYER=PH-GSAS-ECX-2020-0-30&REQUEST=getlegendgraphic&FORMAT=image/png
 # GetFeatureInfo
-http://localhost:8082/?map=/etc/mapserver/LGN6.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&BBOX=537861,6757475,734631,6932972&CRS=EPSG:3857&WIDTH=1073&HEIGHT=957&LAYERS=LGN6&STYLES=default&FORMAT=image/png&QUERY_LAYERS=LGN6&INFO_FORMAT=text/html&I=389&J=589
-
-# GetCapabilities
-http://localhost:8082/?map=/etc/mapserver/GSOC.map&SERVICE=WMS&REQUEST=GetCapabilities
-# GetMap
-http://localhost:8082/?map=/etc/mapserver/GSOC.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS=EPSG:4326&BBOX=-60,-180,85,180&WIDTH=800&HEIGHT=400&LAYERS=GSOC&STYLES=default&FORMAT=image/png
-# GetLegendGraphic
-http://localhost:8082/?map=/etc/mapserver/GSOC.map&SERVICE=WMS&VERSION=1.1.1&LAYER=GSOC&REQUEST=getlegendgraphic&FORMAT=image/png
-# GetFeatureInfo
-http://localhost:8082/?map=/etc/mapserver/GSOC.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&BBOX=537861,6757475,734631,6932972&CRS=EPSG:3857&WIDTH=1073&HEIGHT=957&LAYERS=GSOC&STYLES=default&FORMAT=image/png&QUERY_LAYERS=GSOC&INFO_FORMAT=text/html&I=389&J=589
+http://localhost:8082/?map=/etc/mapserver/PH-GSAS-ECX-2020-0-30.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&BBOX=1.16625995882351496%2C116.25895549999999901%2C24.6476970411764853%2C127.10635850000001312&CRS=EPSG%3A4326&WIDTH=595&HEIGHT=1288&LAYERS=PH-GSAS-ECX-2020-0-30&STYLES=&FORMAT=image%2Fpng&QUERY_LAYERS=PH-GSAS-ECX-2020-0-30&INFO_FORMAT=text%2Fhtml&I=282&J=429
 # QGIS add WMS layer
-http://localhost:8082/?map=/etc/mapserver/GSOC.map
+http://localhost:8082/?map=/etc/mapserver/PH-GSAS-ECX-2020-0-30.map
