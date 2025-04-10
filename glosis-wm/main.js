@@ -102,8 +102,8 @@ const phWMSSource = new ImageWMS({
 const gsocWMSSource = new ImageWMS({
   url: 'http://localhost:8082/',
   params: {
-    'MAP': '/etc/mapserver/GSOC.map',
-    'LAYERS': 'GSOC',
+    'MAP': '/etc/mapserver/PH-GSAS-NAEXC-2020-0-30.map',
+    'LAYERS': 'PH-GSAS-NAEXC-2020-0-30',
     'TRANSPARENT': true,
     'FORMAT': 'image/png'
   },
@@ -132,7 +132,7 @@ const phLayer = new ImageLayer({
 
 const gsocLayer = new ImageLayer({
   source: gsocWMSSource,
-  title: 'Global Soil Organic Carbon',
+  title: 'Exchangeable Sodium 0-30cm (2020)',
   visible: false
 });
 
@@ -220,6 +220,18 @@ const popup = new Overlay({
 
 popup.getElement().className = 'pixel-popup';
 map.addOverlay(popup);
+
+// Create metadata overlay
+const metadataOverlay = new Overlay({
+  element: document.createElement('div'),
+  positioning: 'top-right',
+  offset: [10, 10],
+  stopEvent: false,
+  autoPan: true
+});
+
+metadataOverlay.getElement().className = 'metadata-popup';
+map.addOverlay(metadataOverlay);
 
 // Add styles
 const styles = `
@@ -310,13 +322,80 @@ const styleSheet = document.createElement('style');
 styleSheet.textContent = styles;
 document.head.appendChild(styleSheet);
 
+// Add metadata styles
+const metadataStyles = `
+  .metadata-popup {
+    position: absolute;
+    background-color: white;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+    font-size: 13px;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    max-width: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+    display: block !important;
+    visibility: visible !important;
+  }
+  .metadata-popup .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 18px;
+    border: none;
+    background: transparent;
+    color: #999;
+    cursor: pointer;
+  }
+  .metadata-popup .close-button:hover {
+    color: #666;
+  }
+  .metadata-popup h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #333;
+  }
+  .metadata-popup .metadata-content {
+    margin-top: 10px;
+  }
+  .metadata-popup .metadata-item {
+    margin-bottom: 8px;
+  }
+  .metadata-popup .metadata-label {
+    font-weight: bold;
+    color: #666;
+  }
+  .metadata-popup .metadata-value {
+    margin-left: 5px;
+  }
+  .metadata-popup .download-link {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  .metadata-popup .download-link:hover {
+    text-decoration: underline;
+  }
+`;
+
+// Add metadata styles to document
+const metadataStyleSheet = document.createElement('style');
+metadataStyleSheet.textContent = metadataStyles;
+document.head.appendChild(metadataStyleSheet);
+
 // Function to get the active layer name
 function getActiveLayerName() {
   const layers = [
     { layer: clayLayer, name: 'PH-GSNM-CLAY-2023-0-30' },
     { layer: ecLayer, name: 'PH-GSAS-ECX-2020-0-30' },
     { layer: phLayer, name: 'PH-GSAS-PHX-2020-0-30' },
-    { layer: gsocLayer, name: 'GSOC' }
+    { layer: gsocLayer, name: 'PH-GSAS-NAEXC-2020-0-30' }
   ];
   
   const activeLayer = layers.find(l => l.layer.getVisible());
@@ -342,7 +421,7 @@ function formatLayerValue(layerName, value) {
         label: 'pH:',
         value: value.toFixed(1)
       };
-    case 'GSOC':
+    case 'PH-GSAS-NAEXC-2020-0-30':
       return {
         label: 'Soil Org. Carbon:',
         value: `${value.toFixed(1)} t/ha`
@@ -355,42 +434,25 @@ function formatLayerValue(layerName, value) {
   }
 }
 
-// Replace the pointermove handler with a click handler
-map.on('singleclick', function(evt) {
-  const activeLayerName = getActiveLayerName();
-  if (!activeLayerName) {
-    popup.setPosition(undefined);
-    return;
-  }
+// Store current soil values
+let currentSoilValues = {
+  clay: null,
+  ec: null,
+  ph: null,
+  sodium: null,
+  location: null
+};
 
+// Update the click handler to store soil values
+map.on('singleclick', function(evt) {
   const coordinate = evt.coordinate;
   const pixel = evt.pixel;
   const [lon, lat] = transform(coordinate, 'EPSG:3857', 'EPSG:4326');
 
-  // Get the correct layer name for the WMS request
-  let queryLayerName = activeLayerName;  // Use the same name for all layers
+  // Store location
+  currentSoilValues.location = { lon, lat };
 
-  // Construct GetFeatureInfo URL
-  const url = new URL('http://localhost:8082/');
-  const params = new URLSearchParams({
-    map: `/etc/mapserver/${activeLayerName}.map`,
-    SERVICE: 'WMS',
-    VERSION: '1.3.0',
-    REQUEST: 'GetFeatureInfo',
-    LAYERS: queryLayerName,
-    QUERY_LAYERS: queryLayerName,
-    INFO_FORMAT: 'application/vnd.ogc.gml',
-    I: Math.round(pixel[0]),
-    J: Math.round(pixel[1]),
-    CRS: 'EPSG:4326',
-    STYLES: '',
-    FORMAT: 'image/png',
-    WIDTH: map.getSize()[0].toString(),
-    HEIGHT: map.getSize()[1].toString(),
-    FEATURE_COUNT: 1
-  });
-
-  // Add bbox parameter
+  // Get map size and extent
   const mapSize = map.getSize();
   const extent = map.getView().calculateExtent(mapSize);
   const transformedExtent = transformExtent(extent, 'EPSG:3857', 'EPSG:4326');
@@ -400,62 +462,84 @@ map.on('singleclick', function(evt) {
     transformedExtent[3],
     transformedExtent[2]
   ].join(',');
-  params.append('BBOX', bbox);
 
-  const requestUrl = url.toString() + '?' + params.toString();
-  
-  fetch(requestUrl)
+  // Get the active layer
+  const activeLayer = [
+    { layer: clayLayer, name: 'PH-GSNM-CLAY-2023-0-30', property: 'clay' },
+    { layer: ecLayer, name: 'PH-GSAS-ECX-2020-0-30', property: 'ec' },
+    { layer: phLayer, name: 'PH-GSAS-PHX-2020-0-30', property: 'ph' },
+    { layer: gsocLayer, name: 'PH-GSAS-NAEXC-2020-0-30', property: 'sodium' }
+  ].find(l => l.layer.getVisible());
+
+  if (!activeLayer) {
+    return;
+  }
+
+  // Create popup content
+  let popupContent = `
+    <button class="close-button">&times;</button>
+    <div class="info-row">
+      <span class="label">Lon:</span><span class="value">${lon.toFixed(6)}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Lat:</span><span class="value">${lat.toFixed(6)}</span>
+    </div>
+  `;
+
+  // Query only the active layer
+  const url = new URL('http://localhost:8082/');
+  const params = new URLSearchParams({
+    map: `/etc/mapserver/${activeLayer.name}.map`,
+    SERVICE: 'WMS',
+    VERSION: '1.3.0',
+    REQUEST: 'GetFeatureInfo',
+    LAYERS: activeLayer.name,
+    QUERY_LAYERS: activeLayer.name,
+    INFO_FORMAT: 'application/vnd.ogc.gml',
+    I: Math.round(pixel[0]),
+    J: Math.round(pixel[1]),
+    CRS: 'EPSG:4326',
+    STYLES: '',
+    FORMAT: 'image/png',
+    WIDTH: mapSize[0].toString(),
+    HEIGHT: mapSize[1].toString(),
+    FEATURE_COUNT: 1,
+    BBOX: bbox
+  });
+
+  fetch(url.toString() + '?' + params.toString())
     .then(response => response.text())
     .then(text => {
-      try {
-        if (text.includes('ServiceException')) {
-          popup.setPosition(undefined);
-          return;
-        }
-        
-        if (text.includes('value_list')) {
-          const valueMatch = text.match(/<value_list>([^<]+)<\/value_list>/);
-          if (valueMatch && valueMatch[1]) {
-            const value = parseFloat(valueMatch[1]);
-            if (!isNaN(value)) {
-              const formattedValue = formatLayerValue(queryLayerName, value);
-              popup.getElement().innerHTML = `
-                <button class="close-button">&times;</button>
-                <div class="info-row">
-                  <span class="label">${formattedValue.label}</span><span class="value">${formattedValue.value}</span>
-                </div>
-                <div class="info-row">
-                  <span class="label">Lon:</span><span class="value">${lon.toFixed(6)}</span>
-                </div>
-                <div class="info-row">
-                  <span class="label">Lat:</span><span class="value">${lat.toFixed(6)}</span>
-                </div>
-              `;
-              
-              // Add click handler to close button
-              const closeButton = popup.getElement().querySelector('.close-button');
-              if (closeButton) {
-                closeButton.addEventListener('click', () => {
-                  popup.setPosition(undefined);
-                });
-              }
-              
-              popup.setPosition(coordinate);
-            } else {
-              popup.setPosition(undefined);
-            }
+      if (text.includes('value_list')) {
+        const valueMatch = text.match(/<value_list>([^<]+)<\/value_list>/);
+        if (valueMatch && valueMatch[1]) {
+          const value = parseFloat(valueMatch[1]);
+          if (!isNaN(value)) {
+            currentSoilValues[activeLayer.property] = value;
+            const formattedValue = formatLayerValue(activeLayer.name, value);
+            popupContent += `
+              <div class="info-row">
+                <span class="label">${formattedValue.label}</span><span class="value">${formattedValue.value}</span>
+              </div>
+            `;
           }
-        } else {
-          popup.setPosition(undefined);
         }
-      } catch (e) {
-        console.log('Parse error:', e);
-        popup.setPosition(undefined);
       }
+      
+      popup.getElement().innerHTML = popupContent;
+      
+      // Add click handler to close button
+      const closeButton = popup.getElement().querySelector('.close-button');
+      if (closeButton) {
+        closeButton.addEventListener('click', () => {
+          popup.setPosition(undefined);
+        });
+      }
+      
+      popup.setPosition(coordinate);
     })
     .catch(error => {
-      console.error('Fetch error:', error);
-      popup.setPosition(undefined);
+      console.error(`Error fetching ${activeLayer.name}:`, error);
     });
 });
 
@@ -511,7 +595,7 @@ phLayer.on('change:visible', function(e) {
 gsocLayer.on('change:visible', function(e) {
   if (e.target.getVisible()) {
     showOnlySoilLayer(gsocLayer);
-    updateLegend('GSOC');
+    updateLegend('PH-GSAS-NAEXC-2020-0-30');
   }
 });
 
@@ -629,11 +713,7 @@ document.addEventListener('DOMContentLoaded', function() {
       font-size: 12px;
       color: #666;
     }
-  `;
-  
-  const styleSheet = document.createElement('style');
-  styleSheet.textContent = styles;
-  document.head.appendChild(styleSheet);
+  `
 });
 
 // Add opacity control to layer switcher after it's rendered
@@ -684,4 +764,68 @@ opacityControl.slider.addEventListener('input', function() {
   soilLayerGroup.getLayers().forEach(layer => {
     layer.setOpacity(opacity);
   });
+});
+
+// Remove all metadata-related code and add simple metadata links
+const metadataUrls = {
+  'Exchangeable Sodium 0-30cm (2020)': 'http://localhost:8001/collections/metadata:main/items/32afbc85-ebeb-11ef-bc12-6b4a6fcd8b5e',
+  'pH 0-30cm (2020)': 'http://localhost:8001/collections/metadata:main/items/32afbc8f-ebeb-11ef-bc12-6b4a6fcd8b5e',
+  'Electrical Conductivity 0-30cm (2020)': 'http://localhost:8001/collections/metadata:main/items/32afbca5-ebeb-11ef-bc12-6b4a6fcd8b5e',
+  'Clay Content 0-30cm (2023)': 'http://localhost:8001/collections/metadata:main/items/32afbc7a-ebeb-11ef-bc12-6b4a6fcd8b5e'
+};
+
+// Add metadata links to layer switcher
+function addMetadataLinks() {
+  const layerLabels = document.querySelectorAll('.layer-switcher .panel li.layer label');
+  
+  layerLabels.forEach(label => {
+    const layerName = label.textContent.trim();
+    const metadataUrl = metadataUrls[layerName];
+    if (metadataUrl) {
+      // Remove any existing metadata link
+      const existingLink = label.querySelector('.metadata-link');
+      if (existingLink) {
+        existingLink.remove();
+      }
+      
+      // Create and add new metadata link
+      const metadataLink = document.createElement('a');
+      metadataLink.href = metadataUrl;
+      metadataLink.target = '_blank';
+      metadataLink.textContent = ' (metadata)';
+      metadataLink.className = 'metadata-link';
+      metadataLink.style.marginLeft = '5px';
+      metadataLink.style.color = '#0066cc';
+      metadataLink.style.textDecoration = 'none';
+      metadataLink.style.fontSize = '0.9em';
+      label.appendChild(metadataLink);
+    }
+  });
+}
+
+// Add metadata links when the layer switcher is rendered
+layerSwitcher.on('render', function() {
+  // Add a small delay to ensure the panel is fully rendered
+  setTimeout(addMetadataLinks, 0);
+});
+
+// Add links when layers change visibility
+[clayLayer, ecLayer, phLayer, gsocLayer].forEach(layer => {
+  layer.on('change:visible', function() {
+    // Add a small delay to ensure the panel is updated
+    setTimeout(addMetadataLinks, 0);
+  });
+});
+
+// Add links when the layer switcher button is clicked
+document.addEventListener('click', function(event) {
+  if (event.target.closest('.layer-switcher button')) {
+    // Add a small delay to ensure the panel is visible
+    setTimeout(addMetadataLinks, 0);
+  }
+});
+
+// Also add links when the map is ready
+map.once('postrender', function() {
+  setTimeout(addMetadataLinks, 0);
 });

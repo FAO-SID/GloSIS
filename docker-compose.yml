@@ -62,9 +62,11 @@ services:
       - "1234:1234"
     volumes:
       - ./glosis-wm:/app
-      - /glosis-wm/app/node_modules
+      - /app/node_modules
     environment:
       - NODE_ENV=development
+    networks:
+      - glosis-net
 
   # Web Services (MapServer)
   glosis-ws:
