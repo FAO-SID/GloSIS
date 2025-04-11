@@ -1,0 +1,46 @@
+MAP
+    NAME "PH-GSNM"
+    STATUS ON
+    SIZE 800 600
+    EXTENT -174346.550 509570.474 899653.450 2347570.474
+    UNITS METERS
+    SHAPEPATH "./"
+    SIZE 800 600
+    IMAGETYPE "PNG24"
+    PROJECTION
+        "init=epsg:32651"
+    END # PROJECTION
+    WEB
+        METADATA
+            "wms_title" "Soil Nutrients"
+            "ows_enable_request" "*" 
+            "ows_srs" "EPSG:32651 EPSG:4326 EPSG:3857"
+            "wms_getfeatureinfo_formatlist" "text/plain,text/html,application/json,geojson,application/vnd.ogc.gml,gml"
+            "wms_feature_info_mime_type" "application/json"
+        END
+    END
+    LAYER
+        TEMPLATE "getfeatureinfo.tmpl"
+        NAME "PH-GSNM"
+        TYPE RASTER
+        STATUS ON
+        DATA PH-GSNM.vrt
+        PROJECTION
+            "init=epsg:32651"
+        END
+        METADATA
+            "wms_include_items" "all"
+            "gml_include_items" "all"
+        END
+        PROCESSING "SCALE=AUTO"
+        PROCESSING "NODATA=-1"
+        CLASS
+            NAME "PH-GSNM"
+            STYLE
+                OPACITY 100
+                COLORRANGE 255 237 160  51 161 167
+                DATARANGE 0 200
+            END
+        END
+    END
+END 
