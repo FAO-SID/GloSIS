@@ -1,0 +1,153 @@
+<VRTDataset rasterXSize="4297" rasterYSize="7351">
+  <SRS dataAxisToSRSAxisMapping="1,2">PROJCS["WGS 84 / UTM zone 51N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridian",123],PARAMETER["scale_factor",0.9996],PARAMETER["false_easting",500000],PARAMETER["false_northing",0],UNIT["metre",1,AUTHORITY["EPSG","9001"]],AXIS["Easting",EAST],AXIS["Northing",NORTH],AUTHORITY["EPSG","32651"]]</SRS>
+  <GeoTransform> -1.7434654999999999e+05,  2.5000000000000000e+02,  0.0000000000000000e+00,  2.3475704739999999e+06,  0.0000000000000000e+00, -2.5000000000000000e+02</GeoTransform>
+  <VRTRasterBand dataType="Float32" band="1">
+    <NoDataValue>-1</NoDataValue>
+    <ColorInterp>Gray</ColorInterp>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-BKD-2023-0-30.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-BKD-2023-30-60.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-CEC-2023-0-30.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-CEC-2023-30-60.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-CLAY-2023-0-30.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-CLAY-2023-30-60.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-CORG-2023-0-30.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-CORG-2023-30-60.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-KXX-2023-0-30.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-KXX-2023-30-60.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-PHX-2023-0-30.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-PHX-2023-30-60.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-PXX-2023-0-30.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-PXX-2023-30-60.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-SAND-2023-0-30.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-SAND-2023-30-60.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-SILT-2023-0-30.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="1">PH-GSNM-SILT-2023-30-60.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="4297" RasterYSize="7351" DataType="Float32" BlockXSize="512" BlockYSize="512" />
+      <SrcRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <DstRect xOff="0" yOff="0" xSize="4297" ySize="7351" />
+      <NODATA>-1</NODATA>
+    </ComplexSource>
+  </VRTRasterBand>
+  <OverviewList resampling="nearest">2 4 8 16 32</OverviewList>
+</VRTDataset>

@@ -134,4 +134,20 @@ http://localhost:8082/?map=/etc/mapserver/PH-random_points.map&SERVICE=WMS&VERSI
 # QGIS add WMS layer
 http://localhost:8082/?map=/etc/mapserver/PH-random_points.map
 
+# create VRTs
+cd /home/carva014/Work/Code/FAO/GloSIS/glosis-ws/data/
+ls *GSAS*.tif > filelist.txt
+gdalbuildvrt -input_file_list filelist.txt PH-GSAS.vrt
+rm filelist.txt
+ls *GSOC*.tif > filelist.txt
+gdalbuildvrt -input_file_list filelist.txt PH-GSOC.vrt
+rm filelist.txt
+ls *GSNM*.tif > filelist.txt
+gdalbuildvrt -input_file_list filelist.txt PH-GSNM.vrt
+rm filelist.txt
+
+
+
+
+
 
