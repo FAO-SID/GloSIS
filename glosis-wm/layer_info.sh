@@ -19,3 +19,119 @@ psql -h localhost -p 5432 -U xxxxxxx -d iso19139 -c "\copy (
         ORDER BY p.project_name, l.layer_id
         ) 
 TO '/home/carva014/Work/Code/FAO/GloSIS/glosis-wm/layer_info.csv' WITH CSV HEADER"
+
+
+# generate random points in the philippines to simulate soil profile data
+psql -h localhost -p 5432 -U xxxxxx -d glosis -c "
+        DROP TABLE IF EXISTS glosis.philippines_random_points;
+
+        CREATE TABLE IF NOT EXISTS glosis.philippines_random_points (
+        id SERIAL PRIMARY KEY,
+        geom GEOMETRY(POINT, 4326)
+        );
+
+        INSERT INTO glosis.philippines_random_points (geom)
+        SELECT (ST_DumpPoints(ST_GeneratePoints(geom,2,2025))).geom
+        FROM glosis.country_geom
+        WHERE country_id = 'PH';"
+
+psql -h localhost -p 5432 -U xxxxxx -d glosis -c "\copy (
+        SELECT id, ST_Y(geom) AS latitude, ST_X(geom) AS longitude
+        FROM glosis.philippines_random_points
+        ) 
+TO '/home/carva014/Work/Code/FAO/GloSIS/glosis-wm/philippines_random_coords.csv' WITH CSV HEADER"
+
+psql -h localhost -p 5432 -U xxxxxx -d glosis -c "DROP TABLE IF EXISTS glosis.philippines_random_points"
+
+psql -h localhost -p 5442 -U glosis -d glosis -c "
+        DROP TABLE IF EXISTS core.philippines_random_points;
+        CREATE TABLE IF NOT EXISTS core.philippines_random_points (
+        id SERIAL PRIMARY KEY,
+        latitude FLOAT,
+        longitude FLOAT
+        )"
+
+psql -h localhost -p 5442 -U glosis -d glosis -c "\copy core.philippines_random_points FROM '/home/carva014/Work/Code/FAO/GloSIS/glosis-wm/philippines_random_coords.csv' WITH CSV HEADER"
+
+psql -h localhost -p 5442 -U glosis -d glosis -c "
+        ALTER TABLE core.philippines_random_points ADD COLUMN geom GEOMETRY(POINT, 4326);
+        UPDATE core.philippines_random_points SET geom = ST_SetSRID(ST_MakePoint(longitude, latitude), 4326);"
+
+# MAP
+#     NAME "PH-random_points"
+#     STATUS ON
+#     EXTENT 116.258955 1.166260 127.106359 24.647697
+#     UNITS DD
+#     PROJECTION
+#         "init=epsg:4326"
+#     END
+
+#     SYMBOL
+#         NAME "dot"
+#         TYPE ELLIPSE
+#         POINTS
+#             1 1
+#         END
+#         FILLED TRUE
+#     END
+
+#     WEB
+#         METADATA
+#             "wms_title" "PH-random_points"
+#             "wms_enable_request" "*" 
+#             "ows_srs" "EPSG:32651 EPSG:4326 EPSG:3857"
+#             "wms_getfeatureinfo_formatlist" "text/plain,text/html,application/json,geojson,application/vnd.ogc.gml,gml"
+#             "wms_feature_info_mime_type" "application/json"
+#         END
+#     END
+#     LAYER
+#         NAME "PH-random_points"
+#         TYPE POINT
+#         STATUS ON
+#         CONNECTIONTYPE postgis
+#         CONNECTION "user=glosis password=glosis dbname=glosis host=192.168.1.117 port=5442"
+#         DATA "geom FROM core.philippines_random_points USING UNIQUE id"
+#         METADATA
+#             "wms_include_items" "all"
+#             "gml_include_items" "all"
+#             "wms_title" "PH-random_points"
+#             "wms_srs" "EPSG:32651 EPSG:4326 EPSG:3857"
+#             "wms_feature_info_mime_type" "application/json"
+#         END
+#         LABELCACHE ON
+#         CLASS
+#             NAME "Random Points"
+#             STYLE
+#                 SYMBOL "dot"
+#                 COLOR 255 0 0
+#                 SIZE 8
+#             END
+#             LABEL
+#                 TEXT ([id])
+#                 COLOR 0 0 0
+#                 SIZE 6
+#                 MAXSCALEDENOM 500000
+#                 POSITION AUTO
+#                 OFFSET 0 5
+#                 PARTIALS FALSE
+#                 MINDISTANCE 20
+#                 BUFFER 5
+#                 FORCE TRUE
+#             END
+#         END
+#     END
+# END
+
+# Test WMS
+# GetCapabilities
+http://localhost:8082/?map=/etc/mapserver/PH-random_points.map&SERVICE=WMS&REQUEST=GetCapabilities
+# GetMap
+http://localhost:8082?map=/etc/mapserver/PH-random_points.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=1.166260000000000074%2C116.6146860695027954%2C23.85647567931255963%2C127.1063589999999976&CRS=EPSG%3A4326&WIDTH=549&HEIGHT=1186&LAYERS=PH-random_points&STYLES=&FORMAT=image%2Fpng&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi%3A96&TRANSPARENT=TRUE
+# GetLegendGraphic
+http://localhost:8082/?map=/etc/mapserver/PH-random_points.map&SERVICE=WMS&VERSION=1.1.1&LAYER=PH-random_points&REQUEST=getlegendgraphic&FORMAT=image/png
+# GetFeatureInfo
+http://localhost:8082/?map=/etc/mapserver/PH-random_points.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&BBOX=1.16625995882351496%2C116.25895549999999901%2C24.6476970411764853%2C127.10635850000001312&CRS=EPSG%3A4326&WIDTH=595&HEIGHT=1288&LAYERS=PH-random_points&STYLES=&FORMAT=image%2Fpng&QUERY_LAYERS=PH-random_points&INFO_FORMAT=text%2Fhtml&I=282&J=429
+# QGIS add WMS layer
+http://localhost:8082/?map=/etc/mapserver/PH-random_points.map
+
+
