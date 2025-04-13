@@ -63,8 +63,10 @@ services:
     volumes:
       - ./glosis-wm:/app
       - /app/node_modules
+      - ./glosis-wm/layer_info.csv:/app/public/layer_info.csv
     environment:
       - NODE_ENV=development
+      - PORT=1234
     networks:
       - glosis-net
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GloSIS Web Mapping</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <img src="./logo.png" alt="FAO Logo" class="logo">
+            <h1>GloSIS Web Mapping</h1>
+        </div>
+        <div id="map-container">
+            <div id="map"></div>
+            
+            <!-- Layer switcher panel -->
+            <div id="layer-switcher" class="layer-panel">
+                <div class="panel-header">
+                    <h3>Layer Switcher</h3>
+                    <button id="collapse-btn" class="collapse-btn">&#9664;</button>
+                </div>
+                <div class="panel-content">
+                    <!-- Layer groups will be dynamically populated here -->
+                    <div id="layer-groups"></div>
+                    
+                    <!-- Opacity controller -->
+                    <div id="opacity-controller">
+                        <h4>Opacity</h4>
+                        <input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="1">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map controls -->
+            <div id="zoom-controls" class="map-control">
+                <button id="zoom-in">+</button>
+                <button id="zoom-out">-</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/index.js"></script>
+</body>
+</html> 

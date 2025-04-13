@@ -1,0 +1,25 @@
+{
+  "name": "glosis-wm",
+  "version": "1.0.0",
+  "description": "GloSIS Web Mapping Application",
+  "scripts": {
+    "start": "parcel src/index.html --port 1234",
+    "build": "parcel build src/index.html --out-dir dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ol": "^7.5.1",
+    "proj4": "^2.9.0",
+    "csv-parse": "^5.5.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-static-files-copy": "^2.6.0"
+  },
+  "staticFiles": {
+    "staticPath": "public",
+    "watcherGlob": "**"
+  },
+  "author": "GloSIS Team",
+  "license": "ISC"
+} 

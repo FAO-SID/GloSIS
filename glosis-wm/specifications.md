@@ -1,4 +1,4 @@
-Specifications for Web-mapping website.
+Build ne a web-mapping website with the following specifications:
 
 - Dockerized application
 - Based on Openlayers js library
@@ -38,3 +38,4 @@ Specifications for Web-mapping website.
 - Next to each layer show two icons, one for metadata (metadata_url) and another for download (download_url).
 - It's only possible to select one Base Map.
 - It's only possible to select one layer from all layer grooups, except for profile layer! Because it is a point layer and can be overlaped with other layers.
+- Mobile friendly
