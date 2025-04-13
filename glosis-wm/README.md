@@ -1,67 +1,112 @@
 # GloSIS Web Mapping Application
 
-This is a web mapping application for the GloSIS project, built with OpenLayers.
+A web-mapping application for visualizing soil data from the Global Soil Information System (GloSIS).
 
 ## Features
 
-- Interactive map interface
-- Layer switcher with collapsible groups
-- Support for WMS layers
-- Opacity control
-- Scale display and zoom controls
+- Interactive map interface using OpenLayers
+- Layer switcher with collapsible groups:
+  - Soil Profiles (point data)
+  - Soil Nutrients
+  - Salt-Affected Soils
+  - Organic Carbon Sequestration Potential
+  - Base Maps (ESRI Imagery, OpenStreetMap, Open Terrain)
+- Layer opacity control
+- Zoom controls and scale bar
+- Mobile-friendly interface
 - Metadata and download links for each layer
 
 ## Prerequisites
 
-- Node.js (v14 or higher)
-- npm or yarn
+- Node.js 18 or higher
+- npm 8 or higher
+- Docker (optional, for containerized deployment)
 
-## Installation
+## Development Setup
 
-```bash
-# Install dependencies
-npm install
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd glosis-wm
+   ```
 
-# Start development server
-npm start
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-# Build for production
-npm run build
-```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-## Docker
+4. Open your browser and navigate to `http://localhost:1234`
 
-You can also run this application using Docker:
+## Building for Production
 
-```bash
-# Build the Docker image
-docker build -t glosis-wm .
+1. Build the application:
+   ```bash
+   npm run build
+   ```
 
-# Run the container
-docker run -p 1234:1234 -v $(pwd):/app glosis-wm
-```
+2. The built files will be in the `dist` directory
+
+## Docker Deployment
+
+1. Build the Docker image:
+   ```bash
+   docker build -t glosis-wm .
+   ```
+
+2. Run the container:
+   ```bash
+   docker run -p 1234:1234 glosis-wm
+   ```
+
+3. Access the application at `http://localhost:1234`
 
 ## Project Structure
 
 ```
 glosis-wm/
-├── public/               # Static files
-├── src/                  # Source files
-│   ├── css/              # Stylesheets
-│   ├── img/              # Images
-│   ├── js/               # JavaScript files
-│   └── index.html        # Main HTML file
-├── Dockerfile            # Docker configuration
-├── package.json          # Dependencies and scripts
-└── README.md             # This file
+├── src/
+│   ├── index.html
+│   ├── js/
+│   │   ├── main.js
+│   │   └── layers.js
+│   └── styles/
+│       └── main.css
+├── public/
+│   └── assets/
+│       ├── metadata-icon.svg
+│       └── download-icon.svg
+├── package.json
+├── Dockerfile
+└── README.md
 ```
 
 ## Layer Configuration
 
-The application reads layer configuration from `layer_info.csv`, which contains details for each layer including:
-- Layer group
-- Layer ID
-- Property information
-- Metadata URL
-- Download URL
-- WMS endpoints 
+The application reads layer information from a CSV file with the following columns:
+- project_name: Layer group name
+- layer_id: Unique identifier for the layer
+- property_id: Soil property code
+- property_name: Display name of the soil property
+- unit_id: Unit of measurement
+- dimension_des: Soil depth information
+- metadata_url: Link to layer metadata
+- download_url: Link to download the layer data
+- get_map_url: WMS GetMap request URL
+- get_legend_url: WMS GetLegendGraphic request URL
+- get_feature_info_url: WMS GetFeatureInfo request URL
+
+## Development Guidelines
+
+1. Use `npm start` for development with hot reloading
+2. Run `npm run clean` to clear the build cache if needed
+3. Test the application on different devices and screen sizes
+4. Ensure all layer services are accessible before deployment
+
+## License
+
+ISC License 

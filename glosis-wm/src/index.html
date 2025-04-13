@@ -3,43 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GloSIS Web Mapping</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Philippines Soil Information System</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.5.1/ol.css">
+    <link rel="icon" href="../public/img/logo.png">
 </head>
 <body>
-    <div id="app">
-        <div class="header">
-            <img src="./logo.png" alt="FAO Logo" class="logo">
-            <h1>GloSIS Web Mapping</h1>
+    <div class="header">
+        <img src="../public/img/logo.png" alt="GloSIS Logo" class="logo">
+        <h1>Philippines Soil Information System</h1>
+    </div>
+
+    <div id="map" class="map"></div>
+    
+    <div id="layer-switcher" class="layer-switcher">
+        <div class="layer-switcher-header">
+            <h3>Layers</h3>
+            <button id="collapse-btn" class="collapse-btn">≡</button>
         </div>
-        <div id="map-container">
-            <div id="map"></div>
-            
-            <!-- Layer switcher panel -->
-            <div id="layer-switcher" class="layer-panel">
-                <div class="panel-header">
-                    <h3>Layer Switcher</h3>
-                    <button id="collapse-btn" class="collapse-btn">&#9664;</button>
-                </div>
-                <div class="panel-content">
-                    <!-- Layer groups will be dynamically populated here -->
-                    <div id="layer-groups"></div>
-                    
-                    <!-- Opacity controller -->
-                    <div id="opacity-controller">
-                        <h4>Opacity</h4>
-                        <input type="range" id="opacity-slider" min="0" max="1" step="0.1" value="1">
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Map controls -->
-            <div id="zoom-controls" class="map-control">
-                <button id="zoom-in">+</button>
-                <button id="zoom-out">-</button>
+        <div class="layer-switcher-content">
+            <div id="layer-groups"></div>
+            <div class="opacity-control">
+                <input type="range" id="opacity" min="0" max="1" step="0.1" value="1">
             </div>
         </div>
     </div>
-    <script type="module" src="js/index.js"></script>
+
+    <div class="map-controls">
+        <div class="north-arrow">⇑</div>
+        <div class="zoom-controls">
+            <button id="zoom-in">+</button>
+            <button id="zoom-out">-</button>
+        </div>
+    </div>
+
+    <div id="scale-line" class="scale-line"></div>
+
+    <script type="module" src="./js/main.js"></script>
 </body>
 </html> 
