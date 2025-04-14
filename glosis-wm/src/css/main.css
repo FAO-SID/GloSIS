@@ -6,9 +6,9 @@ body {
 
 .header {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 20px;
+    left: 20px;
+    width: 33%;
     background: rgba(255, 255, 255, 0.9);
     padding: 10px 20px;
     display: flex;
@@ -16,6 +16,7 @@ body {
     gap: 15px;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px 8px 8px 8px;
 }
 
 .header .logo {
@@ -27,6 +28,9 @@ body {
     margin: 0;
     font-size: 20px;
     color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .map {
@@ -36,7 +40,7 @@ body {
 
 .layer-switcher {
     position: absolute;
-    top: 80px;
+    top: 120px;
     left: 20px;
     background: white;
     border-radius: 8px;
@@ -184,9 +188,8 @@ body {
 
 .scale-line {
     position: absolute;
-    bottom: 40px;
-    right: 130px;
-    background: rgba(255, 255, 255, 0.8);
+    bottom: 2px;
+    right: 120px;
     padding: 5px 10px;
     border-radius: 4px;
     z-index: 1000;

@@ -3,7 +3,7 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
-import { ScaleLine, defaults as defaultControls } from 'ol/control';
+import { ScaleLine, defaults as defaultControls, Attribution } from 'ol/control';
 import { fromLonLat } from 'ol/proj';
 import { fetchLayerInfo, createLayerConfig } from './layers';
 
@@ -46,7 +46,11 @@ const baseMaps = {
 // Initialize map
 const map = new Map({
     target: 'map',
-    controls: defaultControls().extend([
+    controls: defaultControls({
+        zoom: false, // Disable default zoom control
+        attribution: false, // Keep attribution control
+        rotate: true // Keep rotate control if it exists
+    }).extend([
         new ScaleLine({
             target: 'scale-line'
         })
@@ -63,7 +67,7 @@ function createLayerGroupUI(groupName, layers) {
     groupDiv.className = 'layer-group';
     
     // Add collapsed class for specific groups
-    if (['Soil Nutrients', 'Salt-Affected Soils', 'Organic Carbon Sequestration Potential'].includes(groupName)) {
+    if (['Base Maps', 'Soil Nutrients', 'Salt-Affected Soils', 'Organic Carbon Sequestration Potential'].includes(groupName)) {
         groupDiv.classList.add('collapsed');
     }
     
