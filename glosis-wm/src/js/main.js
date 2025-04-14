@@ -14,8 +14,8 @@ import { transform, transformExtent } from 'ol/proj';
 // Create popup overlay for feature information
 const popup = new Overlay({
     element: document.getElementById('popup'),
-    positioning: 'bottom-center',
-    offset: [0, 0],
+    positioning: 'center-center',
+    offset: [-105, 5],
     autoPan: {
         animation: {
             duration: 250
