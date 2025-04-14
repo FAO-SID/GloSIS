@@ -9,7 +9,7 @@ body {
     top: 20px;
     left: 20px;
     width: 33%;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.8);
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -42,7 +42,7 @@ body {
     position: absolute;
     top: 120px;
     left: 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     max-height: calc(100vh - 100px);
@@ -161,7 +161,7 @@ body {
 }
 
 .north-arrow {
-    background: white;
+    background:rgba(255, 255, 255, 0.8);
     padding: 5px 10px;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -177,7 +177,7 @@ body {
 }
 
 .zoom-controls button {
-    background: white;
+    background: rgba(255, 255, 255, 0.8);
     border: none;
     padding: 5px 10px;
     border-radius: 4px;
@@ -197,7 +197,7 @@ body {
 
 .popup {
     position: absolute;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 15px;
     border-radius: 10px;
     border: 1px solid #cccccc;
@@ -325,4 +325,5 @@ body {
 .legend-content img {
     width: 100%;
     height: auto;
+    opacity: 0.8;
 } 

@@ -129,9 +129,9 @@ map.on('singleclick', async (evt) => {
 
     // Transform coordinates to EPSG:4326 (lat/lon)
     const coordinate4326 = transform(coordinate, viewProjection, 'EPSG:4326');
-    // Format coordinates to 6 decimal places
-    const lon = coordinate4326[0].toFixed(6);
-    const lat = coordinate4326[1].toFixed(6);
+    // Format coordinates to 3 decimal places
+    const lon = coordinate4326[0].toFixed(2);
+    const lat = coordinate4326[1].toFixed(2);
 
     const mapSize = map.getSize();
     const extent = map.getView().calculateExtent(mapSize);
@@ -321,7 +321,7 @@ function createLayerGroupUI(groupName, layers) {
     groupDiv.className = 'layer-group';
     
     // Add collapsed class for specific groups
-    if (['Base Maps', 'Soil Profiles', 'Soil Nutrients', 'Salt-Affected Soils', 'Organic Carbon Sequestration Potential'].includes(groupName)) {
+    if (['Base Maps', 'Soil Profiles', 'Salt-Affected Soils', 'Organic Carbon Sequestration Potential'].includes(groupName)) {
         groupDiv.classList.add('collapsed');
     }
     
@@ -471,6 +471,13 @@ async function initializeLayers() {
         // Set default opacity in the opacity control
         const opacityControl = document.getElementById('opacity');
         opacityControl.value = 0.8;
+
+        // Activate Bulk density (0-30) by default
+        const bulkDensityLayer = document.querySelector('input[id="PH-GSNM-BKD-2023-0-30"]');
+        if (bulkDensityLayer) {
+            bulkDensityLayer.checked = true;
+            bulkDensityLayer.dispatchEvent(new Event('change'));
+        }
     } catch (error) {
         console.error('Error initializing layers:', error);
     }
