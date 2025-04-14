@@ -5,7 +5,23 @@ import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 import { ScaleLine, defaults as defaultControls, Attribution } from 'ol/control';
 import { fromLonLat } from 'ol/proj';
+import Overlay from 'ol/Overlay';
 import { fetchLayerInfo, createLayerConfig } from './layers';
+import ImageLayer from 'ol/layer/Image';
+import ImageWMS from 'ol/source/ImageWMS';
+import { transform, transformExtent } from 'ol/proj';
+
+// Create popup overlay for feature information
+const popup = new Overlay({
+    element: document.getElementById('popup'),
+    positioning: 'bottom-center',
+    offset: [0, 0],
+    autoPan: {
+        animation: {
+            duration: 250
+        }
+    }
+});
 
 // Base maps configuration
 const baseMaps = {
@@ -61,13 +77,228 @@ const map = new Map({
     })
 });
 
+// Add popup overlay to map
+map.addOverlay(popup);
+
+// Handle popup closer
+document.getElementById('popup-closer').onclick = () => {
+    popup.setPosition(undefined);
+};
+
+// Add click handler for feature information
+map.on('singleclick', async (evt) => {
+    // Get the visible WMS layers
+    const visibleLayers = map.getLayers().getArray().filter(layer => {
+        return layer instanceof ImageLayer && 
+               layer.getVisible() && 
+               layer.getSource() instanceof ImageWMS;
+    });
+
+    if (visibleLayers.length === 0) {
+        popup.setPosition(undefined);
+        return;
+    }
+
+    // Get the view resolution and projection
+    const viewResolution = map.getView().getResolution();
+    const viewProjection = map.getView().getProjection();
+    const coordinate = evt.coordinate;
+
+    // Transform coordinates to EPSG:4326
+    const coordinate4326 = transform(coordinate, viewProjection, 'EPSG:4326');
+    const mapSize = map.getSize();
+    const extent = map.getView().calculateExtent(mapSize);
+    const bbox4326 = transformExtent(extent, viewProjection, 'EPSG:4326');
+
+    // Create a promise for each layer's feature info request
+    const featureInfoPromises = visibleLayers.map(async (layer) => {
+        const source = layer.getSource();
+        const layerName = layer.get('name');
+        
+        if (!layerName) {
+            console.warn('Layer name not found for layer:', layer);
+            return null;
+        }
+
+        // Get the layer ID from the source params
+        const layerId = source.getParams().LAYERS;
+        
+        // Log layer information for debugging
+        console.log('Layer info:', {
+            layerName: layerName,
+            layerId: layerId,
+            sourceParams: source.getParams()
+        });
+
+        // Use OpenLayers' built-in getGetFeatureInfoUrl method
+        const url = source.getFeatureInfoUrl(
+            evt.coordinate,
+            viewResolution,
+            viewProjection,
+            {
+                'INFO_FORMAT': 'text/html',
+                'FEATURE_COUNT': 1,
+                'QUERY_LAYERS': layerId,
+                'VERSION': '1.3.0'
+            }
+        );
+
+        if (!url) {
+            console.warn('Could not generate GetFeatureInfo URL for layer:', layerName);
+            return null;
+        }
+
+        // Log the final URL for debugging
+        console.log('Feature info URL:', url);
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Network response was not ok');
+            
+            // Get the content type from the response
+            const contentType = response.headers.get('content-type');
+            
+            let data;
+            if (contentType && contentType.includes('application/json')) {
+                data = await response.json();
+            } else if (contentType && contentType.includes('text/html')) {
+                const text = await response.text();
+                data = {
+                    type: 'FeatureCollection',
+                    features: [{
+                        type: 'Feature',
+                        properties: {
+                            'Content': text
+                        }
+                    }]
+                };
+            } else if (contentType && contentType.includes('text/plain')) {
+                const text = await response.text();
+                // Parse the plain text response into a structured format
+                const properties = {};
+                text.split('\n').forEach(line => {
+                    const [key, value] = line.split(':').map(s => s.trim());
+                    if (key && value) {
+                        properties[key] = value;
+                    }
+                });
+                data = {
+                    type: 'FeatureCollection',
+                    features: [{
+                        type: 'Feature',
+                        properties: properties
+                    }]
+                };
+            } else {
+                // For other formats, get the text content
+                const text = await response.text();
+                data = {
+                    type: 'FeatureCollection',
+                    features: [{
+                        type: 'Feature',
+                        properties: {
+                            'Content': text
+                        }
+                    }]
+                };
+            }
+            
+            return {
+                layer: layer,
+                data: data
+            };
+        } catch (error) {
+            console.error('Error fetching feature info:', error);
+            return null;
+        }
+    });
+
+    // Wait for all feature info requests to complete
+    const featureInfoResults = await Promise.all(featureInfoPromises);
+    
+    // Filter out failed requests and empty results
+    const validResults = featureInfoResults.filter(result => 
+        result && result.data && 
+        ((result.data.features && result.data.features.length > 0) || 
+         (result.data.properties && Object.keys(result.data.properties).length > 0))
+    );
+
+    if (validResults.length === 0) {
+        popup.setPosition(undefined);
+        return;
+    }
+
+    // Create popup content
+    const popupContent = document.getElementById('popup-content');
+    popupContent.innerHTML = '';
+
+    validResults.forEach(result => {
+        const layerName = result.layer.get('name') || 'Unknown Layer';
+        const features = result.data.features || [result.data];
+
+        const layerDiv = document.createElement('div');
+        layerDiv.className = 'feature-info-layer';
+        
+        const layerHeader = document.createElement('h3');
+        layerHeader.textContent = layerName;
+        layerDiv.appendChild(layerHeader);
+
+        features.forEach(feature => {
+            const featureDiv = document.createElement('div');
+            featureDiv.className = 'feature-info-item';
+            
+            if (feature.properties) {
+                if (feature.properties.Content) {
+                    // Parse the content string
+                    const content = feature.properties.Content;
+                    const valueMatch = content.match(/Value:\s*([\d.]+)/);
+                    const coordsMatch = content.match(/Coords:\s*([\d., ]+)/);
+                    
+                    // Get unit from layer source parameters
+                    const unit = result.layer.get('unit');
+                    
+                    if (valueMatch) {
+                        const valueDiv = document.createElement('div');
+                        valueDiv.className = 'feature-info-property';
+                        valueDiv.innerHTML = `<strong>Value:</strong> ${valueMatch[1]}${unit ? ' ' + unit : ''}`;
+                        featureDiv.appendChild(valueDiv);
+                    }
+                    
+                    if (coordsMatch) {
+                        const coordsDiv = document.createElement('div');
+                        coordsDiv.className = 'feature-info-property';
+                        coordsDiv.innerHTML = `<strong>Coords:</strong> ${coordsMatch[1]}`;
+                        featureDiv.appendChild(coordsDiv);
+                    }
+                } else {
+                    Object.entries(feature.properties).forEach(([key, value]) => {
+                        if (value !== null && value !== undefined) {
+                            const propertyDiv = document.createElement('div');
+                            propertyDiv.className = 'feature-info-property';
+                            propertyDiv.innerHTML = `<strong>${key}:</strong> ${value}`;
+                            featureDiv.appendChild(propertyDiv);
+                        }
+                    });
+                }
+            }
+            
+            layerDiv.appendChild(featureDiv);
+        });
+
+        popupContent.appendChild(layerDiv);
+    });
+
+    // Show popup
+    popup.setPosition(coordinate);
+});
+
 // Function to create layer group UI
 function createLayerGroupUI(groupName, layers) {
     const groupDiv = document.createElement('div');
     groupDiv.className = 'layer-group';
     
     // Add collapsed class for specific groups
-    if (['Base Maps', 'Soil Nutrients', 'Salt-Affected Soils', 'Organic Carbon Sequestration Potential'].includes(groupName)) {
+    if (['Base Maps', 'Soil Profiles', 'Soil Nutrients', 'Salt-Affected Soils', 'Organic Carbon Sequestration Potential'].includes(groupName)) {
         groupDiv.classList.add('collapsed');
     }
     
@@ -184,32 +415,17 @@ async function initializeLayers() {
         const layerGroupsContainer = document.getElementById('layer-groups');
         layerGroupsContainer.innerHTML = ''; // Clear existing content
         
-        // Add all layer groups to the UI and map, handling Soil Profiles separately
+        // Add all layer groups to the UI and map
         Object.entries(layerGroups).forEach(([groupName, layers]) => {
             const groupUI = createLayerGroupUI(groupName, layers);
             layerGroupsContainer.appendChild(groupUI);
             
-            // Add layers to map, but skip Soil Profiles for now
-            if (groupName !== 'Soil Profiles') {
-                layers.forEach(layer => {
-                    map.addLayer(layer.layer);
-                    layer.layer.setVisible(false);
-                });
-            }
-        });
-
-        // Add Soil Profiles layers last to ensure they stay on top
-        if (layerGroups['Soil Profiles']) {
-            layerGroups['Soil Profiles'].forEach(layer => {
+            // Add all layers to map, including Soil Profiles
+            layers.forEach(layer => {
                 map.addLayer(layer.layer);
-                layer.layer.setVisible(true);
-                // Also check the corresponding checkbox
-                const checkbox = document.getElementById(layer.id);
-                if (checkbox) {
-                    checkbox.checked = true;
-                }
+                layer.layer.setVisible(false);
             });
-        }
+        });
         
         // Select default base map
         const defaultBaseMap = document.getElementById('esri-imagery');

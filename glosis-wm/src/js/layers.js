@@ -49,6 +49,34 @@ export async function fetchLayerInfo() {
     }
 }
 
+// Function to create WMS layer
+function createWMSLayer(layerId, getMapUrl, featureInfoUrl, unit) {
+    // Parse the URL and parameters from getMapUrl
+    const url = new URL(getMapUrl);
+    const mapFile = url.searchParams.get('map');
+    
+    const layer = new ImageLayer({
+        source: new ImageWMS({
+            url: 'http://localhost:8082/',
+            params: {
+                'map': mapFile,
+                'LAYERS': layerId,
+                'FORMAT': 'image/png',
+                'TRANSPARENT': true
+            },
+            ratio: 1,
+            serverType: 'mapserver'
+        })
+    });
+    
+    // Set the layer name and feature info URL
+    layer.set('name', layerId);
+    layer.set('featureInfoUrl', featureInfoUrl);
+    layer.set('unit', unit);
+    
+    return layer;
+}
+
 // Function to create layer configuration
 export function createLayerConfig(layerInfo) {
     const config = {};
@@ -68,31 +96,10 @@ export function createLayerConfig(layerInfo) {
                 name: `${layer.name}${layer.depth ? ` (${layer.depth})` : ''}${layer.unit ? ` [${layer.unit}]` : ''}`,
                 metadata_url: layer.metadata_url,
                 download_url: layer.download_url,
-                layer: createWMSLayer(layer.id, layer.get_map_url)
+                layer: createWMSLayer(layer.id, layer.get_map_url, layer.get_feature_info_url, layer.unit)
             }));
         }
     });
     
     return config;
-}
-
-// Function to create WMS layer
-function createWMSLayer(layerId, getMapUrl) {
-    // Parse the URL and parameters from getMapUrl
-    const url = new URL(getMapUrl);
-    const mapFile = url.searchParams.get('map');
-    
-    return new ImageLayer({
-        source: new ImageWMS({
-            url: 'http://localhost:8082/',
-            params: {
-                'map': mapFile,
-                'LAYERS': layerId,
-                'FORMAT': 'image/png',
-                'TRANSPARENT': true
-            },
-            ratio: 1,
-            serverType: 'mapserver'
-        })
-    });
 } 
