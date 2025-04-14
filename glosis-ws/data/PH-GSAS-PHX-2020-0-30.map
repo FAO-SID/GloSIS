@@ -30,7 +30,7 @@ MAP
       CLASS
         NAME "PH-GSAS-PHX-2020-0-30"
         STYLE
-            COLORRANGE "#F4E7D3" "#5C4033"
+            COLORRANGE "#0000FF" "#FF0000"
             DATARANGE 4.788224 6.9331264
             RANGEITEM "pixel"
           END # STYLE

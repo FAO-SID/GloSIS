@@ -23,6 +23,29 @@ const popup = new Overlay({
     }
 });
 
+// Create legend container
+const legendContainer = document.createElement('div');
+legendContainer.id = 'legend';
+legendContainer.className = 'legend-container';
+document.body.appendChild(legendContainer);
+
+// Function to update legend
+function updateLegend(layer) {
+    const legendContainer = document.getElementById('legend');
+    const legendContent = legendContainer.querySelector('.legend-content');
+    
+    if (!layer || !layer.getVisible()) {
+        legendContainer.style.display = 'none';
+        return;
+    }
+
+    const layerId = layer.getSource().getParams().LAYERS;
+    const legendUrl = `http://localhost:8082/?map=/etc/mapserver/${layerId}.map&SERVICE=WMS&VERSION=1.1.1&LAYER=${layerId}&REQUEST=getlegendgraphic&FORMAT=image/png`;
+    
+    legendContainer.style.display = 'block';
+    legendContent.innerHTML = `<img src="${legendUrl}" alt="Legend" />`;
+}
+
 // Base maps configuration
 const baseMaps = {
     'Base Maps': [
@@ -72,7 +95,7 @@ const map = new Map({
         })
     ]),
     view: new View({
-        center: fromLonLat([121.774017, 12.879721]), // Philippines center
+        center: fromLonLat([120, 12]), // Philippines center
         zoom: 6
     })
 });
@@ -104,8 +127,12 @@ map.on('singleclick', async (evt) => {
     const viewProjection = map.getView().getProjection();
     const coordinate = evt.coordinate;
 
-    // Transform coordinates to EPSG:4326
+    // Transform coordinates to EPSG:4326 (lat/lon)
     const coordinate4326 = transform(coordinate, viewProjection, 'EPSG:4326');
+    // Format coordinates to 6 decimal places
+    const lon = coordinate4326[0].toFixed(6);
+    const lat = coordinate4326[1].toFixed(6);
+
     const mapSize = map.getSize();
     const extent = map.getView().calculateExtent(mapSize);
     const bbox4326 = transformExtent(extent, viewProjection, 'EPSG:4326');
@@ -147,9 +174,6 @@ map.on('singleclick', async (evt) => {
             console.warn('Could not generate GetFeatureInfo URL for layer:', layerName);
             return null;
         }
-
-        // Log the final URL for debugging
-        console.log('Feature info URL:', url);
 
         try {
             const response = await fetch(url);
@@ -252,7 +276,6 @@ map.on('singleclick', async (evt) => {
                     // Parse the content string
                     const content = feature.properties.Content;
                     const valueMatch = content.match(/Value:\s*([\d.]+)/);
-                    const coordsMatch = content.match(/Coords:\s*([\d., ]+)/);
                     
                     // Get unit from layer source parameters
                     const unit = result.layer.get('unit');
@@ -260,16 +283,16 @@ map.on('singleclick', async (evt) => {
                     if (valueMatch) {
                         const valueDiv = document.createElement('div');
                         valueDiv.className = 'feature-info-property';
-                        valueDiv.innerHTML = `<strong>Value:</strong> ${valueMatch[1]}${unit ? ' ' + unit : ''}`;
+                        const roundedValue = parseFloat(valueMatch[1]).toFixed(2);
+                        valueDiv.innerHTML = `<strong>Value:</strong> ${roundedValue}${unit ? ' ' + unit : ''}`;
                         featureDiv.appendChild(valueDiv);
                     }
                     
-                    if (coordsMatch) {
-                        const coordsDiv = document.createElement('div');
-                        coordsDiv.className = 'feature-info-property';
-                        coordsDiv.innerHTML = `<strong>Coords:</strong> ${coordsMatch[1]}`;
-                        featureDiv.appendChild(coordsDiv);
-                    }
+                    // Add coordinates in EPSG:4326
+                    const coordsDiv = document.createElement('div');
+                    coordsDiv.className = 'feature-info-property';
+                    coordsDiv.innerHTML = `<strong>Coords (lon, lat):</strong> ${lon}, ${lat}`;
+                    featureDiv.appendChild(coordsDiv);
                 } else {
                     Object.entries(feature.properties).forEach(([key, value]) => {
                         if (value !== null && value !== undefined) {
@@ -353,10 +376,15 @@ function createLayerGroupUI(groupName, layers) {
         
         // Handle layer visibility
         input.onchange = () => {
+            // Close any open popup
+            popup.setPosition(undefined);
+            
             if (groupName === 'Base Maps') {
                 baseMaps['Base Maps'].forEach(baseLayer => {
                     baseLayer.layer.setVisible(baseLayer.id === layer.id);
                 });
+                // Hide legend for base maps
+                updateLegend(null);
             } else {
                 // For non-profile layers, uncheck all other non-profile layers
                 if (groupName !== 'Soil Profiles') {
@@ -371,6 +399,8 @@ function createLayerGroupUI(groupName, layers) {
                     });
                 }
                 layer.layer.setVisible(input.checked);
+                // Update legend
+                updateLegend(input.checked ? layer.layer : null);
 
                 // Collapse other group layers when a new layer is selected
                 if (input.checked) {
@@ -424,6 +454,10 @@ async function initializeLayers() {
             layers.forEach(layer => {
                 map.addLayer(layer.layer);
                 layer.layer.setVisible(false);
+                // Set default opacity for non-base map layers
+                if (!baseMaps['Base Maps'].some(baseLayer => baseLayer.layer === layer.layer)) {
+                    layer.layer.setOpacity(0.8);
+                }
             });
         });
         
@@ -433,6 +467,10 @@ async function initializeLayers() {
             defaultBaseMap.checked = true;
             defaultBaseMap.dispatchEvent(new Event('change'));
         }
+
+        // Set default opacity in the opacity control
+        const opacityControl = document.getElementById('opacity');
+        opacityControl.value = 0.8;
     } catch (error) {
         console.error('Error initializing layers:', error);
     }

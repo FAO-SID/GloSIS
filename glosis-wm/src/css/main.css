@@ -189,7 +189,7 @@ body {
 .scale-line {
     position: absolute;
     bottom: 2px;
-    right: 120px;
+    right: 150px;
     padding: 5px 10px;
     border-radius: 4px;
     z-index: 1000;
@@ -308,4 +308,21 @@ body {
 
 .feature-info-property strong {
     color: #555;
+    margin-right: 5px;
+}
+
+.legend-container {
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 1000;
+    display: none;
+    max-width: 200px;
+}
+
+.legend-content img {
+    width: 100%;
+    height: auto;
 } 
