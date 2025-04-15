@@ -24,27 +24,27 @@ services:
     image: kobotoolbox/kobo:latest
     restart: always
     environment:
-      - KOBO_SUPERUSER_PASSWORD=admin
-      - KOBO_SUPERUSER_USERNAME=admin
-      - POSTGRES_DB=glosis
-      - POSTGRES_USER=glosis
-      - POSTGRES_PASSWORD=glosis
       - POSTGRES_HOST=glosis-db
       - POSTGRES_PORT=5432
-      - KOBO_INITIAL_SUPERUSER_PASSWORD=admin
-      - KOBO_INITIAL_SUPERUSER_USERNAME=admin
+      - POSTGRES_DB=glosis
+      - KOBO_SUPERUSER_USERNAME=kobo
+      - KOBO_SUPERUSER_PASSWORD=kobo
+      # - POSTGRES_USER=glosis
+      # - POSTGRES_PASSWORD=glosis
+      # - KOBO_INITIAL_SUPERUSER_PASSWORD=kobo
+      # - KOBO_INITIAL_SUPERUSER_USERNAME=kobo
       - KOBO_DEBUG=true
-      - KOBO_DEV_MODE=true
-      - KOBO_DEV_MODE_EMAIL=true
-      - KOBO_DEV_MODE_EMAIL_DOMAIN=localhost
-      - KOBO_DEV_MODE_EMAIL_HOST=localhost
-      - KOBO_DEV_MODE_EMAIL_PORT=1025
-      - KOBO_DEV_MODE_EMAIL_USERNAME=
-      - KOBO_DEV_MODE_EMAIL_PASSWORD=
-      - KOBO_DEV_MODE_EMAIL_USE_TLS=false
-      - KOBO_DEV_MODE_EMAIL_USE_SSL=false
+      # - KOBO_DEV_MODE=true
+      # - KOBO_DEV_MODE_EMAIL=true
+      # - KOBO_DEV_MODE_EMAIL_DOMAIN=localhost
+      # - KOBO_DEV_MODE_EMAIL_HOST=localhost
+      # - KOBO_DEV_MODE_EMAIL_PORT=1025
+      # - KOBO_DEV_MODE_EMAIL_USERNAME=
+      # - KOBO_DEV_MODE_EMAIL_PASSWORD=
+      # - KOBO_DEV_MODE_EMAIL_USE_TLS=false
+      # - KOBO_DEV_MODE_EMAIL_USE_SSL=false
     ports:
-      - "8000:8000"
+      - "8003:8000"
     volumes:
       - ./kobo:/srv/src/kobo
     depends_on:

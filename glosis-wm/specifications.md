@@ -1,4 +1,4 @@
-Build ne a web-mapping website with the following specifications:
+Specifications:
 
 - Dockerized application
 - Based on Openlayers js library
