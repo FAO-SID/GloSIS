@@ -74,7 +74,7 @@ services:
     environment:
       USER: shiny
       PASSWORD: shiny
-      DB_HOST: glosis
+      DB_HOST: glosis-db
       DB_PORT: 5442
       DB_NAME: glosis
       DB_USER: glosis

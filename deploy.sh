@@ -1,7 +1,15 @@
+#!/bin/bash
+
+# working dir 
+PROJECT_DIR="/home/carva014/Work/Code/FAO"      # << EDIT THIS LINE!
+
+# date
+DATE=`date +%Y-%m-%d_%H-%M`
+
+
 #################################
 #            Docker             #
 #################################
-
 
 # docker comands
 # docker images
@@ -10,7 +18,6 @@
 # docker container stop XXXXXXXXXX
 # docker container rm XXXXXXXXXX
 # docker logs XXXXXXXXXX
-
 
 # To remove all existing images, containers and databases, run the following commands in your docker-compose.yml folder
 docker stop $(docker ps -q)
@@ -27,9 +34,9 @@ docker-compose up --build
 ####################
 
 # copy sql scripts to db container
-docker cp /home/carva014/Work/Code/FAO/GloSIS/glosis-db/initdb/init-01.sql glosis-db:/tmp/init-01.sql
-docker cp /home/carva014/Work/Code/FAO/GloSIS/glosis-db/versions/glosis-db_latest.sql glosis-db:/tmp/init-02.sql
-docker cp /home/carva014/Work/Code/FAO/GloSIS/glosis-db/initdb/init-03.sql glosis-db:/tmp/init-03.sql
+docker cp $PROJECT_DIR/GloSIS/glosis-db/initdb/init-01.sql glosis-db:/tmp/init-01.sql
+docker cp $PROJECT_DIR/GloSIS/glosis-db/versions/glosis-db_latest.sql glosis-db:/tmp/init-02.sql
+docker cp $PROJECT_DIR/GloSIS/glosis-db/initdb/init-03.sql glosis-db:/tmp/init-03.sql
 
 # execute sql scripts
 docker exec -it glosis-db psql -d glosis -U glosis -f /tmp/init-01.sql
@@ -181,7 +188,7 @@ docker exec -it glosis-db psql -d glosis -U glosis -c "
 ####################
 
 # load records
-mv /home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/output/*.xml /home/carva014/Work/Code/FAO/GloSIS/glosis-md/records
+mv $PROJECT_DIR/GloSIS/glosis-datacube/PH/output/*.xml $PROJECT_DIR/GloSIS/glosis-md/records
 docker-compose exec glosis-md ls -l /records
 docker-compose exec glosis-md pycsw-admin.py load-records -c /etc/pycsw/pycsw.yml -p /records -r -y
 
@@ -199,8 +206,8 @@ docker-compose exec glosis-md sed -i 's/https:\/\/pycsw.org/http:\/\/localhost:8
 ####################
 
 # copy geotiffs and map files
-mv /home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/output/*.tif /home/carva014/Work/Code/FAO/GloSIS/glosis-ws/data/
-mv /home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/output/*.map /home/carva014/Work/Code/FAO/GloSIS/glosis-ws/data/
+mv $PROJECT_DIR/GloSIS/glosis-datacube/PH/output/*.tif $PROJECT_DIR/GloSIS/glosis-ws/data/
+mv $PROJECT_DIR/GloSIS/glosis-datacube/PH/output/*.map $PROJECT_DIR/GloSIS/glosis-ws/data/
 
 # Test raster WMS
 # GetCapabilities
@@ -229,7 +236,7 @@ http://localhost:8082/?map=/etc/mapserver/PH-random_points.map&SERVICE=WMS&VERSI
 http://localhost:8082/?map=/etc/mapserver/PH-random_points.map
 
 # create VRTs
-cd /home/carva014/Work/Code/FAO/GloSIS/glosis-ws/data/
+cd $PROJECT_DIR/GloSIS/glosis-ws/data/
 ls *GSAS*.tif > filelist.txt
 gdalbuildvrt -input_file_list filelist.txt PH-GSAS.vrt
 rm filelist.txt
@@ -251,5 +258,5 @@ http://localhost:8082?map=/etc/mapserver/PH-GSOC.map&SERVICE=WMS&VERSION=1.3.0&R
 #  PostgreSQL (db) #
 ####################
 
-pg_dump -h localhost -p 5442 -U glosis -d glosis -Fc -v -f /home/carva014/Work/Code/FAO/GloSIS/glosis-db/backups/glosis_backup_2025-04-11.backup
+pg_dump -h localhost -p 5442 -U glosis -d glosis -Fc -v -f $PROJECT_DIR/GloSIS/glosis-db/backups/glosis_backup_${DATE}.backup
 
