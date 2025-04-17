@@ -3,7 +3,11 @@
 # OBJECT: procedure_phys_chem
 # ISSUE: add data from https://github.com/glosis-ld/glosis/blob/master/csv_codelists/glosis_procedure.csv
 
-psql -h localhost -p 5432 -d iso28258 -U glosis -c "
+# working dir 
+PROJECT_DIR="/home/carva014/Work/Code/FAO"      # << EDIT THIS LINE!
+
+
+psql -h localhost -p 5432 -d glosis -U glosis -c "
     DROP TABLE IF EXISTS core.procedure_phys_chem_tmp;
     CREATE TABLE IF NOT EXISTS core.procedure_phys_chem_tmp (
         attribute text,
@@ -22,9 +26,9 @@ psql -h localhost -p 5432 -d iso28258 -U glosis -c "
         CONSTRAINT procedure_phys_chem_tmp_pkey PRIMARY KEY (attribute, instance)
         );"
 
-cat /home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_026.csv | psql -h localhost -p 5432 -d iso28258 -U glosis -c "COPY core.procedure_phys_chem_tmp FROM STDIN WITH (FORMAT CSV, HEADER, NULL '')"
+cat $PROJECT_DIR/GloSIS/glosis-db/modifications/mod_026.csv | psql -h localhost -p 5432 -d glosis -U glosis -c "COPY core.procedure_phys_chem_tmp FROM STDIN WITH (FORMAT CSV, HEADER, NULL '')"
 
-psql -h localhost -p 5432 -d iso28258 -U glosis -c "
+psql -h localhost -p 5432 -d glosis -U glosis -c "
     DO \$\$ 
     BEGIN
         BEGIN
@@ -45,7 +49,7 @@ psql -h localhost -p 5432 -d iso28258 -U glosis -c "
     END \$\$"
 
 
-psql -h localhost -p 5432 -d iso28258 -U glosis -c "
+psql -h localhost -p 5432 -d glosis -U glosis -c "
     UPDATE core.procedure_phys_chem SET definition = t.definition FROM core.procedure_phys_chem_tmp t WHERE procedure_phys_chem_id = t.instance;
     UPDATE core.procedure_phys_chem SET reference = t.reference FROM core.procedure_phys_chem_tmp t WHERE procedure_phys_chem_id = t.instance;
     UPDATE core.procedure_phys_chem SET citation = t.citation FROM core.procedure_phys_chem_tmp t WHERE procedure_phys_chem_id = t.instance;
