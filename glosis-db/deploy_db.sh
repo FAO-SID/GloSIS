@@ -42,6 +42,7 @@ psql -h localhost -p 5432 -d glosis -U glosis -f $PROJECT_DIR/GloSIS/glosis-db/m
 psql -h localhost -p 5432 -d glosis -U glosis -f $PROJECT_DIR/GloSIS/glosis-db/modifications/mod_025.sql
 $PROJECT_DIR/GloSIS/glosis-db/modifications/mod_026.sh
 $PROJECT_DIR/GloSIS/glosis-db/modifications/mod_027.sh
+psql -h localhost -p 5432 -d glosis -U glosis -f $PROJECT_DIR/GloSIS/glosis-db/modifications/mod_028.sql
 
 # Dump iso28258 database
 pg_dump -h localhost \
