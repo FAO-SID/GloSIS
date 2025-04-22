@@ -18,41 +18,6 @@ services:
     networks:
       - glosis-net
 
-  # # Data collection (KoboToolbox)
-  # glosis-dc-mongo:
-  #   container_name: glosis-dc-mongo
-  #   image: mongo:4.4
-  #   restart: always
-  #   networks:
-  #     - glosis-net
-
-  # glosis-dc:
-  #   container_name: glosis-dc
-  #   image: kobotoolbox/kobocat:2.025.02
-  #   restart: always
-  #   environment:
-  #     - DJANGO_SETTINGS_MODULE=kobocat.settings
-  #     - KOBOFORM_URL=http://localhost:8003
-  #     - ENKETO_URL=http://localhost:8005
-  #     - DATABASE_URL=postgres://glosis:glosis@glosis-db:5432/glosis
-  #     - MONGO_URL=mongodb://glosis-dc-mongo:27017/glosis
-  #     - POSTGRES_HOST=glosis-db
-  #     - POSTGRES_PORT=5432
-  #     - POSTGRES_DB=glosis
-  #     - KOBO_SUPERUSER_USERNAME=kobo
-  #     - KOBO_SUPERUSER_PASSWORD=kobo
-  #     - KOBO_DEBUG=true
-  #     - SKIP_MONGO_INIT=true
-  #   ports:
-  #     - "8003:8000"
-  #   volumes:
-  #     - ./kobo:/srv/src/kobocat
-  #   depends_on:
-  #     - glosis-db
-  #     - glosis-dc-mongo
-  #   networks:
-  #     - glosis-net
-
   # Metadata (pyCSW)
   glosis-md:
     container_name: glosis-md

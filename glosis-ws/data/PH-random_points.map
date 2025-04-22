@@ -30,7 +30,7 @@ MAP
         TYPE POINT
         STATUS ON
         CONNECTIONTYPE postgis
-        CONNECTION "user=glosis password=glosis dbname=glosis host=192.168.1.117 port=5442"
+        CONNECTION "user=glosis password=glosis dbname=glosis host=192.168.1.128 port=5442"
         DATA "geom FROM core.philippines_profiles USING UNIQUE id"
         METADATA
             "wms_include_items" "all"
