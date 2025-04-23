@@ -24,42 +24,9 @@ MAP
         TYPE RASTER
         STATUS ON
         METADATA
-            "wms_title" "Soil Nutrient Management"
             "wms_include_items" "all"
             "gml_include_items" "all"
-            "wms_enable_request" "*"
-            "wms_bandnames" "BKD-0-30,BKD-30-60,CEC-0-30,CEC-30-60,CLAY-0-30,CLAY-30-60,CORG-0-30,CORG-30-60,KXX-0-30,KXX-30-60,PHX-0-30,PHX-30-60,PXX-0-30,PXX-30-60,SAND-0-30,SAND-30-60,SILT-0-30,SILT-30-60"
-            "wms_band_interpretation" "1:BKD-0-30;2:BKD-30-60;3:CEC-0-30;4:CEC-30-60;5:CLAY-0-30;6:CLAY-30-60;7:CORG-0-30;8:CORG-30-60;9:KXX-0-30;10:KXX-30-60;11:PHX-0-30;12:PHX-30-60;13:PXX-0-30;14:PXX-30-60;15:SAND-0-30;16:SAND-30-60;17:SILT-0-30;18:SILT-30-60"
-            "gml_BKD-0-30_type" "Float32"
-            "gml_BKD-30-60_type" "Float32"
-            "gml_CEC-0-30_type" "Float32"
-            "gml_CEC-30-60_type" "Float32"
-            "gml_CLAY-0-30_type" "Float32"
-            "gml_CLAY-30-60_type" "Float32"
-            "gml_CORG-0-30_type" "Float32"
-            "gml_CORG-30-60_type" "Float32"
-            "gml_KXX-0-30_type" "Float32"
-            "gml_KXX-30-60_type" "Float32"
-            "gml_PHX-0-30_type" "Float32"
-            "gml_PHX-30-60_type" "Float32"
-            "gml_PXX-0-30_type" "Float32"
-            "gml_PXX-30-60_type" "Float32"
-            "gml_SAND-0-30_type" "Float32"
-            "gml_SAND-30-60_type" "Float32"
-            "gml_SILT-0-30_type" "Float32"
-            "gml_SILT-30-60_type" "Float32"
-            "wms_queryable" "1"
-            "wms_getfeatureinfo_include_bands" "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18"
         END
-        PROCESSING "BANDS=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18"
-        PROCESSING "SCALE=AUTO"
-        PROCESSING "NODATA=-1"
-        PROCESSING "GETFEATUREINFO_MULTIBAND=ON"
-        PROCESSING "GETFEATUREINFO_BAND_NAMES=ON"
-        PROCESSING "GETFEATUREINFO_BAND_VALUES=ON"
-        PROCESSING "GETFEATUREINFO_FORMAT=application/json"
-        TEMPLATE "PH-GSNM.tmpl"
-        
         CLASS
             NAME "PH-GSNM"
             STYLE

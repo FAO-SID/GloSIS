@@ -91,3 +91,15 @@ for FILE in "$OUTPUT_DIR"/*.tif; do
     CURRENT_NODATA=$(gdalinfo "$FILE" | grep "NoData Value=" | awk -F'NoData Value=' '{print $2}')
     printf "%-15s %-15s %-15s %-15s %-15s %-15s %s\n" "$CURRENT_XMIN" "$CURRENT_YMIN" "$CURRENT_XMAX" "$CURRENT_YMAX" "$CURRENT_PIXEL_SIZE" "$CURRENT_NODATA" "$BASENAME"
 done
+
+# Create VRTs
+cd $OUTPUT_DIR
+ls *GSAS*.tif > filelist.txt
+gdalbuildvrt -separate -input_file_list filelist.txt PH-GSAS.vrt
+rm filelist.txt
+ls *GSOC*.tif > filelist.txt
+gdalbuildvrt -separate -input_file_list filelist.txt PH-GSOC.vrt
+rm filelist.txt
+ls *GSNM*.tif > filelist.txt
+gdalbuildvrt -separate -input_file_list filelist.txt PH-GSNM.vrt
+rm filelist.txt

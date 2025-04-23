@@ -230,19 +230,6 @@ http://localhost:8082/?map=/etc/mapserver/PH-random_points.map&SERVICE=WMS&VERSI
 # QGIS add WMS layer
 http://localhost:8082/?map=/etc/mapserver/PH-random_points.map
 
-
-# # create VRTs
-# cd $PROJECT_DIR/GloSIS/glosis-ws/data/
-# ls *GSAS*.tif > filelist.txt
-# gdalbuildvrt -separate -input_file_list filelist.txt PH-GSAS.vrt
-# rm filelist.txt
-# ls *GSOC*.tif > filelist.txt
-# gdalbuildvrt -separate -input_file_list filelist.txt PH-GSOC.vrt
-# rm filelist.txt
-# ls *GSNM*.tif > filelist.txt
-# gdalbuildvrt -separate -input_file_list filelist.txt PH-GSNM.vrt
-# rm filelist.txt
-
 # Test VRT WMS
 # VRT GetMap
 http://localhost:8082?map=/etc/mapserver/PH-GSOC.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=11.50360938260532961%2C119.4691787884444949%2C17.66748659510531283%2C122.84315021570988335&CRS=EPSG%3A4326&WIDTH=595&HEIGHT=1087&LAYERS=PH-GSOC&STYLES=&FORMAT=image%2Fpng&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi%3A96&TRANSPARENT=TRUE
@@ -250,6 +237,7 @@ http://localhost:8082?map=/etc/mapserver/PH-GSOC.map&SERVICE=WMS&VERSION=1.3.0&R
 http://localhost:8082/?map=/etc/mapserver/PH-GSAS.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&BBOX=11.50360938260532961%2C119.4691787884444949%2C17.66748659510531283%2C122.84315021570988335&CRS=EPSG%3A4326&WIDTH=595&HEIGHT=1087&LAYERS=PH-GSAS&STYLES=&FORMAT=image%2Fpng&QUERY_LAYERS=PH-GSAS&INFO_FORMAT=text%2Fhtml&I=244&J=358
 http://localhost:8082/?map=/etc/mapserver/PH-GSNM.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&BBOX=11.50360938260532961%2C119.4691787884444949%2C17.66748659510531283%2C122.84315021570988335&CRS=EPSG%3A4326&WIDTH=595&HEIGHT=1087&LAYERS=PH-GSNM&STYLES=&FORMAT=image%2Fpng&QUERY_LAYERS=PH-GSNM&INFO_FORMAT=text%2Fhtml&I=244&J=358
 http://localhost:8082/?map=/etc/mapserver/PH-GSOC.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&BBOX=11.50360938260532961%2C119.4691787884444949%2C17.66748659510531283%2C122.84315021570988335&CRS=EPSG%3A4326&WIDTH=595&HEIGHT=1087&LAYERS=PH-GSOC&STYLES=&FORMAT=image%2Fpng&QUERY_LAYERS=PH-GSOC&INFO_FORMAT=text%2Fhtml&I=244&J=358
+
 
 ####################
 #  PostgreSQL (db) #
