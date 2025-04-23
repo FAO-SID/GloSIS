@@ -9,13 +9,13 @@ DROP SCHEMA IF EXISTS topology;
 -- create pycsw schema
 CREATE SCHEMA pycsw;
 ALTER SCHEMA pycsw OWNER TO pycsw;
-COMMENT ON SCHEMA pycsw IS 'GloSIS metadata catalog';
+COMMENT ON SCHEMA pycsw IS 'GloSIS metadata catalog database schema';
 GRANT ALL ON SCHEMA pycsw TO pycsw;
 
 -- create kobo schema
 CREATE SCHEMA kobo;
 ALTER SCHEMA kobo OWNER TO kobo;
-COMMENT ON SCHEMA kobo IS 'GloSIS data collection';
+COMMENT ON SCHEMA kobo IS 'GloSIS data collection database schema';
 GRANT ALL ON SCHEMA kobo TO kobo;
 
 -- grant privileges to glosis_r

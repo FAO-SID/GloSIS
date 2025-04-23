@@ -188,7 +188,6 @@ docker exec -it glosis-db psql -d glosis -U glosis -c "
 ####################
 
 # load records
-# mv $PROJECT_DIR/GloSIS/glosis-datacube/PH/output/*.xml $PROJECT_DIR/GloSIS/glosis-md/records
 docker-compose exec glosis-md ls -l /records
 docker-compose exec glosis-md pycsw-admin.py load-records -c /etc/pycsw/pycsw.yml -p /records -r -y
 
@@ -204,10 +203,6 @@ docker-compose exec glosis-db psql -U glosis -d glosis -c "SELECT identifier, ti
 ####################
 #  MapServer (ws)  #
 ####################
-
-# copy geotiffs and map files
-# mv $PROJECT_DIR/GloSIS/glosis-datacube/PH/output/*.tif $PROJECT_DIR/GloSIS/glosis-ws/data/
-# mv $PROJECT_DIR/GloSIS/glosis-datacube/PH/output/*.map $PROJECT_DIR/GloSIS/glosis-ws/data/
 
 # Test raster WMS
 # GetCapabilities
@@ -235,20 +230,22 @@ http://localhost:8082/?map=/etc/mapserver/PH-random_points.map&SERVICE=WMS&VERSI
 # QGIS add WMS layer
 http://localhost:8082/?map=/etc/mapserver/PH-random_points.map
 
-# create VRTs
-cd $PROJECT_DIR/GloSIS/glosis-ws/data/
-ls *GSAS*.tif > filelist.txt
-gdalbuildvrt -separate -input_file_list filelist.txt PH-GSAS.vrt
-rm filelist.txt
-ls *GSOC*.tif > filelist.txt
-gdalbuildvrt -separate -input_file_list filelist.txt PH-GSOC.vrt
-rm filelist.txt
-ls *GSNM*.tif > filelist.txt
-gdalbuildvrt -separate -input_file_list filelist.txt PH-GSNM.vrt
-rm filelist.txt
 
-gdallocationinfo -valonly -l_srs EPSG:4326 $PROJECT_DIR/GloSIS/glosis-ws/data/PH-GSOC.vrt 120.85598, 15.638156
-gdalinfo $PROJECT_DIR/GloSIS/glosis-ws/data/PH-GSOC.vrt
+# # create VRTs
+# cd $PROJECT_DIR/GloSIS/glosis-ws/data/
+# ls *GSAS*.tif > filelist.txt
+# gdalbuildvrt -separate -input_file_list filelist.txt PH-GSAS.vrt
+# rm filelist.txt
+# ls *GSOC*.tif > filelist.txt
+# gdalbuildvrt -separate -input_file_list filelist.txt PH-GSOC.vrt
+# rm filelist.txt
+# ls *GSNM*.tif > filelist.txt
+# gdalbuildvrt -separate -input_file_list filelist.txt PH-GSNM.vrt
+# rm filelist.txt
+
+# gdallocationinfo -valonly -l_srs EPSG:4326 $PROJECT_DIR/GloSIS/glosis-ws/data/PH-GSOC.vrt 120.85598, 15.638156
+# gdalinfo $PROJECT_DIR/GloSIS/glosis-ws/data/PH-GSOC.vrt
+
 
 # Test VRT WMS
 # VRT GetMap
