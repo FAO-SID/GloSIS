@@ -2,16 +2,7 @@
   <SRS dataAxisToSRSAxisMapping="1,2">PROJCS["WGS 84 / UTM zone 51N",GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]],PROJECTION["Transverse_Mercator"],PARAMETER["latitude_of_origin",0],PARAMETER["central_meridian",123],PARAMETER["scale_factor",0.9996],PARAMETER["false_easting",500000],PARAMETER["false_northing",0],UNIT["metre",1,AUTHORITY["EPSG","9001"]],AXIS["Easting",EAST],AXIS["Northing",NORTH],AUTHORITY["EPSG","32651"]]</SRS>
   <GeoTransform> -1.7434654999999999e+05,  1.0000000000000000e+03,  0.0000000000000000e+00,  2.3475704739999999e+06,  0.0000000000000000e+00, -1.0000000000000000e+03</GeoTransform>
   <VRTRasterBand dataType="Float32" band="1">
-    <Metadata>
-      <MDI key="STATISTICS_APPROXIMATE">YES</MDI>
-      <MDI key="STATISTICS_MAXIMUM">4</MDI>
-      <MDI key="STATISTICS_MEAN">2.0266882329155</MDI>
-      <MDI key="STATISTICS_MINIMUM">2</MDI>
-      <MDI key="STATISTICS_STDDEV">0.16144915766093</MDI>
-      <MDI key="STATISTICS_VALID_PERCENT">11.56</MDI>
-    </Metadata>
     <NoDataValue>-1</NoDataValue>
-    <ColorInterp>Gray</ColorInterp>
     <ComplexSource>
       <SourceFilename relativeToVRT="1">PH-GSAS-ECX-2020-0-30.tif</SourceFilename>
       <SourceBand>1</SourceBand>
@@ -20,6 +11,9 @@
       <DstRect xOff="0" yOff="0" xSize="1074" ySize="1838" />
       <NODATA>-1</NODATA>
     </ComplexSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Float32" band="2">
+    <NoDataValue>-1</NoDataValue>
     <ComplexSource>
       <SourceFilename relativeToVRT="1">PH-GSAS-ECX-2020-30-100.tif</SourceFilename>
       <SourceBand>1</SourceBand>
@@ -28,6 +22,9 @@
       <DstRect xOff="0" yOff="0" xSize="1074" ySize="1838" />
       <NODATA>-1</NODATA>
     </ComplexSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Float32" band="3">
+    <NoDataValue>-1</NoDataValue>
     <ComplexSource>
       <SourceFilename relativeToVRT="1">PH-GSAS-NAEXC-2020-0-30.tif</SourceFilename>
       <SourceBand>1</SourceBand>
@@ -36,6 +33,9 @@
       <DstRect xOff="0" yOff="0" xSize="1074" ySize="1838" />
       <NODATA>-1</NODATA>
     </ComplexSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Float32" band="4">
+    <NoDataValue>-1</NoDataValue>
     <ComplexSource>
       <SourceFilename relativeToVRT="1">PH-GSAS-NAEXC-2020-30-100.tif</SourceFilename>
       <SourceBand>1</SourceBand>
@@ -44,6 +44,9 @@
       <DstRect xOff="0" yOff="0" xSize="1074" ySize="1838" />
       <NODATA>-1</NODATA>
     </ComplexSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Float32" band="5">
+    <NoDataValue>-1</NoDataValue>
     <ComplexSource>
       <SourceFilename relativeToVRT="1">PH-GSAS-PHX-2020-0-30.tif</SourceFilename>
       <SourceBand>1</SourceBand>
@@ -52,6 +55,9 @@
       <DstRect xOff="0" yOff="0" xSize="1074" ySize="1838" />
       <NODATA>-1</NODATA>
     </ComplexSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Float32" band="6">
+    <NoDataValue>-1</NoDataValue>
     <ComplexSource>
       <SourceFilename relativeToVRT="1">PH-GSAS-PHX-2020-30-100.tif</SourceFilename>
       <SourceBand>1</SourceBand>
@@ -60,6 +66,9 @@
       <DstRect xOff="0" yOff="0" xSize="1074" ySize="1838" />
       <NODATA>-1</NODATA>
     </ComplexSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Float32" band="7">
+    <NoDataValue>-1</NoDataValue>
     <ComplexSource>
       <SourceFilename relativeToVRT="1">PH-GSAS-SALT-2020-0-30.tif</SourceFilename>
       <SourceBand>1</SourceBand>
@@ -68,6 +77,9 @@
       <DstRect xOff="0" yOff="0" xSize="1074" ySize="1838" />
       <NODATA>-1</NODATA>
     </ComplexSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Float32" band="8">
+    <NoDataValue>-1</NoDataValue>
     <ComplexSource>
       <SourceFilename relativeToVRT="1">PH-GSAS-SALT-2020-30-100.tif</SourceFilename>
       <SourceBand>1</SourceBand>
