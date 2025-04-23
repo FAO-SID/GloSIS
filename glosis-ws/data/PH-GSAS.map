@@ -1,7 +1,5 @@
 MAP
     NAME "PH-GSAS"
-    STATUS ON
-    SIZE 800 600
     EXTENT -174346.550 509570.474 899653.450 2347570.474
     UNITS METERS
     SHAPEPATH "./"
@@ -9,10 +7,10 @@ MAP
     IMAGETYPE "PNG24"
     PROJECTION
         "init=epsg:32651"
-    END # PROJECTION
+    END
     WEB
         METADATA
-            "wms_title" "Salt-Affected Soil"
+            "wms_title" "Soil Acidity and Salinity"
             "ows_enable_request" "*" 
             "ows_srs" "EPSG:32651 EPSG:4326 EPSG:3857"
             "wms_getfeatureinfo_formatlist" "text/plain,text/html,application/json,geojson,application/vnd.ogc.gml,gml"
@@ -20,20 +18,38 @@ MAP
         END
     END
     LAYER
-        TEMPLATE "getfeatureinfo.tmpl"
+        TEMPLATE "PH-GSAS.tmpl"
         NAME "PH-GSAS"
+        DATA "PH-GSAS.vrt"
         TYPE RASTER
         STATUS ON
-        DATA PH-GSAS.vrt
-        PROJECTION
-            "init=epsg:32651"
-        END
         METADATA
+            "wms_title" "Soil Acidity and Salinity"
             "wms_include_items" "all"
             "gml_include_items" "all"
+            "wms_enable_request" "*"
+            "wms_bandnames" "ECX-0-30,ECX-30-100,NAEXC-0-30,NAEXC-30-100,PHX-0-30,PHX-30-100,SALT-0-30,SALT-30-100"
+            "wms_band_interpretation" "1:ECX-0-30;2:ECX-30-100;3:NAEXC-0-30;4:NAEXC-30-100;5:PHX-0-30;6:PHX-30-100;7:SALT-0-30;8:SALT-30-100"
+            "gml_ECX-0-30_type" "Float32"
+            "gml_ECX-30-100_type" "Float32"
+            "gml_NAEXC-0-30_type" "Float32"
+            "gml_NAEXC-30-100_type" "Float32"
+            "gml_PHX-0-30_type" "Float32"
+            "gml_PHX-30-100_type" "Float32"
+            "gml_SALT-0-30_type" "Float32"
+            "gml_SALT-30-100_type" "Float32"
+            "wms_queryable" "1"
+            "wms_getfeatureinfo_include_bands" "1,2,3,4,5,6,7,8"
         END
+        PROCESSING "BANDS=1,2,3,4,5,6,7,8"
         PROCESSING "SCALE=AUTO"
         PROCESSING "NODATA=-1"
+        PROCESSING "GETFEATUREINFO_MULTIBAND=ON"
+        PROCESSING "GETFEATUREINFO_BAND_NAMES=ON"
+        PROCESSING "GETFEATUREINFO_BAND_VALUES=ON"
+        PROCESSING "GETFEATUREINFO_FORMAT=application/json"
+        TEMPLATE "PH-GSAS.tmpl"
+        
         CLASS
             NAME "PH-GSAS"
             STYLE

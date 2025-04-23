@@ -1,42 +1,35 @@
 MAP
     NAME "PH-GSOC"
-    STATUS ON
-    SIZE 800 600
     EXTENT -174346.550 509570.474 899653.450 2347570.474
     UNITS METERS
     SHAPEPATH "./"
+    SIZE 800 600
     IMAGETYPE "PNG24"
-    DEBUG 5
-    
     PROJECTION
         "init=epsg:32651"
     END
-    
     WEB
         METADATA
             "wms_title" "Soil Organic Carbon Sequestration Potential"
             "ows_enable_request" "*" 
             "ows_srs" "EPSG:32651 EPSG:4326 EPSG:3857"
             "wms_getfeatureinfo_formatlist" "text/plain,text/html,application/json,geojson,application/vnd.ogc.gml,gml"
-            "wms_feature_info_mime_type" "text/html"
+            "wms_feature_info_mime_type" "application/json"
         END
     END
-    
     LAYER
+        TEMPLATE "PH-GSOC.tmpl"
         NAME "PH-GSOC"
+        DATA "PH-GSOC.vrt"
         TYPE RASTER
         STATUS ON
-        DATA "PH-GSOC.vrt"
-        PROJECTION
-            "init=epsg:32651"
-        END
         METADATA
             "wms_title" "Soil Organic Carbon"
             "wms_include_items" "all"
             "gml_include_items" "all"
             "wms_enable_request" "*"
-            "wms_bandnames" "CORGADBAU,CORGADSSM1,CORGADSSM2,CORGADSSM3,CORGASRBAU,CORGASRSSM1,CORGASRSSM2,CORGASRSSM3,CORGRDSSM1,CORGRDSSM2,CORGRDSSM3,CORGRSRSSM1,CORGRSRSSM2,CORGRSRSSM3"
-            "wms_band_interpretation" "1:CORGADBAU;2:CORGADSSM1;3:CORGADSSM2;4:CORGADSSM3;5:CORGASRBAU;6:CORGASRSSM1;7:CORGASRSSM2;8:CORGASRSSM3;9:CORGRDSSM1;10:CORGRDSSM2;11:CORGRDSSM3;12:CORGRSRSSM1;13:CORGRSRSSM2;14:CORGRSRSSM3"
+            "wms_bandnames" "CORGADBAU,CORGADSSM1,CORGADSSM2,CORGADSSM3,CORGASRBAU,CORGASRSSM1,CORGASRSSM2,CORGASRSSM3,CORGRDSSM1,CORGRDSSM2,CORGRDSSM3,CORGRSRSSM1,CORGRSRSSM1U,CORGRSRSSM2,CORGRSRSSM2U,CORGRSRSSM3,CORGRSRSSM3U,CORGSOCBAU,CORGSOCSSM1,CORGSOCSSM2,CORGSOCSSM3,CORGSSMU,CORGT0"
+            "wms_band_interpretation" "1:CORGADBAU;2:CORGADSSM1;3:CORGADSSM2;4:CORGADSSM3;5:CORGASRBAU;6:CORGASRSSM1;7:CORGASRSSM2;8:CORGASRSSM3;9:CORGRDSSM1;10:CORGRDSSM2;11:CORGRDSSM3;12:CORGRSRSSM1;13:CORGRSRSSM1U;14:CORGRSRSSM2;15:CORGRSRSSM2U;16:CORGRSRSSM3;17:CORGRSRSSM3U;18:CORGSOCBAU;19:CORGSOCSSM1;20:CORGSOCSSM2;21:CORGSOCSSM3;22:CORGSSMU;23:CORGT0"
             "gml_CORGADBAU_type" "Float32"
             "gml_CORGADSSM1_type" "Float32"
             "gml_CORGADSSM2_type" "Float32"
@@ -49,16 +42,27 @@ MAP
             "gml_CORGRDSSM2_type" "Float32"
             "gml_CORGRDSSM3_type" "Float32"
             "gml_CORGRSRSSM1_type" "Float32"
+            "gml_CORGRSRSSM1U_type" "Float32"
             "gml_CORGRSRSSM2_type" "Float32"
+            "gml_CORGRSRSSM2U_type" "Float32"
             "gml_CORGRSRSSM3_type" "Float32"
+            "gml_CORGRSRSSM3U_type" "Float32"
+            "gml_CORGSOCBAU_type" "Float32"
+            "gml_CORGSOCSSM1_type" "Float32"
+            "gml_CORGSOCSSM2_type" "Float32"
+            "gml_CORGSOCSSM3_type" "Float32"
+            "gml_CORGSSMU_type" "Float32"
+            "gml_CORGT0_type" "Float32"
             "wms_queryable" "1"
-            "wms_getfeatureinfo_include_bands" "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
+            "wms_getfeatureinfo_include_bands" "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23"
         END
-        PROCESSING "BANDS=1"
+        PROCESSING "BANDS=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23"
         PROCESSING "SCALE=AUTO"
         PROCESSING "NODATA=-1"
-        TEMPLATE "getfeatureinfo_vrt.tmpl"
-        
+        PROCESSING "GETFEATUREINFO_MULTIBAND=ON"
+        PROCESSING "GETFEATUREINFO_BAND_NAMES=ON"
+        PROCESSING "GETFEATUREINFO_BAND_VALUES=ON"
+        PROCESSING "GETFEATUREINFO_FORMAT=application/json"
         CLASS
             NAME "PH-GSOC"
             STYLE
