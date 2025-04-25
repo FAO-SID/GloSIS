@@ -8,13 +8,13 @@ services:
     image: postgis/postgis:17-3.5
     restart: always
     environment:
-      POSTGRES_DB: glosis
-      POSTGRES_USER: glosis
-      POSTGRES_PASSWORD: glosis
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5442:5432"
     volumes:
-      - ./glosis-db/pgdata:/var/lib/postgresql/data
+      - ./glosis-db/volume:/var/lib/postgresql/data
     networks:
       - glosis-net
 
@@ -28,7 +28,7 @@ services:
       - 8001:8000
     volumes:
       - ./glosis-md/pycsw.yml:/etc/pycsw/pycsw.yml
-      - ./glosis-md/records:/records
+      - ./glosis-md/volume:/records
     networks:
       - glosis-net
 
@@ -42,13 +42,13 @@ services:
       PASSWORD: shiny
       DB_HOST: glosis-db
       DB_PORT: 5432
-      DB_NAME: glosis
-      DB_USER: glosis
-      DB_PASSWORD: glosis
+      DB_NAME: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "3838:3838"
     volumes:
-      - ./glosis-shiny/init-scripts:/srv/shiny-server/init-scripts
+      - ./glosis-shiny/volume:/srv/shiny-server/init-scripts
     depends_on:
       - glosis-db
     networks:
@@ -79,7 +79,7 @@ services:
     ports:
       - "8082:80"
     volumes:
-      - ./glosis-ws/data:/etc/mapserver:ro
+      - ./glosis-ws/volume:/etc/mapserver:ro
     depends_on:
       - glosis-db
     networks:
