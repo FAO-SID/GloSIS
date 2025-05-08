@@ -21,7 +21,7 @@ services:
   # Metadata (pyCSW)
   glosis-md:
     container_name: glosis-md
-    image: geopython/pycsw:latest
+    image: geopython/pycsw:3.0.0-beta1
     environment:
         PYCSW_SERVER_URL: http://localhost:8001
     ports:

@@ -11,14 +11,6 @@ DATE=`date +%Y-%m-%d_%H-%M`
 #            Docker             #
 #################################
 
-# docker comands
-# docker images
-# docker image rm XXXXXXXXXX
-# docker ps --all
-# docker container stop XXXXXXXXXX
-# docker container rm XXXXXXXXXX
-# docker logs XXXXXXXXXX
-
 # To remove all existing images, containers and databases, run the following commands in your docker-compose.yml folder
 docker stop $(docker ps -q)
 docker rm $(docker ps -aq)
@@ -26,8 +18,9 @@ docker rmi $(docker images -q) --force
 docker network prune -f
 docker volume prune -f
 docker system prune -a --volumes -f
+rm -rf $PROJECT_DIR/GloSIS/glosis-db/volume/*
 cd $PROJECT_DIR/GloSIS
-docker-compose up --build
+docker-compose up --build -d
 
 
 ####################
@@ -189,13 +182,12 @@ docker exec -it glosis-db psql -d glosis -U glosis -c "
 ####################
 
 # load records
-cd $PROJECT_DIR/GloSIS
 docker-compose up -d glosis-md
 docker-compose exec glosis-md ls -l /records
 docker-compose exec glosis-md pycsw-admin.py load-records -c /etc/pycsw/pycsw.yml -p /records -r -y
 
 # verify if records were loaded
-docker-compose exec glosis-db psql -U glosis -d glosis -c "SELECT identifier, title FROM pycsw.records ORDER BY title;"
+docker-compose exec glosis-db psql -U glosis -d glosis -c "SELECT identifier, title FROM pycsw.records ORDER BY title LIMIT 5;"
 
 # custumization - https://docs.pycsw.org/en/latest/configuration.html
 docker-compose exec glosis-md sed -i 's/pycsw website/Philippines SIS metadata/g' pycsw/pycsw/ogc/api/templates/_base.html
