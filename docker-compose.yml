@@ -35,7 +35,7 @@ services:
   # Data ingestion tool (Shiny)
   glosis-shiny:
     container_name: glosis-shiny
-    image: luislado/glosis-shiny:latest
+    image: luislado/glosis-shiny:v4
     restart: always
     environment:
       USER: shiny
