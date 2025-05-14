@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # working dir 
-PROJECT_DIR="/home/carva014/Work/Code/FAO"      # << EDIT THIS LINE!
+PROJECT_DIR="/home/carva014/Work/Code/FAO/GloSIS"      # << EDIT THIS LINE!
 
 # date
 DATE=`date +%Y-%m-%d_%H-%M`
@@ -18,8 +18,8 @@ docker rmi $(docker images -q) --force
 docker network prune -f
 docker volume prune -f
 docker system prune -a --volumes -f
-rm -rf $PROJECT_DIR/GloSIS/glosis-db/volume/*
-cd $PROJECT_DIR/GloSIS
+rm -rf $PROJECT_DIR/glosis-db/volume/*
+cd $PROJECT_DIR
 docker-compose up --build -d
 
 
@@ -28,9 +28,9 @@ docker-compose up --build -d
 ####################
 
 # copy sql scripts to db container
-docker cp $PROJECT_DIR/GloSIS/glosis-db/initdb/init-01.sql glosis-db:/tmp/init-01.sql
-docker cp $PROJECT_DIR/GloSIS/glosis-db/versions/glosis-db_latest.sql glosis-db:/tmp/init-02.sql
-docker cp $PROJECT_DIR/GloSIS/glosis-db/initdb/init-03.sql glosis-db:/tmp/init-03.sql
+docker cp $PROJECT_DIR/glosis-db/initdb/init-01.sql glosis-db:/tmp/init-01.sql
+docker cp $PROJECT_DIR/glosis-db/versions/glosis-db_latest.sql glosis-db:/tmp/init-02.sql
+docker cp $PROJECT_DIR/glosis-db/initdb/init-03.sql glosis-db:/tmp/init-03.sql
 
 # execute sql scripts
 docker exec -it glosis-db psql -d glosis -U glosis -f /tmp/init-01.sql
@@ -238,4 +238,4 @@ http://localhost:8082/?map=/etc/mapserver/PH-GSOC.map&SERVICE=WMS&VERSION=1.3.0&
 #  PostgreSQL (db) #
 ####################
 
-pg_dump -h localhost -p 5442 -U glosis -d glosis -Fc -v -f $PROJECT_DIR/GloSIS/glosis-db/backups/glosis_backup_${DATE}.backup
+pg_dump -h localhost -p 5442 -U glosis -d glosis -Fc -v -f $PROJECT_DIR/glosis-db/backups/glosis_backup_${DATE}.backup
