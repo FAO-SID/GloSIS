@@ -5,7 +5,7 @@
 -- Dumped from database version 12.22 (Ubuntu 12.22-2.pgdg22.04+1)
 -- Dumped by pg_dump version 17.5 (Ubuntu 17.5-1.pgdg22.04+1)
 
--- Started on 2025-05-22 10:14:39 CEST
+-- Started on 2025-05-22 10:14:38 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -14611,7 +14611,7 @@ ALTER DEFAULT PRIVILEGES FOR ROLE glosis IN SCHEMA core GRANT SELECT ON TABLES T
 ALTER DEFAULT PRIVILEGES FOR ROLE glosis IN SCHEMA metadata GRANT SELECT ON TABLES TO glosis_r;
 
 
--- Completed on 2025-05-22 10:14:39 CEST
+-- Completed on 2025-05-22 10:14:38 CEST
 
 --
 -- PostgreSQL database dump complete
