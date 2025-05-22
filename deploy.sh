@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# working dir 
+# Set working directory
 PROJECT_DIR="/home/carva014/Work/Code/FAO/GloSIS"      # << EDIT THIS LINE!
 
-# Navigate to project folder
+# Navigate to the project folder
 cd $PROJECT_DIR
 
 
