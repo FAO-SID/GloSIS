@@ -17,11 +17,6 @@ services:
       - ./glosis-db/volume:/var/lib/postgresql/data
     networks:
       - glosis-net
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
 
   # Metadata (pyCSW)
   glosis-md:
@@ -37,8 +32,7 @@ services:
     networks:
       - glosis-net
     depends_on:
-      glosis-db:
-        condition: service_healthy
+      - glosis-db
 
   # Data ingestion tool (Shiny)
   glosis-shiny:
@@ -57,10 +51,10 @@ services:
       - "3838:3838"
     volumes:
       - ./glosis-shiny/volume:/srv/shiny-server/init-scripts
-    depends_on:
-      - glosis-db
     networks:
       - glosis-net
+    depends_on:
+      - glosis-db
 
   # Web Mapping (Openlayers)
   glosis-wm:

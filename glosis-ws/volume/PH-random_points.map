@@ -30,9 +30,9 @@ MAP
         TYPE POINT
         STATUS ON
         CONNECTIONTYPE postgis
-        CONNECTION "user=glosis password=glosis dbname=glosis host=192.168.1.214 port=5442"
+        CONNECTION "user=glosis password=glosis dbname=glosis host=192.168.1.118 port=5442"
         # CONNECTION "user=${POSTGRES_USER} password=${POSTGRES_PASSWORD} dbname=${POSTGRES_DB} host=192.168.1.128 port=5442" # DOES NOT WORK
-        DATA "geom FROM core.philippines_profiles USING UNIQUE id"
+        DATA "geom FROM core.profiles USING UNIQUE id"
         METADATA
             "wms_include_items" "all"
             "gml_include_items" "all"

@@ -104,13 +104,13 @@ body {
 }
 
 .layer-group-header::before {
-    content: '▼';
+    content: 'v';
     margin-right: 5px;
     font-size: 12px;
 }
 
 .layer-group.collapsed .layer-group-header::before {
-    content: '▶';
+    content: '>';
 }
 
 .layer-group.collapsed .layer-group-content {
