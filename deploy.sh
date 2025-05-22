@@ -3,10 +3,13 @@
 # working dir 
 PROJECT_DIR="/home/carva014/Work/Code/FAO/GloSIS"      # << EDIT THIS LINE!
 
+# Navigate to project folder
+cd $PROJECT_DIR
 
-#################################
-#            Docker             #
-#################################
+
+####################
+#      Docker      #
+####################
 
 # Clean up Docker
 docker stop $(docker ps -q)
@@ -19,19 +22,20 @@ docker system prune -a --volumes -f
 # Remove old DB volume content
 rm -rf $PROJECT_DIR/glosis-db/volume/*
 
-# Navigate to project folder
-cd $PROJECT_DIR
 
-# Rebuild and start Docker containers
+####################
+#     glosis-db    #
+####################
+
+# Build and run glosis-db container
 docker compose up --build glosis-db -d
-docker compose up --build glosis-shiny -d
-docker compose up --build glosis-wm -d
-docker compose up --build glosis-ws -d
 
-
-####################
-#  PostgreSQL (db) #
-####################
+# Wait for the PostgreSQL server to be ready
+echo "Waiting for glosis-db PostgreSQL to start..."
+until docker exec glosis-db pg_isready -U glosis -d glosis; do
+  sleep 1
+done
+echo "glosis-db PostgreSQL is ready."
 
 # Copy SQL scripts to glosis-db container
 docker cp $PROJECT_DIR/glosis-db/initdb/init-01.sql glosis-db:/tmp/init-01.sql
@@ -39,17 +43,26 @@ docker cp $PROJECT_DIR/glosis-db/versions/glosis-db_latest.sql glosis-db:/tmp/in
 docker cp $PROJECT_DIR/glosis-db/initdb/init-03.sql glosis-db:/tmp/init-03.sql
 
 # Execute SQL scripts inside the container
+sleep 10
 docker exec -it glosis-db psql -d glosis -U glosis -f /tmp/init-01.sql
 docker exec -it glosis-db psql -d glosis -U glosis -f /tmp/init-02.sql
 docker exec -it glosis-db psql -d glosis -U glosis -f /tmp/init-03.sql
 
 
 ####################
-#    pyCSW (md)    #
+#      Docker      #
 ####################
 
-# Build and run glosis-md container
+# Build and start other Docker containers
+docker compose up --build glosis-shiny -d
+docker compose up --build glosis-wm -d
+docker compose up --build glosis-ws -d
 docker compose up --build glosis-md -d
+
+
+####################
+#     glosis-md    #
+####################
 
 # Load records
 docker-compose exec glosis-md ls -l /records
