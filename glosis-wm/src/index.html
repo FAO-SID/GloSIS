@@ -18,13 +18,20 @@
     
     <div id="popup" class="popup">
         <div id="popup-content"></div>
-        <button id="popup-closer" class="popup-closer">×</button>
+        <button id="popup-closer" class="popup-closer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display: block; margin: auto;">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+        </button>
     </div>
     
     <div id="layer-switcher" class="layer-switcher">
         <div class="layer-switcher-header">
-            <!-- <h3>Layers</h3> -->
-            <button id="collapse-btn" class="collapse-btn">≡</button>
+            <button id="collapse-btn" class="collapse-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="display: block; margin: auto;">
+                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="black"/>
+                </svg>
+            </button>
         </div>
         <div class="layer-switcher-content">
             <div id="layer-groups"></div>
@@ -35,7 +42,12 @@
     </div>
 
     <div class="map-controls">
-        <div class="north-arrow">⇑</div>
+        <div class="north-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="currentColor" style="display: block; margin: auto;">
+                <path d="M16 3 L5 27 H 27 Z" fill="white" stroke="black" stroke-width="1" />
+                <text x="16" y="23" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black" font-weight="bold">N</text>
+            </svg>
+        </div>
         <div class="zoom-controls">
             <button id="zoom-in">+</button>
             <button id="zoom-out">-</button>

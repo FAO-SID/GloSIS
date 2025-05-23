@@ -51,16 +51,8 @@ body {
     transition: transform 0.3s ease;
 }
 
-.layer-switcher.collapsed {
-    transform: translateX(-95%);
-}
-
 .layer-switcher.collapsed .layer-switcher-content {
     display: none;
-}
-
-.layer-switcher.collapsed .collapse-btn {
-    transform: rotate(180deg);
 }
 
 .layer-switcher-header {
@@ -73,18 +65,17 @@ body {
     border-top-right-radius: 8px;
 }
 
-.layer-switcher-header h3 {
-    margin: 0;
-    font-size: 16px;
-}
-
 .collapse-btn {
     background: none;
     border: none;
-    font-size: 20px;
     cursor: pointer;
     padding: 5px;
     transition: transform 0.3s ease;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .layer-switcher-content {
@@ -250,12 +241,6 @@ body {
 
     .header h1 {
         font-size: 16px;
-    }
-
-    .layer-switcher {
-        top: 60px;
-        max-width: 80%;
-        max-height: calc(100vh - 80px);
     }
     
     .map-controls {
