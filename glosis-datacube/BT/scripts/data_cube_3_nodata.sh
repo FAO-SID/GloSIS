@@ -5,7 +5,7 @@
 ###############################################
 
 # Variables
-INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/PH/tmp"                          # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/tmp"                          # << EDIT THIS LINE!
 NODATA=-1
 cd $INPUT_DIR
 
