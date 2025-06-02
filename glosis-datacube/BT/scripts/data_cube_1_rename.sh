@@ -4,9 +4,9 @@
 #                    Rename                   #
 ###############################################
 
-INPUT_DIR="FAO/GloSIS/glosis-datacube/BT/input/GSAS"                          # << EDIT THIS LINE!
-OUTPUT_DIR="FAO/GloSIS/glosis-datacube/BT/input/BT/tmp"                       # << EDIT THIS LINE!
-YEAR=2020                                                                     # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/input/GSAS"                 # << EDIT THIS LINE!
+OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/tmp"                       # << EDIT THIS LINE!
+YEAR=2021                                                                                     # << EDIT THIS LINE!
 cp $INPUT_DIR/EC0_30_sd.tif $OUTPUT_DIR/BT-GSAS-ECXSD-$YEAR-0-30.tif
 cp $INPUT_DIR/EC0_30_uncertain.tif $OUTPUT_DIR/BT-GSAS-ECXU-$YEAR-0-30.tif
 cp $INPUT_DIR/EC30_100_sd.tif $OUTPUT_DIR/BT-GSAS-ECXSD-$YEAR-30-100.tif
@@ -15,26 +15,26 @@ cp $INPUT_DIR/ESP30_100_sd.tif $OUTPUT_DIR/BT-GSAS-NAEXCSD-$YEAR-30-100.tif
 cp $INPUT_DIR/ESP30_100_uncertain.tif $OUTPUT_DIR/BT-GSAS-NAEXCU-$YEAR-30-100.tif
 cp $INPUT_DIR/pH30_100_sd.tif $OUTPUT_DIR/BT-GSAS-PHXSD-$YEAR-30-100.tif
 cp $INPUT_DIR/pH30_100_uncertain.tif $OUTPUT_DIR/BT-GSAS-PHXU-$YEAR-30-100.tif
-cp $INPUT_DIR/Salt30_100cm_uncertain.tif $OUTPUT_DIR/BT-GSAS-SALT-$YEAR-30-100.tif
-cp $INPUT_DIR/Top0_30ECse.tif $OUTPUT_DIR/BT-GSAS-ECX-$YEAR-0-30.tif
-cp $INPUT_DIR/Top0_30ECte.tif $OUTPUT_DIR/BT-GSAS-ECX-$YEAR-0-30.tif
+cp $INPUT_DIR/Salt30_100cm_uncertain.tif $OUTPUT_DIR/BT-GSAS-SALTU-$YEAR-30-100.tif
+cp $INPUT_DIR/Top0_30ECse.tif $OUTPUT_DIR/BT-GSAS-ECXSE-$YEAR-0-30.tif
+cp $INPUT_DIR/Top0_30ECte.tif $OUTPUT_DIR/BT-GSAS-ECXTE-$YEAR-0-30.tif
 cp $INPUT_DIR/Top0_30ESP.tif $OUTPUT_DIR/BT-GSAS-NAEXC-$YEAR-0-30.tif
-cp $INPUT_DIR/Top0_30ESPt.tif $OUTPUT_DIR/BT-GSAS-NAEXC-$YEAR-0-30.tif
+cp $INPUT_DIR/Top0_30ESPt.tif $OUTPUT_DIR/BT-GSAS-NAEXCPT-$YEAR-0-30.tif
 cp $INPUT_DIR/Top0_30PH.tif $OUTPUT_DIR/BT-GSAS-PHX-$YEAR-0-30.tif
-cp $INPUT_DIR/Top0_30PHt.tif $OUTPUT_DIR/BT-GSAS-PHX-$YEAR-0-30.tif
+cp $INPUT_DIR/Top0_30PHt.tif $OUTPUT_DIR/BT-GSAS-PHXT-$YEAR-0-30.tif
 cp $INPUT_DIR/Top0_30saltaffected.tif $OUTPUT_DIR/BT-GSAS-SALT-$YEAR-0-30.tif
-cp $INPUT_DIR/Top30_100ECse.tif $OUTPUT_DIR/BT-GSAS-ECX-$YEAR-30-100.tif
-cp $INPUT_DIR/Top30_100ECte.tif $OUTPUT_DIR/BT-GSAS-ECX-$YEAR-30-100.tif
+cp $INPUT_DIR/Top30_100ECse.tif $OUTPUT_DIR/BT-GSAS-ECXSE-$YEAR-30-100.tif
+cp $INPUT_DIR/Top30_100ECte.tif $OUTPUT_DIR/BT-GSAS-ECXTE-$YEAR-30-100.tif
 cp $INPUT_DIR/Top30_100ESP.tif $OUTPUT_DIR/BT-GSAS-NAEXC-$YEAR-30-100.tif
-cp $INPUT_DIR/Top30_100ESPt.tif $OUTPUT_DIR/BT-GSAS-NAEXC-$YEAR-30-100.tif
+cp $INPUT_DIR/Top30_100ESPt.tif $OUTPUT_DIR/BT-GSAS-NAEXCPT-$YEAR-30-100.tif
 cp $INPUT_DIR/Top30_100PH.tif $OUTPUT_DIR/BT-GSAS-PHX-$YEAR-30-100.tif
-cp $INPUT_DIR/Top30_100PHt.tif $OUTPUT_DIR/BT-GSAS-PHX-$YEAR-30-100.tif
+cp $INPUT_DIR/Top30_100PHt.tif $OUTPUT_DIR/BT-GSAS-PHXT-$YEAR-30-100.tif
 cp $INPUT_DIR/Top30_100saltaffected.tif $OUTPUT_DIR/BT-GSAS-SALT-$YEAR-30-100.tif
 
 
-INPUT_DIR="FAO/GloSIS/glosis-datacube/BT/input/GSOC"                          # << EDIT THIS LINE!
-OUTPUT_DIR="FAO/GloSIS/glosis-datacube/BT/input/BT/tmp"                       # << EDIT THIS LINE!
-YEAR=2020                                                                     # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/input/GSOC"                 # << EDIT THIS LINE!
+OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/tmp"                       # << EDIT THIS LINE!
+YEAR=2022                                                                                     # << EDIT THIS LINE!
 cp $INPUT_DIR/Bhutan_GSOCseq_AbsDiff_BAU_Map030.tif $OUTPUT_DIR/BT-GSOC-CORGADBAU-$YEAR-0-30.tif
 cp $INPUT_DIR/Bhutan_GSOCseq_AbsDiff_SSM1_Map030.tif $OUTPUT_DIR/BT-GSOC-CORGADSSM1-$YEAR-0-30.tif
 cp $INPUT_DIR/Bhutan_GSOCseq_AbsDiff_SSM2_Map030.tif $OUTPUT_DIR/BT-GSOC-CORGADSSM2-$YEAR-0-30.tif
@@ -66,9 +66,9 @@ cp $INPUT_DIR/Bhutan_GSOCseq_T0_Map030.tif $OUTPUT_DIR/BT-GSOC-CORGT0-$YEAR-0-30
 cp $INPUT_DIR/Bhutan_GSOCseq_T0_UncertaintyMap030.tif $OUTPUT_DIR/BT-GSOC-CORGT0U-$YEAR-0-30.tif
 
 
-INPUT_DIR="FAO/GloSIS/glosis-datacube/BT/input/GSNM"                          # << EDIT THIS LINE!
-OUTPUT_DIR="FAO/GloSIS/glosis-datacube/BT/input/BT/tmp"                       # << EDIT THIS LINE!
-YEAR=2020                                                                     # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/input/GSNM"                 # << EDIT THIS LINE!
+OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/tmp"                       # << EDIT THIS LINE!
+YEAR=2024                                                                                     # << EDIT THIS LINE!
 cp $INPUT_DIR/AvailK_0_30_mean.tiff $OUTPUT_DIR/BT-GSNM-KXX-$YEAR-0-30.tif
 cp $INPUT_DIR/AvailK_0_30_sd.tiff $OUTPUT_DIR/BT-GSNM-KXXSD-$YEAR-0-30.tif
 cp $INPUT_DIR/AvailP_0_30_mean.tiff $OUTPUT_DIR/BT-GSNM-PXX-$YEAR-0-30.tif
@@ -106,7 +106,7 @@ cp $INPUT_DIR/TEB_0_30_sd.tiff $OUTPUT_DIR/BT-GSNM-BSEXCSD-$YEAR-0-30.tif
 cp $INPUT_DIR/TotalN_0_30_mean.tiff $OUTPUT_DIR/BT-GSNM-NTOT-$YEAR-0-30.tif
 cp $INPUT_DIR/TotalN_0_30_sd.tiff $OUTPUT_DIR/BT-GSNM-NTOTSD-$YEAR-0-30.tif
 
-INPUT_DIR="FAO/GloSIS/glosis-datacube/BT/input/OTHER"                         # << EDIT THIS LINE!
-OUTPUT_DIR="FAO/GloSIS/glosis-datacube/BT/input/BT/tmp"                       # << EDIT THIS LINE!
-YEAR=2020                                                                     # << EDIT THIS LINE!
-cp $INPUT_DIR/SoilType_map_10.tif $OUTPUT_DIR/BT-OTHER-XXXXXXXXXX-$YEAR-0-100.tif
+INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/input/OTHER"                # << EDIT THIS LINE!
+OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/tmp"                       # << EDIT THIS LINE!
+YEAR=2024                                                                                     # << EDIT THIS LINE!
+cp $INPUT_DIR/SoilType_map_10.tif $OUTPUT_DIR/BT-OTHER-WRB-$YEAR-0-100.tif
