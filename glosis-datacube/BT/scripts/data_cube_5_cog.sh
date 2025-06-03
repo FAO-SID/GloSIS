@@ -37,7 +37,7 @@ for FILE in *.tif; do
     printf "%-15s %-15s %-15s %-15s %-15s %-15s %s\n" "$CURRENT_XMIN" "$CURRENT_YMIN" "$CURRENT_XMAX" "$CURRENT_YMAX" "$CURRENT_PIXEL_SIZE" "$CURRENT_NODATA" "$BASENAME"
 
     # Update overall extent
-    XMIN=$(echo "$CURRENT_XMIN $XMIN" | awk '{print ($1 < $2) ? $1 : $2}')
+    XMIN=$(echo "$CURRENT_XMIN $XMIN" | awk '{print ($1 > $2) ? $1 : $2}')
     YMIN=$(echo "$CURRENT_YMIN $YMIN" | awk '{print ($1 > $2) ? $1 : $2}')
     XMAX=$(echo "$CURRENT_XMAX $XMAX" | awk '{print ($1 < $2) ? $1 : $2}')
     YMAX=$(echo "$CURRENT_YMAX $YMAX" | awk '{print ($1 < $2) ? $1 : $2}')
@@ -54,12 +54,12 @@ for FILE in *.tif; do
     OUTPUT_FILE="$OUTPUT_DIR/$BASENAME"
 
     # Set resolution based on filename
-    if [[ "$BASENAME" == *"GSNM"* ]]; then
-        XRES=250
-        YRES=250
+    if [[ "$BASENAME" == *"GSNM"* || "$BASENAME" == *"OTHER"* ]]; then
+        XRES=0.00225 # 250 meters in degrees
+        YRES=0.00225 # 250 meters in degrees
     else
-        XRES=1000
-        YRES=1000
+        XRES=0.009 # 1000 meters in degrees
+        YRES=0.009 # 1000 meters in degrees
     fi
 
     # Align GeoTIFFs
@@ -95,11 +95,11 @@ done
 # Create VRTs
 cd $OUTPUT_DIR
 ls *GSAS*.tif > filelist.txt
-gdalbuildvrt -separate -input_file_list filelist.txt PH-GSAS.vrt
+gdalbuildvrt -q -separate -input_file_list filelist.txt PH-GSAS.vrt
 rm filelist.txt
 ls *GSOC*.tif > filelist.txt
-gdalbuildvrt -separate -input_file_list filelist.txt PH-GSOC.vrt
+gdalbuildvrt -q -separate -input_file_list filelist.txt PH-GSOC.vrt
 rm filelist.txt
 ls *GSNM*.tif > filelist.txt
-gdalbuildvrt -separate -input_file_list filelist.txt PH-GSNM.vrt
+gdalbuildvrt -q -separate -input_file_list filelist.txt PH-GSNM.vrt
 rm filelist.txt

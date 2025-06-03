@@ -6,7 +6,7 @@
 
 # Variables
 INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/tmp"                          # << EDIT THIS LINE!
-EPSG="EPSG:32651"
+EPSG="EPSG:4326"
 cd $INPUT_DIR
 
 # Reproject
