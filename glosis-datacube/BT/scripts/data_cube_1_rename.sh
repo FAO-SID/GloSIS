@@ -109,4 +109,4 @@ cp $INPUT_DIR/TotalN_0_30_sd.tiff $OUTPUT_DIR/BT-GSNM-NTOTSD-$YEAR-0-30.tif
 INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/input/OTHER"                # << EDIT THIS LINE!
 OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/tmp"                       # << EDIT THIS LINE!
 YEAR=2024                                                                                     # << EDIT THIS LINE!
-cp $INPUT_DIR/SoilType_map_10.tif $OUTPUT_DIR/BT-OTHER-WRB-$YEAR-0-100.tif
+cp $INPUT_DIR/SoilType_map_10.tif $OUTPUT_DIR/BT-OTHER-CLAWRB-$YEAR-0-100.tif

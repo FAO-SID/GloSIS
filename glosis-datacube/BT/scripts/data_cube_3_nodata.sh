@@ -67,7 +67,7 @@ gdal_calc.py --quiet -A BT-GSNM-SAND-2024-0-30.tif  --outfile=temp.tif --calc="A
 gdal_calc.py --quiet -A BT-GSNM-SANDSD-2024-0-30.tif  --outfile=temp.tif --calc="A*(A!=-9999.000) + ($NODATA)*(A==-9999.000)" --NoDataValue=$NODATA && mv temp.tif BT-GSNM-SANDSD-2024-0-30.tif						
 gdal_calc.py --quiet -A BT-GSNM-SILT-2024-0-30.tif  --outfile=temp.tif --calc="A*(A!=-9999.000) + ($NODATA)*(A==-9999.000)" --NoDataValue=$NODATA && mv temp.tif BT-GSNM-SILT-2024-0-30.tif						
 gdal_calc.py --quiet -A BT-GSNM-SILTSD-2024-0-30.tif  --outfile=temp.tif --calc="A*(A!=-9999.000) + ($NODATA)*(A==-9999.000)" --NoDataValue=$NODATA && mv temp.tif BT-GSNM-SILTSD-2024-0-30.tif						
-gdal_calc.py --quiet -A BT-OTHER-WRB-2024-0-100.tif  --outfile=temp.tif --calc="A*(A!=-9999.000) + ($NODATA)*(A==-9999.000)" --NoDataValue=$NODATA && mv temp.tif BT-OTHER-WRB-2024-0-100.tif						
+gdal_calc.py --quiet -A BT-OTHER-CLAWRB-2024-0-100.tif  --outfile=temp.tif --calc="A*(A!=-9999.000) + ($NODATA)*(A==-9999.000)" --NoDataValue=$NODATA && mv temp.tif BT-OTHER-CLAWRB-2024-0-100.tif						
 
 # Rewrite pixels with -999 to -1
 gdal_calc.py --quiet -A BT-GSOC-CORGSOCBAU-2022-0-30.tif  --outfile=temp.tif --calc="A*(A!=-999.000) + ($NODATA)*(A==-999.000)" --NoDataValue=$NODATA && mv temp.tif BT-GSOC-CORGSOCBAU-2022-0-30.tif						
