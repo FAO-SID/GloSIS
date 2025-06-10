@@ -1,5 +1,10 @@
+#!/bin/bash
+
+# Set country
+COUNTRY_ID="PH"      # << EDIT THIS LINE!
+
 # get overall layer info to build web-mapping interface
-psql -h localhost -p 5432 -U xxxxxxx -d iso19139 -c "\copy (
+psql -h localhost -p 5432 -U glosis -d iso19139 -c "\copy (
         SELECT  p.project_name, 
                 l.layer_id, 
                 p2.property_id, 
@@ -16,6 +21,7 @@ psql -h localhost -p 5432 -U xxxxxxx -d iso19139 -c "\copy (
         LEFT JOIN metadata.project p ON p.country_id = m.country_id AND p.project_id = m.project_id
         LEFT JOIN metadata.property p2 ON p2.property_id = m.property_id 
         LEFT JOIN metadata.url u ON u.mapset_id = m.mapset_id AND u.url_name = 'Download '||l.dimension_des
+        WHERE m.country_id = '$COUNTRY_ID'
         ORDER BY p.project_name, l.layer_id
         ) 
-TO '/home/carva014/Work/Code/FAO/GloSIS/glosis-wm/layer_info.csv' WITH CSV HEADER"
+TO '/home/carva014/Work/Code/FAO/GloSIS/glosis-wm/layer_info_${COUNTRY_ID}.csv' WITH CSV HEADER"
