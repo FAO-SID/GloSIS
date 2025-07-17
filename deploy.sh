@@ -55,7 +55,7 @@ docker exec -it glosis-db psql -d glosis -U glosis -f /tmp/init-03.sql
 
 # Build and start Docker shiny containers
 docker compose up --build glosis-shiny -d
-# Updatet Global.R script to glosis-shiny container
+# Update Global.R script to glosis-shiny container
 docker cp $PROJECT_DIR/glosis-shiny/global/global.R glosis-shiny:/srv/shiny-server/iso28258/global.R
 
 # Build and start other Docker containers
