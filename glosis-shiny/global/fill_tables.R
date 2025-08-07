@@ -639,7 +639,50 @@ insert_data_sql <-
     
     # ----
     # ELEMENT: Insert data into the 'element' table ----
+    # tryCatch({
+    #   # Extract unique combinations of relevant columns
+    #   unique_data <- unique(site_tibble[, c(
+    #     "order_element", "type", "upper_depth", "lower_depth",
+    #     "specimen_code", "profile_code"
+    #   )])
+    #   
+    #   for (row in 1:nrow(unique_data)) {
+    #     current_row <- unique_data[row, ]
+    #     
+    #     # Retrieve 'profile_id' based on 'profile_code'
+    #     profile_id_query <- sprintf(
+    #       "SELECT profile_id FROM core.profile WHERE profile_code = %s",
+    #       sql_value(current_row$profile_code)
+    #     )
+    #     profile_id_result <- dbGetQuery(con, profile_id_query)
+    #     
+    #     if (nrow(profile_id_result) > 0) {
+    #       profile_id <- profile_id_result$profile_id[1]
+    #       
+    #       # Construct the insert query for core.element table
+    #       insert_element_query <- sprintf(
+    #         "INSERT INTO core.element (profile_id, order_element, upper_depth, lower_depth, type) 
+    #      VALUES (%s, %s, %s, %s, %s) 
+    #      ON CONFLICT DO NOTHING;",
+    #      sql_value(profile_id, is_numeric = TRUE),            # profile_id
+    #      sql_value(current_row$order_element, is_numeric = TRUE),  # order_element
+    #      sql_value(current_row$upper_depth, is_numeric = TRUE),    # upper_depth
+    #      sql_value(current_row$lower_depth, is_numeric = TRUE),    # lower_depth
+    #      sql_value(current_row$type)                          # type
+    #       )
+    #       
+    #       # Execute the insert query
+    #       dbExecute(con, insert_element_query)
+    #     }
+    #   }
+    #   
+    # }, error = function(e) {
+    #   message(sprintf("Error during element insertion: %s", e$message))
+    # })
+    
     tryCatch({
+      log_file <- "/srv/shiny-server/init-scripts/logs/error_log.txt"
+      
       # Extract unique combinations of relevant columns
       unique_data <- unique(site_tibble[, c(
         "order_element", "type", "upper_depth", "lower_depth",
@@ -649,36 +692,75 @@ insert_data_sql <-
       for (row in 1:nrow(unique_data)) {
         current_row <- unique_data[row, ]
         
+        upper_depth <- as.numeric(current_row$upper_depth)
+        lower_depth <- as.numeric(current_row$lower_depth)
+        type <- current_row$type
+        profile_code <- current_row$profile_code
+        specimen_code <- current_row$specimen_code
+        
+        # Validate depth rules BEFORE DB insert
+        if (is.na(upper_depth) || is.na(lower_depth)) {
+          error_msg <- sprintf(
+            "ERROR: Missing depth values in specimen '%s' (profile: '%s').",
+            specimen_code, profile_code
+          )
+        } else if (upper_depth > lower_depth) {
+          error_msg <- sprintf(
+            "ERROR: Upper depth (%d) is greater than lower depth (%d) in specimen '%s' (profile: '%s').",
+            upper_depth, lower_depth, specimen_code, profile_code
+          )
+        } else if (lower_depth > 500) {
+          error_msg <- sprintf(
+            "ERROR: Lower depth (%d) exceeds 500 mm in specimen '%s' (profile: '%s').",
+            lower_depth, specimen_code, profile_code
+          )
+        } else if (upper_depth < 0) {
+          error_msg <- sprintf(
+            "ERROR: Upper depth (%d) is negative in specimen '%s' (profile: '%s').",
+            upper_depth, specimen_code, profile_code
+          )
+        } else {
+          error_msg <- NULL  # No error
+        }
+        
+        # If validation failed, show notification and log it
+        if (!is.null(error_msg)) {
+          shiny::showNotification(error_msg, type = "error", duration = 20, session = session)
+          timestamped_msg <- sprintf("[%s] %s\n", Sys.time(), error_msg)
+          write(timestamped_msg, file = log_file, append = TRUE)
+          next  # Skip this row
+        }
+        
         # Retrieve 'profile_id' based on 'profile_code'
         profile_id_query <- sprintf(
           "SELECT profile_id FROM core.profile WHERE profile_code = %s",
-          sql_value(current_row$profile_code)
+          sql_value(profile_code)
         )
         profile_id_result <- dbGetQuery(con, profile_id_query)
         
         if (nrow(profile_id_result) > 0) {
           profile_id <- profile_id_result$profile_id[1]
           
-          # Construct the insert query for core.element table
+          # Construct and execute the insert query for core.element
           insert_element_query <- sprintf(
-            "INSERT INTO core.element (profile_id, order_element, upper_depth, lower_depth, type) 
-         VALUES (%s, %s, %s, %s, %s) 
+            "INSERT INTO core.element (profile_id, order_element, upper_depth, lower_depth, type)
+         VALUES (%s, %s, %s, %s, %s)
          ON CONFLICT DO NOTHING;",
-         sql_value(profile_id, is_numeric = TRUE),            # profile_id
-         sql_value(current_row$order_element, is_numeric = TRUE),  # order_element
-         sql_value(current_row$upper_depth, is_numeric = TRUE),    # upper_depth
-         sql_value(current_row$lower_depth, is_numeric = TRUE),    # lower_depth
-         sql_value(current_row$type)                          # type
+         sql_value(profile_id, is_numeric = TRUE),
+         sql_value(current_row$order_element, is_numeric = TRUE),
+         sql_value(upper_depth, is_numeric = TRUE),
+         sql_value(lower_depth, is_numeric = TRUE),
+         sql_value(type)
           )
           
-          # Execute the insert query
           dbExecute(con, insert_element_query)
         }
       }
-      
     }, error = function(e) {
       message(sprintf("Error during element insertion: %s", e$message))
     })
+    
+    
     
     # ----
     # ELEMENT-RESULTS: Insert data into the 'result_desc_element' table ----
