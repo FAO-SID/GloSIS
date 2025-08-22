@@ -1,6 +1,7 @@
 -- OBJECT: languages
 -- ISSUE: add language translation support
 
+
 DROP TABLE IF EXISTS core.translate;
 DROP TABLE IF EXISTS core.languages;
 

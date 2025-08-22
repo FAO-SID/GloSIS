@@ -1,6 +1,7 @@
 -- OBJECT: core.profiles
 -- ISSUE: add view with profiles and speciment data for web services
 
+
 CREATE VIEW core.profiles AS
 SELECT 
 	r.result_phys_chem_id AS gid,
