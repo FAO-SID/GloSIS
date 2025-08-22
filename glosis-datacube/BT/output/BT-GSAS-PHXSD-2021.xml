@@ -10,7 +10,7 @@
                  xmlns:xlink="http://www.w3.org/1999/xlink"
                  xmlns:gmi="http://www.isotc211.org/2005/gmi">
   <gmd:fileIdentifier>
-    <gco:CharacterString>5dfe0590-41e9-11f0-96f5-456217065866</gco:CharacterString>
+    <gco:CharacterString>116ba8d2-7f4a-11f0-bd26-ed9ceec2d0fe</gco:CharacterString>
   </gmd:fileIdentifier>
   <gmd:language>
     <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
@@ -101,7 +101,7 @@
       <gmd:citation>
         <gmd:CI_Citation>
           <gmd:title>
-            <gco:CharacterString>pH - Hydrogen potential standard deviation (Bhutan - 0.009 deg)</gco:CharacterString>
+            <gco:CharacterString>pH - Hydrogen potential standard deviation (Bhutan - pH - 0.009 deg - 2021-12-17)</gco:CharacterString>
           </gmd:title>
           <gmd:date>
             <gmd:CI_Date>
@@ -126,7 +126,7 @@
         </gmd:CI_Citation>
       </gmd:citation>
       <gmd:abstract>
-        <gco:CharacterString>pH - Hydrogen potential standard deviation. This indicates the soil reaction. pH are classified accordingly: pH lower than 4.5 Extremely acid soils include Acid Sulfate Soils (Mangrove soils, cat clays). Do not drain because by oxidation sulfuric acid will be produced and pH will drop lower still. pH 4.5 to 5.5 Very acid soils suffering often from Al toxicity. Some crops are tolerant for these conditions (Tea, Pineapple). pH 5.5 to 7.2 Acid to neutral soils: these are the best pH conditions for nutrient availability and suitable for most crops. pH 7.2 to 8.5 These pH values are indicative of carbonate rich soils. Depending on the form and concentration of calcium carbonate they may result in well structured soils which may however have depth limitations when the calcium carbonate hardens in an impermeable layer and chemically forms less available carbonates affecting nutrient availability (Phosphorus, Iron). pH bigger than 8.5 Indicates alkaline soils often highly sodic (Na reaching toxic levels), badly structured (columnar structure) and easily dispersed surface clays.</gco:CharacterString>
+        <gco:CharacterString>UNKNOWN</gco:CharacterString>
       </gmd:abstract>
       <gmd:status>
         <gmd:MD_ProgressCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ProgressCode" codeListValue="completed" />
@@ -140,7 +140,7 @@
                 <gco:CharacterString>Bhutan National Soil Services Centre</gco:CharacterString>
               </gmd:organisationName>
               <gmd:positionName>
-                <gco:CharacterString>Soil Survey and Land Evaluation Supervisor</gco:CharacterString>
+                <gco:CharacterString>Soil Survey & Land Evaluation Supervisor</gco:CharacterString>
               </gmd:positionName>
               <gmd:contactInfo>
                 <gmd:CI_Contact>
@@ -192,7 +192,7 @@
                 <gco:CharacterString>Bhutan National Soil Services Centre</gco:CharacterString>
               </gmd:organisationName>
               <gmd:positionName>
-                <gco:CharacterString>Principal Soil Survey and Land Evaluation Officer</gco:CharacterString>
+                <gco:CharacterString>Principal Soil Survey & Land Evaluation Officer</gco:CharacterString>
               </gmd:positionName>
               <gmd:contactInfo>
                 <gmd:CI_Contact>

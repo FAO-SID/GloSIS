@@ -10,7 +10,7 @@
                  xmlns:xlink="http://www.w3.org/1999/xlink"
                  xmlns:gmi="http://www.isotc211.org/2005/gmi">
   <gmd:fileIdentifier>
-    <gco:CharacterString>5dfe055b-41e9-11f0-96f5-456217065866</gco:CharacterString>
+    <gco:CharacterString>116ba8a3-7f4a-11f0-bd26-ed9ceec2d0fe</gco:CharacterString>
   </gmd:fileIdentifier>
   <gmd:language>
     <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
@@ -101,7 +101,7 @@
       <gmd:citation>
         <gmd:CI_Citation>
           <gmd:title>
-            <gco:CharacterString>Organic carbon sequestration potential - time zero (Bhutan - 0.009 deg)</gco:CharacterString>
+            <gco:CharacterString>Organic carbon sequestration potential - time zero (Bhutan - t/(ha·a) - 0.009 deg - 2022-11-11)</gco:CharacterString>
           </gmd:title>
           <gmd:date>
             <gmd:CI_Date>
@@ -136,7 +136,7 @@
         </gmd:CI_Citation>
       </gmd:citation>
       <gmd:abstract>
-        <gco:CharacterString>The data represents the estimate of initial soil organic carbon stock in 2020</gco:CharacterString>
+        <gco:CharacterString>The data represents the uncertainty of the estimate of initial soil organic carbon stock in 2020</gco:CharacterString>
       </gmd:abstract>
       <gmd:status>
         <gmd:MD_ProgressCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ProgressCode" codeListValue="completed" />
@@ -150,7 +150,7 @@
                 <gco:CharacterString>Bhutan National Soil Services Centre</gco:CharacterString>
               </gmd:organisationName>
               <gmd:positionName>
-                <gco:CharacterString>Soil Survey and Land Evaluation Supervisor</gco:CharacterString>
+                <gco:CharacterString>Soil Survey & Land Evaluation Supervisor</gco:CharacterString>
               </gmd:positionName>
               <gmd:contactInfo>
                 <gmd:CI_Contact>
@@ -202,7 +202,7 @@
                 <gco:CharacterString>Bhutan National Soil Services Centre</gco:CharacterString>
               </gmd:organisationName>
               <gmd:positionName>
-                <gco:CharacterString>Principal Soil Survey and Land Evaluation Officer</gco:CharacterString>
+                <gco:CharacterString>Principal Soil Survey & Land Evaluation Officer</gco:CharacterString>
               </gmd:positionName>
               <gmd:contactInfo>
                 <gmd:CI_Contact>
