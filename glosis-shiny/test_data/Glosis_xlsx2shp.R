@@ -12,6 +12,7 @@ packages <- c("dplyr","sf","janitor", "readxl", "tools")
 invisible(lapply(packages, library, character.only = TRUE))
 rm(packages)
 
+# Read all available xlsx templates in the directory and store in the object "files", adjust the path to your xlsx templates if necessary.
 files <- list.files(pattern = "xlsx$")
 files # Shows the available files
 # Define your target xlsx based on the list in files
