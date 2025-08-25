@@ -78,4 +78,12 @@ names(pts_sf_shp) <- nm
 myfile <- tools::file_path_sans_ext(myfile)
 # delete any shapefile sidecar files with that base name
 unlink( list.files(pattern = paste0("^", myfile, "\\.(shp|shx|dbf|prj|cpg)$")), force = TRUE)
+
+# 7) Save to shapefile in the subfolder "xlsx2shape"
+output_dir <-"xlsx2shape/"
+# check if output directory exists if not create it
+if (!file.exists(output_dir)){
+  # create a new sub directory inside the main path
+  dir.create(output_dir)
+}
 st_write(pts_sf_shp, paste0("xlsx2shapes/",myfile, ".shp"), delete_dsn = TRUE)
