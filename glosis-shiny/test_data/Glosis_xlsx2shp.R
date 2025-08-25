@@ -16,7 +16,7 @@ rm(packages)
 files <- list.files(pattern = "xlsx$")
 files # Shows the available files
 # Define your target xlsx based on the list in files
-myfile <- files[1] # Selects first target xlsx, change it to 2, 3, etc if you have another target xlsx templates
+myfile <- files[1] # Selects first xlsx in the list, change it to 2, 3, etc if you want to use another target xlsx template in this list
 
 plot <- read_excel(myfile, sheet="Plot Data", skip = 1)
 profile <- read_excel(myfile, sheet="Profile Data", skip = 1)
