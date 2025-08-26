@@ -80,5 +80,5 @@ Create a `.env` file in your project root:
 
 ## Deployment Instructions
 
-Follow the steps detail in file deploy.sh (linux) or deploy.ps1 (windows)
+Follow the steps detail in file [deploy.sh] (https://github.com/FAO-SID/GloSIS/blob/main/deploy.sh) (linux) or [deploy.ps1](https://github.com/FAO-SID/GloSIS/blob/main/deploy.ps1) (windows)
 
