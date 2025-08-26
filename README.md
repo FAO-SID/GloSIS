@@ -61,7 +61,7 @@ Create a `.env` file in your project root:
 ## Implementation Steps
 
 1. **Database - PostgreSQL**:
-   - PostgreSQL Database. Based on the [ISRIC implementation](https://github.com/ISRICWorldSoil/iso-28258) of the [domain model ISO 28258](https://www.iso.org/standard/44595.html).
+   - PostgreSQL Database. Originally based on the [ISRIC implementation](https://github.com/ISRICWorldSoil/iso-28258) of the [domain model ISO 28258](https://www.iso.org/standard/44595.html).
 
 2. **Metadata catalogue - pyCSW**:
    - Customize configuration in `md/config/` as needed
