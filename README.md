@@ -1,11 +1,11 @@
-# SIS - Soil Information System
+# GloSIS - Global Soil Information System
 
-SIS software stack structure:
+GloSIS software stack structure:
 
 ## Project Structure
 
 ```
-sis/
+GloSIS/
 ├── .env                            # Environment variables
 ├── .gitignore                      # gitignore
 ├── deploy.sh                       # Instructions
@@ -13,7 +13,7 @@ sis/
 ├── LICENSE                         # License manifest
 ├── README.md                       # Project documentation
 │
-├── sis-data-cube/                  # Raster Data Cube (GDAL)
+├── glosis-datacube/                # Raster Data Cube (GDAL)
 │   └── PH/                         # Philippines case
 │       ├── data_cube_1_rename.sh   # Rename files acording naming convention <country>-<project>-<property>-<year>-<top>-<bottom>
 │       ├── data_cube_2_check.sh    # Print out raster stats and NoData
@@ -21,19 +21,19 @@ sis/
 │       ├── data_cube_4_epsg.sh     # Set the same EPSG for all rasters
 │       └── data_cube_5_cog.sh      # Set the same BBox for all rasters and converts them into Cloud Optmized GeoTIFFs
 │
-├── sis-database/                   # Database (DONE)
+├── glosis-db/                      # Database (DONE)
 │   ├── Changes/                    # All changes made since fork
 │   └── pgdata/                     # Persistent data (added to .gitignore)
 │
-├── sis-metadata/                   # GeoNetwork metadata catalog (DONE)
+├── glosis-md/                      # GeoNetwork metadata catalog (DONE)
 │   ├── records/                    # Metadata records in XML
-|   └── pycsw.yml                   # Configuration file
+|   └── pycsw.yml                    # Configuration file
 |
-├── sis-shiny/                      # Shiny app to help with ingest soil profile data into PostgreSQL (DONE)
+├── glosis-shiny/                   # Shiny app to help with ingest soil profile data into PostgreSQL (DONE)
 │   ├── init-scripts/               # Init scripts
 │   └── test_data/                  # Test data
 │
-├── sis-wweb-mapping/               # Web mapping (DONE)
+├── glosis-wm/                      # Web mapping (DONE)
 |   ├── dist                        # Node distro
 |   ├── node_modules                # Mode modules
 |   ├── .parcel-cache               # Cache
@@ -45,7 +45,7 @@ sis/
 |   ├── package.json                # Dependencies
 |   └── .gitignore                  # gitignore
 │
-└── sis-web-services/               # MapServer (DONE)
+└── glosis-ws/                      # MapServer (DONE)
     └── data/                       # GeoTIFFs and mapfiles
 ```
 
@@ -80,5 +80,5 @@ Create a `.env` file in your project root:
 
 ## Deployment Instructions
 
-Follow the steps detail in file [deploy.sh](https://github.com/FAO-SID/sis/blob/main/deploy.sh) (linux) or [deploy.ps1](https://github.com/FAO-SID/sis/blob/main/deploy.ps1) (windows)
+Follow the steps detail in file [deploy.sh](https://github.com/FAO-SID/GloSIS/blob/main/deploy.sh) (linux) or [deploy.ps1](https://github.com/FAO-SID/GloSIS/blob/main/deploy.ps1) (windows)
 
