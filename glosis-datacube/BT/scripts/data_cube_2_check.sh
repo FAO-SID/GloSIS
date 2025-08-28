@@ -1,11 +1,13 @@
 #!/bin/bash
 
 ###############################################
-#                NoData & EPSG                #
+#                   NoData                    #
 ###############################################
 
 # Variables
-INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/tmp"                          # << EDIT THIS LINE!
+COUNTRY=BT
+INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/tmp"                          # << EDIT THIS LINE!
+
 cd $INPUT_DIR
 
 # Chcek NoData values before processing
@@ -22,4 +24,4 @@ for FILE in *.tif; do
     printf "%-8s %-8s %-12s %-12s %-8s %s\n" "$MIN" "$MAX" "$MEA" "$STD" "$CURRENT_NODATA" "$BASENAME"
 done
 
-rm *.tif.aux.xml
+rm -f *.tif.aux.xml

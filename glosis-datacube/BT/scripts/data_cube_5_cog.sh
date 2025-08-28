@@ -5,8 +5,9 @@
 ###############################################
 
 # Input and output directories
-INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/tmp"                          # << EDIT THIS LINE!
-OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/output"                      # << EDIT THIS LINE!
+COUNTRY=BT
+INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/tmp"                          # << EDIT THIS LINE!
+OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/output"                      # << EDIT THIS LINE!
 cd $INPUT_DIR
 
 # Create output directory if it doesn't exist
@@ -94,9 +95,6 @@ done
 
 # Create VRTs
 cd $OUTPUT_DIR
-ls *GSAS*.tif > filelist.txt
-gdalbuildvrt -q -separate -input_file_list filelist.txt PH-GSAS.vrt
-rm filelist.txt
 ls *GSOC*.tif > filelist.txt
 gdalbuildvrt -q -separate -input_file_list filelist.txt PH-GSOC.vrt
 rm filelist.txt
