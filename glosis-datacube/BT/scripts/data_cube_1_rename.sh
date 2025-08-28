@@ -4,6 +4,7 @@
 #                    Rename                   #
 ###############################################
 
+echo
 
 COUNTRY=BT
 PROJ=GSOC
@@ -12,6 +13,9 @@ UD="0"
 LD=30
 INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/input/$PROJ"                          # << EDIT THIS LINE!
 OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/tmp"                          # << EDIT THIS LINE!
+
+mkdir -p "$OUTPUT_DIR"
+
 
 cp $INPUT_DIR/Bhutan_GSOCseq_AbsDiff_BAU_Map030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGADBAU-$YEAR-$UD-$LD.tif
 cp $INPUT_DIR/Bhutan_GSOCseq_AbsDiff_SSM1_Map030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGADSSM1-$YEAR-$UD-$LD.tif
@@ -25,7 +29,7 @@ cp $INPUT_DIR/Bhutan_GSOCseq_ASR_SSM2_Map030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORG
 cp $INPUT_DIR/Bhutan_GSOCseq_ASR_SSM2_UncertaintyMap030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGASRSSM2U-$YEAR-$UD-$LD.tif
 cp $INPUT_DIR/Bhutan_GSOCseq_ASR_SSM3_Map030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGASRSSM3-$YEAR-$UD-$LD.tif
 cp $INPUT_DIR/Bhutan_GSOCseq_ASR_SSM3_UncertaintyMap030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGASRSSM3U-$YEAR-$UD-$LD.tif
-cp $INPUT_DIR/Bhutan_GSOCseq_BAU_UncertaintyMap030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGSOCBAUU-$YEAR-$UD-$LD.tif
+cp $INPUT_DIR/Bhutan_GSOCseq_BAU_UncertaintyMap030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGBAUU-$YEAR-$UD-$LD.tif
 cp $INPUT_DIR/Bhutan_GSOCseq_finalSOC_BAU_Map030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGSOCBAU-$YEAR-$UD-$LD.tif
 cp $INPUT_DIR/Bhutan_GSOCseq_finalSOC_SSM1_Map030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGSOCSSM1-$YEAR-$UD-$LD.tif
 cp $INPUT_DIR/Bhutan_GSOCseq_finalSOC_SSM2_Map030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGSOCSSM2-$YEAR-$UD-$LD.tif
@@ -44,13 +48,11 @@ cp $INPUT_DIR/Bhutan_GSOCseq_T0_Map030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGT0-$YE
 cp $INPUT_DIR/Bhutan_GSOCseq_T0_UncertaintyMap030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGT0U-$YEAR-$UD-$LD.tif
 
 
-COUNTRY=BT
 PROJ=GSNM
 YEAR=2024
 UD="0"
 LD=30
 INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/input/$PROJ"                          # << EDIT THIS LINE!
-OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/tmp"                          # << EDIT THIS LINE!
 
 cp $INPUT_DIR/AvailK_0_30_mean.tiff $OUTPUT_DIR/$COUNTRY-$PROJ-KXX-$YEAR-$UD-$LD.tif
 cp $INPUT_DIR/AvailK_0_30_sd.tiff $OUTPUT_DIR/$COUNTRY-$PROJ-KXXSD-$YEAR-$UD-$LD.tif
@@ -90,12 +92,10 @@ cp $INPUT_DIR/TotalN_0_30_mean.tiff $OUTPUT_DIR/$COUNTRY-$PROJ-NTOT-$YEAR-$UD-$L
 cp $INPUT_DIR/TotalN_0_30_sd.tiff $OUTPUT_DIR/$COUNTRY-$PROJ-NTOTSD-$YEAR-$UD-$LD.tif
 
 
-COUNTRY=BT
 PROJ=OTHER
 YEAR=2024
 UD="0"
 LD=100
 INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/input/$PROJ"                          # << EDIT THIS LINE!
-OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/tmp"                          # << EDIT THIS LINE!
 
 cp $INPUT_DIR/SoilType_map_10.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CLAWRB-$YEAR-$UD-$LD.tif

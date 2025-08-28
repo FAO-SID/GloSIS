@@ -4,6 +4,8 @@
 #                NoData & EPSG                #
 ###############################################
 
+echo
+
 # Variables
 COUNTRY=BT
 INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/tmp"                          # << EDIT THIS LINE!
@@ -44,5 +46,3 @@ for FILE in *.tif; do
 done
 
 rm -f *.tif.aux.xml
-echo
-/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/BT/scripts/data_cube_2_check.sh

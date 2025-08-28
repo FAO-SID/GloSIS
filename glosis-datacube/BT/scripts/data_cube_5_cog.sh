@@ -4,6 +4,8 @@
 #       Cloud Optimized GeoTIFF - COG         #
 ###############################################
 
+echo
+
 # Input and output directories
 COUNTRY=BT
 INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/tmp"                          # << EDIT THIS LINE!
