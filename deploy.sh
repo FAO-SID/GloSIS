@@ -5,9 +5,11 @@ PROJECT_DIR="/home/carva014/Work/Code/FAO/GloSIS"
 COUNTRY=BT
 COUNTRY_LONG="Bhutan"
 ORG_LOGO_URL="https:\/\/tse4.mm.bing.net\/th\/id/OIP.hV37F63PxOkqMwTAlCNnvQAAAA?r=0&pid=Api" # PH "https:\/\/www.bswm.da.gov.ph\/wp-content\/uploads\/BAGONG-PILIPINAS.png"
-LATITUDE=27   # 27 BT / 12 PH
-LONGITUDE=90  # 90 BT / 120 PH
-ZOOM=6
+LATITUDE=27.5   # 27 BT / 12 PH
+LONGITUDE=89.7  # 90 BT / 120 PH
+ZOOM=9
+LAYER_DEFAULT='BT-GSNM-BKD-2024-0-30'
+BASE_MAP_DEFAULT='esri-imagery' # esri-imagery / OpenStreetMap / Open TopoMap
 
 # Navigate to the project folder
 cd $PROJECT_DIR
@@ -84,13 +86,13 @@ docker compose up --build glosis-ws -d
 ####################
 
 # Customize pyCSW
+cp $PROJECT_DIR/glosis-md/pycsw_default.yml $PROJECT_DIR/glosis-md/pycsw.yml
+sed -i "s|COUNTRY_SIS|$COUNTRY_LONG|g" $PROJECT_DIR/glosis-md/pycsw.yml
 
 # Build and start container
 docker compose up --build glosis-md -d
 
 # Customize pyCSW UI - https://docs.pycsw.org/en/latest/configuration.html
-cp $PROJECT_DIR/glosis-md/pycsw_default.yml $PROJECT_DIR/glosis-md/pycsw.yml
-sed -i "s|COUNTRY_SIS|$COUNTRY_LONG|g" $PROJECT_DIR/glosis-md/pycsw.yml
 docker compose exec glosis-md sed -i "s/pycsw website/${COUNTRY_LONG} SIS metadata/g" pycsw/pycsw/ogc/api/templates/_base.html
 docker compose exec glosis-md sed -i "s|https://pycsw.org/img/pycsw-logo-vertical.png|${ORG_LOGO_URL}|g" pycsw/pycsw/ogc/api/templates/_base.html
 docker compose exec glosis-md sed -i "s/https:\/\/pycsw.org/http:\/\/localhost:8001\/collections\/metadata:main\/items/g" pycsw/pycsw/ogc/api/templates/_base.html
@@ -100,6 +102,7 @@ docker compose exec glosis-db psql -U glosis -d glosis -c "DELETE FROM pycsw.rec
 rm $PROJECT_DIR/glosis-md/volume/*.xml
 cp $PROJECT_DIR/glosis-datacube/$COUNTRY/output/*.xml $PROJECT_DIR/glosis-md/volume
 docker compose exec glosis-md ls -l /records
+rm $PROJECT_DIR/glosis-md/volume/*.tif.aux.xml
 docker compose exec glosis-md pycsw-admin.py load-records -c /etc/pycsw/pycsw.yml -p /records -r -y
 
 # Verify if records were loaded
@@ -110,21 +113,36 @@ docker compose exec glosis-db psql -U glosis -d glosis -c "SELECT identifier, ti
 #     glosis-wm    #
 ####################
 
-# layer_info.csv in layers.js line 8
 # collapsed group layer names in main.js line 323
-# default base map main.js line 464
-# default layer map main.js line 475
+# collapsed group layer names in layers.js line 84
 
-# set the center and zoom level of the map
+# Overwrite logo file
+cp $PROJECT_DIR/glosis-wm/public/img/logo_${COUNTRY}.png $PROJECT_DIR/glosis-wm/public/img/logo.png # index.html line 9 and 13
+
+# Overwrite layer info file
+cp $PROJECT_DIR/glosis-wm/public/layer_info_${COUNTRY}.csv $PROJECT_DIR/glosis-wm/public/layer_info.csv # layers.js line 8
+
+# Reset main.js
 cp $PROJECT_DIR/glosis-wm/src/js/main.default $PROJECT_DIR/glosis-wm/src/js/main.js
-sed -i "s/MAP_CENTER_LONG/$LONGITUDE/g" $PROJECT_DIR/glosis-wm/src/js/main.js # line 98
-sed -i "s/MAP_CENTER_LAT/$LATITUDE/g" $PROJECT_DIR/glosis-wm/src/js/main.js   # line 98
-sed -i "s/MAP_ZOOM/$ZOOM/g" $PROJECT_DIR/glosis-wm/src/js/main.js             # line 99
+
+# Set map center
+sed -i "s/MAP_CENTER_LONG/$LONGITUDE/g" $PROJECT_DIR/glosis-wm/src/js/main.js         # main.js line 98
+sed -i "s/MAP_CENTER_LAT/$LATITUDE/g" $PROJECT_DIR/glosis-wm/src/js/main.js           # main.js line 98
+
+# Set zoom level
+sed -i "s/MAP_ZOOM/$ZOOM/g" $PROJECT_DIR/glosis-wm/src/js/main.js                     # main.js line 99
+
+# Set default base map
+sed -i "s/BASE_MAP_DEFAULT/$BASE_MAP_DEFAULT/g" $PROJECT_DIR/glosis-wm/src/js/main.js # main.js line 465
+
+# Set default layer
+sed -i "s/LAYER_DEFAULT/$LAYER_DEFAULT/g" $PROJECT_DIR/glosis-wm/src/js/main.js       # main.js line 476
+
+# Reset index.html
+cp $PROJECT_DIR/glosis-wm/src/index.default $PROJECT_DIR/glosis-wm/src/index.html
+
+# Set country name
+sed -i "s/COUNTRY_LONG/$COUNTRY_LONG/g" $PROJECT_DIR/glosis-wm/src/index.html       # main.js line 476
 
 # Build and start container
 docker compose up --build glosis-wm -d
-
-
-
-
-
