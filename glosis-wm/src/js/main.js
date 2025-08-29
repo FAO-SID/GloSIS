@@ -95,7 +95,7 @@ const map = new Map({
         })
     ]),
     view: new View({
-        center: fromLonLat([120, 12]), // Philippines center
+        center: fromLonLat([90, 27]),
         zoom: 6
     })
 });
