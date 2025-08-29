@@ -150,7 +150,7 @@
                 <gco:CharacterString>Bhutan National Soil Services Centre</gco:CharacterString>
               </gmd:organisationName>
               <gmd:positionName>
-                <gco:CharacterString>Soil Survey & Land Evaluation Supervisor</gco:CharacterString>
+                <gco:CharacterString>Soil Survey and Land Evaluation Supervisor</gco:CharacterString>
               </gmd:positionName>
               <gmd:contactInfo>
                 <gmd:CI_Contact>
@@ -202,7 +202,7 @@
                 <gco:CharacterString>Bhutan National Soil Services Centre</gco:CharacterString>
               </gmd:organisationName>
               <gmd:positionName>
-                <gco:CharacterString>Principal Soil Survey & Land Evaluation Officer</gco:CharacterString>
+                <gco:CharacterString>Principal Soil Survey and Land Evaluation Officer</gco:CharacterString>
               </gmd:positionName>
               <gmd:contactInfo>
                 <gmd:CI_Contact>
@@ -385,16 +385,16 @@
           <gmd:geographicElement>
             <gmd:EX_GeographicBoundingBox>
               <gmd:westBoundLongitude>
-                <gco:Decimal>28.2</gco:Decimal>
+                <gco:Decimal>88.7</gco:Decimal>
               </gmd:westBoundLongitude>
               <gmd:eastBoundLongitude>
-                <gco:Decimal>26.7</gco:Decimal>
+                <gco:Decimal>92.1</gco:Decimal>
               </gmd:eastBoundLongitude>
               <gmd:southBoundLatitude>
-                <gco:Decimal>92.1</gco:Decimal>
+                <gco:Decimal>26.7</gco:Decimal>
               </gmd:southBoundLatitude>
               <gmd:northBoundLatitude>
-                <gco:Decimal>88.7</gco:Decimal>
+                <gco:Decimal>28.2</gco:Decimal>
               </gmd:northBoundLatitude>
             </gmd:EX_GeographicBoundingBox>
           </gmd:geographicElement>

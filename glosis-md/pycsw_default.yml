@@ -31,13 +31,13 @@ manager:
 
 metadata:
     identification:
-        title: Bhutan SIS metadata
-        description: This metadata catalogue lists a set of datasets of soil data from the Bhutan Soil Information System (SIS).
+        title: COUNTRY_SIS SIS metadata
+        description: This metadata catalogue lists a set of datasets of soil data from the COUNTRY_SIS Soil Information System (SIS).
         keywords:
             - catalogue
             - discovery
             - metadata
-            - Bhutan Soil Information System
+            - COUNTRY_SIS Soil Information System
             - Soil
         keywords_type: theme
         fees: None
@@ -57,7 +57,7 @@ metadata:
         city: city
         stateorprovince: stateorprovince
         postalcode: postalcode
-        country: Bhutan
+        country: COUNTRY_SIS
         phone: +xx-xxx-xxx-xxxx
         fax: +xx-xxx-xxx-xxxx
         email: email
