@@ -96,8 +96,8 @@ docker compose exec glosis-md ls -l /records
 docker compose exec glosis-db psql -U glosis -d glosis -c "SELECT identifier, title FROM pycsw.records ORDER BY title LIMIT 5;"
 
 # Customize pyCSW UI - https://docs.pycsw.org/en/latest/configuration.html
-docker compose exec glosis-md sed -i "s/pycsw website/$COUNTRY_LONG SIS metadata/g" pycsw/pycsw/ogc/api/templates/_base.html
-# FAILED: docker compose exec glosis-md sed -i "s/https:\/\/pycsw.org\/img\/pycsw-logo-vertical.png/$ORG_LOGO_URL/g" pycsw/pycsw/ogc/api/templates/_base.html
+docker compose exec glosis-md sed -i "s/pycsw website/${COUNTRY_LONG} SIS metadata/g" pycsw/pycsw/ogc/api/templates/_base.html
+docker compose exec glosis-md sed -i "s|https://pycsw.org/img/pycsw-logo-vertical.png|${ORG_LOGO_URL}|g" pycsw/pycsw/ogc/api/templates/_base.html
 docker compose exec glosis-md sed -i "s/https:\/\/pycsw.org/http:\/\/localhost:8001\/collections\/metadata:main\/items/g" pycsw/pycsw/ogc/api/templates/_base.html
 
 ####################
