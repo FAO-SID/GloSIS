@@ -10,7 +10,7 @@
                  xmlns:xlink="http://www.w3.org/1999/xlink"
                  xmlns:gmi="http://www.isotc211.org/2005/gmi">
   <gmd:fileIdentifier>
-    <gco:CharacterString>74023b86-8436-11f0-9ee5-b3f159bc8b18</gco:CharacterString>
+    <gco:CharacterString>508883fa-84b7-11f0-8702-b72cd12597f0</gco:CharacterString>
   </gmd:fileIdentifier>
   <gmd:language>
     <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
@@ -101,7 +101,7 @@
       <gmd:citation>
         <gmd:CI_Citation>
           <gmd:title>
-            <gco:CharacterString>Sand texture fraction (Bhutan - % - 0.00225 deg - 2024-03-28)</gco:CharacterString>
+            <gco:CharacterString>Sand texture fraction (Bhutan - % - 0.00225 deg - 2024)</gco:CharacterString>
           </gmd:title>
           <gmd:date>
             <gmd:CI_Date>
