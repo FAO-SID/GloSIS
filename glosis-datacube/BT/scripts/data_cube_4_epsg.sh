@@ -8,7 +8,7 @@ echo
 
 # Variables
 COUNTRY=BT
-INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/tmp"                          # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/tmp"                          # << EDIT THIS LINE!
 EPSG="EPSG:4326"
 cd $INPUT_DIR
 

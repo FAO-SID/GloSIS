@@ -8,8 +8,8 @@ echo
 
 # Input and output directories
 COUNTRY=BT
-INPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/tmp"                          # << EDIT THIS LINE!
-OUTPUT_DIR="/home/carva014/Work/Code/FAO/GloSIS/glosis-datacube/$COUNTRY/output"                      # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/tmp"                          # << EDIT THIS LINE!
+OUTPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/output"                      # << EDIT THIS LINE!
 cd $INPUT_DIR
 
 # Create output directory if it doesn't exist
