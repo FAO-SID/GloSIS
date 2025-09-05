@@ -58,11 +58,11 @@ for FILE in *.tif; do
 
     # Set resolution based on filename
     if [[ "$BASENAME" == *"GSNM"* || "$BASENAME" == *"OTHER"* ]]; then
-        XRES=0.00225 # 250 meters in degrees
-        YRES=0.00225 # 250 meters in degrees
+        XRES=0.0022457 # 250 meters in degrees
+        YRES=0.0022457 # 250 meters in degrees
     else
-        XRES=0.009 # 1000 meters in degrees
-        YRES=0.009 # 1000 meters in degrees
+        XRES=0.0083333 # 1000 meters in degrees
+        YRES=0.0083333 # 1000 meters in degrees
     fi
 
     # Align GeoTIFFs
@@ -97,9 +97,9 @@ done
 
 # Create VRTs
 cd $OUTPUT_DIR
-ls *GSOC*.tif > filelist.txt
-gdalbuildvrt -q -separate -input_file_list filelist.txt PH-GSOC.vrt
+ls *GSOCSEQ*.tif > filelist.txt
+gdalbuildvrt -q -separate -input_file_list filelist.txt $COUNTRY-GSOCSEQ.vrt
 rm filelist.txt
 ls *GSNM*.tif > filelist.txt
-gdalbuildvrt -q -separate -input_file_list filelist.txt PH-GSNM.vrt
+gdalbuildvrt -q -separate -input_file_list filelist.txt $COUNTRY-GSNM.vrt
 rm filelist.txt
