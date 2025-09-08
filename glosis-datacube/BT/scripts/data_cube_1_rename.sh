@@ -11,7 +11,7 @@ PROJ=GSOCSEQ
 YEAR=2022
 UD="0"
 LD=30
-INPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/input/$PROJ"                          # << EDIT THIS LINE!
+INPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/input/$PROJ"                   # << EDIT THIS LINE!
 OUTPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/tmp"                          # << EDIT THIS LINE!
 
 mkdir -p "$OUTPUT_DIR"

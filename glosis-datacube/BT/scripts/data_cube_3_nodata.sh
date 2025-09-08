@@ -12,6 +12,7 @@ INPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/tmp"                     
 
 cd $INPUT_DIR
 
+
 # Dealing with other Nodata values
 echo
 echo "Assigning NoData ..."
