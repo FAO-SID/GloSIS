@@ -96,8 +96,8 @@ cp $INPUT_DIR/TotalN_0_30_sd.tiff $OUTPUT_DIR/$COUNTRY-$PROJ-NTOT-$YEAR-$UD-$LD-
 
 PROJ=OTHER
 YEAR=2024
-UD="0"
-LD=100
+UD=0
+LD=0
 INPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/input/$PROJ"                          # << EDIT THIS LINE!
 
-cp $INPUT_DIR/SoilType_map_10.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CLAWRB-$YEAR-$UD-$LD-X.tif
+cp $INPUT_DIR/SoilType_map_10.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CLAWRB-$YEAR-$UD-$LD-MEAN.tif
