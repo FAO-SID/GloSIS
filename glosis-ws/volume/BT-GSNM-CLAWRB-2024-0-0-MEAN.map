@@ -1,5 +1,5 @@
 MAP
-  NAME "BT-OTHER-CLAWRB-2024-0-100-X"
+  NAME "BT-GSNM-CLAWRB-2024-0-0-MEAN"
   EXTENT 88.7499989 26.6998818 92.12528599999999 28.2494148
   UNITS DD
   SHAPEPATH "./"
@@ -10,7 +10,7 @@ MAP
   END # PROJECTION
   WEB
       METADATA
-          "ows_title" "BT-OTHER-CLAWRB-2024-0-100-X web-service" 
+          "ows_title" "BT-GSNM-CLAWRB-2024-0-0-MEAN web-service" 
           "ows_enable_request" "*" 
           "ows_srs" "EPSG:4326 EPSG:4326 EPSG:3857"
           "wms_getfeatureinfo_formatlist" "text/plain,text/html,application/json,geojson,application/vnd.ogc.gml,gml"
@@ -19,8 +19,8 @@ MAP
   END # WEB
   LAYER
       TEMPLATE "getfeatureinfo.tmpl"
-      NAME "BT-OTHER-CLAWRB-2024-0-100-X"
-      DATA "BT-OTHER-CLAWRB-2024-0-100-X.tif"
+      NAME "BT-GSNM-CLAWRB-2024-0-0-MEAN"
+      DATA "BT-GSNM-CLAWRB-2024-0-0-MEAN.tif"
       TYPE RASTER
       STATUS ON
       METADATA
@@ -28,7 +28,7 @@ MAP
         "gml_include_items" "all"
       END # METADATA
       CLASS
-        NAME "BT-OTHER-CLAWRB-2024-0-100-X"
+        NAME "BT-GSNM-CLAWRB-2024-0-0-MEAN"
         STYLE
             COLORRANGE "#F4E7D3" "#5C4033"
             DATARANGE 1 7

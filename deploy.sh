@@ -74,8 +74,8 @@ docker cp $PROJECT_DIR/glosis-shiny/global/global.R glosis-shiny:/srv/shiny-serv
 # Load records
 rm $PROJECT_DIR/glosis-ws/volume/*.map
 rm $PROJECT_DIR/glosis-ws/volume/*.tif
-cp $PROJECT_DIR/glosis-datacube/$COUNTRY/output/*.tif $PROJECT_DIR/glosis-ws/volume
-cp $PROJECT_DIR/glosis-datacube/$COUNTRY/output/*.map $PROJECT_DIR/glosis-ws/volume
+cp /home/carva014/Downloads/FAO/AFACI/$COUNTRY/output/*.tif $PROJECT_DIR/glosis-ws/volume
+cp /home/carva014/Downloads/FAO/AFACI/$COUNTRY/output/*.map $PROJECT_DIR/glosis-ws/volume
 
 # Build and start container
 docker compose up --build glosis-ws -d
@@ -100,7 +100,7 @@ docker compose exec glosis-md sed -i "s/https:\/\/pycsw.org/http:\/\/localhost:8
 # Load records
 docker compose exec glosis-db psql -U glosis -d glosis -c "DELETE FROM pycsw.records;"
 rm $PROJECT_DIR/glosis-md/volume/*.xml
-cp $PROJECT_DIR/glosis-datacube/$COUNTRY/output/*.xml $PROJECT_DIR/glosis-md/volume
+cp /home/carva014/Downloads/FAO/AFACI/$COUNTRY/output/*.xml $PROJECT_DIR/glosis-md/volume
 docker compose exec glosis-md ls -l /records
 rm $PROJECT_DIR/glosis-md/volume/*.tif.aux.xml
 docker compose exec glosis-md pycsw-admin.py load-records -c /etc/pycsw/pycsw.yml -p /records -r -y
