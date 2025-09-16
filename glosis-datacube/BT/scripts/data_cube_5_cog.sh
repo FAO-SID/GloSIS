@@ -57,7 +57,7 @@ for FILE in *.tif; do
     OUTPUT_FILE="$OUTPUT_DIR/$BASENAME"
 
     # Set resolution based on filename
-    if [[ "$BASENAME" == *"GSNM"* || "$BASENAME" == *"OTHER"* ]]; then
+    if [[ "$BASENAME" == *"GSNM"* ]]; then
         XRES=0.0022457 # 250 meters in degrees
         YRES=0.0022457 # 250 meters in degrees
     else
