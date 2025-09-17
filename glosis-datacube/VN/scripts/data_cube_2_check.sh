@@ -7,7 +7,7 @@
 echo
 
 # Variables
-COUNTRY=VT
+COUNTRY=VN
 INPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/tmp"                          # << EDIT THIS LINE!
 
 cd $INPUT_DIR
