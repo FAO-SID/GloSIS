@@ -16,7 +16,6 @@ OUTPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/tmp"                    
 
 mkdir -p "$OUTPUT_DIR"
 
-
 cp $INPUT_DIR/Bhutan_GSOCseq_AbsDiff_BAU_Map030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGADBAU-$YEAR-$UD-$LD-MEAN.tif
 cp $INPUT_DIR/Bhutan_GSOCseq_AbsDiff_SSM1_Map030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGADSSM1-$YEAR-$UD-$LD-MEAN.tif
 cp $INPUT_DIR/Bhutan_GSOCseq_AbsDiff_SSM2_Map030.tif $OUTPUT_DIR/$COUNTRY-$PROJ-CORGADSSM2-$YEAR-$UD-$LD-MEAN.tif
