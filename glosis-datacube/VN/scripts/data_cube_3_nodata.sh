@@ -46,4 +46,20 @@ for FILE in *.tif; do
 
 done
 
+
+printf "%-8s %-8s %-8s %s\n" "Minimum" "oNoData" "nNoData" "File"
+for FILE in *.tif; do
+
+    CURRENT_NODATA=$(gdalinfo "$FILE" | grep "NoData Value=" | awk -F'NoData Value=' '{print $2}' | tr -d '[:space:]')
+
+    if [[ "$FILE" == *"GSOCSEQ"* ]]; then
+        NODATA=-3.39999995214436425e+38
+        printf "%-8s %-8s %-8s %s\n" "$MIN" "$CURRENT_NODATA" "$NODATA" "$FILE"
+        gdal_calc.py --quiet -A "$FILE" --outfile="${FILE}.tmp.tif" --calc="A*(A!=$CURRENT_NODATA) + ($NODATA)*(A==$CURRENT_NODATA)" --NoDataValue="$NODATA"
+        mv "${FILE}.tmp.tif" "$FILE"
+    fi
+
+done
+
+
 rm -f *.tif.aux.xml
