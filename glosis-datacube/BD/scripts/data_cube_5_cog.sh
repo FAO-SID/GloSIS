@@ -57,12 +57,12 @@ for FILE in *.tif; do
     OUTPUT_FILE="$OUTPUT_DIR/$BASENAME"
 
     # Set resolution based on filename
-    if [[ "$BASENAME" == *"GSAS"* ]]; then
-        XRES=0.0083333 # 1000 meters in degrees
-        YRES=0.0083333 # 1000 meters in degrees
-    else
+    if [[ "$BASENAME" == *"GSNM"* ]]; then
         XRES=0.0022457 # 250 meters in degrees
         YRES=0.0022457 # 250 meters in degrees
+    else
+        XRES=0.0083333 # 1000 meters in degrees
+        YRES=0.0083333 # 1000 meters in degrees
     fi
 
     # Align GeoTIFFs
