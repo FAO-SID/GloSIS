@@ -1,13 +1,13 @@
 #!/bin/bash
 
 ###############################################
-#                NoData & EPSG                #
+#                   NoData                    #
 ###############################################
 
 echo
 
 # Variables
-COUNTRY=ID
+COUNTRY=LA
 INPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/tmp"                          # << EDIT THIS LINE!
 
 cd $INPUT_DIR

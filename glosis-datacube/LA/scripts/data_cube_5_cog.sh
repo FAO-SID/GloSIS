@@ -7,7 +7,7 @@
 echo
 
 # Input and output directories
-COUNTRY=ID
+COUNTRY=LA
 INPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/tmp"                          # << EDIT THIS LINE!
 OUTPUT_DIR="/home/carva014/Downloads/FAO/AFACI/$COUNTRY/output"                      # << EDIT THIS LINE!
 cd $INPUT_DIR
@@ -41,7 +41,7 @@ for FILE in *.tif; do
 
     # Update overall extent
     XMIN=$(echo "$CURRENT_XMIN $XMIN" | awk '{print ($1 > $2) ? $1 : $2}')
-    YMIN=$(echo "$CURRENT_YMIN $YMIN" | awk '{print ($1 < $2) ? $1 : $2}')
+    YMIN=$(echo "$CURRENT_YMIN $YMIN" | awk '{print ($1 > $2) ? $1 : $2}')
     XMAX=$(echo "$CURRENT_XMAX $XMAX" | awk '{print ($1 < $2) ? $1 : $2}')
     YMAX=$(echo "$CURRENT_YMAX $YMAX" | awk '{print ($1 < $2) ? $1 : $2}')
 done
@@ -57,12 +57,12 @@ for FILE in *.tif; do
     OUTPUT_FILE="$OUTPUT_DIR/$BASENAME"
 
     # Set resolution based on filename
-    if [[ "$BASENAME" == *"GSNM"* ]]; then
-        XRES=0.0022457 # 250 meters in degrees
-        YRES=0.0022457 # 250 meters in degrees
-    else
+    if [[ "$BASENAME" == *"GSAS"* ]]; then
         XRES=0.0083333 # 1000 meters in degrees
         YRES=0.0083333 # 1000 meters in degrees
+    else
+        XRES=0.0022457 # 250 meters in degrees
+        YRES=0.0022457 # 250 meters in degrees
     fi
 
     # Align GeoTIFFs
@@ -97,12 +97,12 @@ done
 
 # Create VRTs
 cd $OUTPUT_DIR
-# ls *GSAS*.tif > filelist.txt
-# gdalbuildvrt -q -separate -input_file_list filelist.txt $COUNTRY-GSAS.vrt
-# rm filelist.txt
-ls *GSOCSEQ*.tif > filelist.txt
-gdalbuildvrt -q -separate -input_file_list filelist.txt $COUNTRY-GSOCSEQ.vrt
+ls *GSAS*.tif > filelist.txt
+gdalbuildvrt -q -separate -input_file_list filelist.txt $COUNTRY-GSAS.vrt
 rm filelist.txt
+# ls *GSOCSEQ*.tif > filelist.txt
+# gdalbuildvrt -q -separate -input_file_list filelist.txt $COUNTRY-GSOCSEQ.vrt
+# rm filelist.txt
 # ls *GSNM*.tif > filelist.txt
 # gdalbuildvrt -q -separate -input_file_list filelist.txt $COUNTRY-GSNM.vrt
 # rm filelist.txt

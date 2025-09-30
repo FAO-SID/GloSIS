@@ -25,3 +25,29 @@ psql -h localhost -p 5432 -U glosis -d iso19139 -c "\copy (
         ORDER BY p.project_name, l.layer_id
         ) 
 TO '/home/carva014/Work/Code/FAO/GloSIS/glosis-wm/public/layer_info_${COUNTRY_ID}.csv' WITH CSV HEADER"
+
+
+# psql -h localhost -p 5432 -U glosis -d iso19139 -c "\copy (
+#         SELECT DISTINCT 
+#                 c.en country, 
+#                 m.project_id, 
+#                 m.property_id, 
+#                 p.name property_name, 
+#                 p.unit_of_measure_id unit, 
+#                 m.mapset_id,
+#                 u.url_name,
+#                 u.url
+#         FROM spatial_metadata.mapset m
+#         LEFT JOIN spatial_metadata.country c ON c.country_id=m.country_id
+#         LEFT JOIN spatial_metadata.property p ON p.property_id=m.property_id
+#         LEFT JOIN spatial_metadata.url u ON u.mapset_id=m.mapset_id
+#         WHERE u.protocol = 'WWW:LINK-1.0-http--link'
+#         AND u.url_name ILIKE 'Download%'
+#         ORDER BY m.mapset_id, u.url_name) 
+# TO '/home/carva014/Downloads/GloSIS_download_links.csv' WITH CSV HEADER"
+
+# psql -h localhost -p 5432 -U glosis -d iso19139 -c "\copy (
+#         SELECT property_id, name, unit_of_measure_id
+#         FROM spatial_metadata.property 
+#         ORDER BY name) 
+# TO '/home/carva014/Downloads/GloSIS_properties.csv' WITH CSV HEADER"
