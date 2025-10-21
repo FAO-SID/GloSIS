@@ -1,5 +1,5 @@
 -- OBJECT: core.api_manifest
--- ISSUE: manifest view to show available data
+-- ISSUE: table to expose thru REST API endpoint (1) the available data in the SIS
 
 DROP VIEW IF EXISTS core.vw_api_manifest;
 

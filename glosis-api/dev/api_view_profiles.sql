@@ -1,5 +1,5 @@
 -- OBJECT: core.vw_api_profiles
--- ISSUE: list of profiles
+-- ISSUE: table to expose thru REST API endpoint (2) the list of profiles
 
 
 DROP VIEW IF EXISTS core.vw_api_profiles;

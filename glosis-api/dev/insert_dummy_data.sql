@@ -1,5 +1,5 @@
 -- OBJECT: core.insert_dummy_data()
--- ISSUE: add dummy data
+-- ISSUE: add dummy data to he database
 
 
 -- PL/pgSQL function that inserts dummy data.

@@ -1,5 +1,5 @@
 -- OBJECT: core.vw_api_observations
--- ISSUE: observations per profile
+-- ISSUE: table to expose thru REST API endpoint (3) the observational data
 
 
 DROP VIEW IF EXISTS core.vw_api_observations;
