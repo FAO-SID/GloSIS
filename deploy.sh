@@ -71,7 +71,7 @@ docker cp $PROJECT_DIR/glosis-shiny/global/global.R glosis-shiny:/srv/shiny-serv
 #     glosis-ws    #
 ####################
 
-# Load records
+# Copy .tif and .map files
 rm $PROJECT_DIR/glosis-ws/volume/*.map
 rm $PROJECT_DIR/glosis-ws/volume/*.tif
 cp /home/carva014/Downloads/FAO/AFACI/$COUNTRY/output/*.tif $PROJECT_DIR/glosis-ws/volume
