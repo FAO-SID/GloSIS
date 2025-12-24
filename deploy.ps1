@@ -59,6 +59,10 @@ docker exec -i glosis-db psql -d glosis -U glosis -f /tmp/init-03.sql
 docker compose up --build glosis-shiny -d
 # Update Global.R script to glosis-shiny container
 docker cp "$PROJECT_DIR\glosis-shiny\global\global.R" glosis-shiny:/srv/shiny-server/iso28258/global.R
+# Update server.R script to glosis-shiny container
+docker cp "$PROJECT_DIR\glosis-shiny\global\server.R" glosis-shiny:/srv/shiny-server/iso28258/server.R
+# Update fill_tables.R script to glosis-shiny container
+docker cp "$PROJECT_DIR\glosis-shiny\global\fill_tables.R" glosis-shiny:/srv/shiny-server/iso28258/fill_tables.R
 
 # Build and start other Docker containers
 docker compose up --build glosis-wm -d
@@ -81,4 +85,5 @@ docker-compose exec glosis-db psql -U glosis -d glosis -c "SELECT identifier, ti
 docker-compose exec glosis-md sed -i 's/pycsw website/Philippines SIS metadata/g' pycsw/pycsw/ogc/api/templates/_base.html
 docker-compose exec glosis-md sed -i 's/https:\/\/pycsw.org\/img\/pycsw-logo-vertical.png/https:\/\/www.bswm.da.gov.ph\/wp-content\/uploads\/BAGONG-PILIPINAS.png/g' pycsw/pycsw/ogc/api/templates/_base.html
 docker-compose exec glosis-md sed -i 's/https:\/\/pycsw.org/http:\/\/localhost:8001\/collections\/metadata:main\/items/g' pycsw/pycsw/ogc/api/templates/_base.html
+
 
