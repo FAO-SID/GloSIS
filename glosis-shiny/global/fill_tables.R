@@ -1,3 +1,11 @@
+# LAST UPDATE 24 Dec 2025. It allows the use of duplicated lab properties analysed by different methods
+# CHANGES FRAMED WITH NEW
+
+# Helper function to print to Docker logs
+log_debug <- function(msg) {
+  cat(paste0("[DEBUG] ", Sys.time(), ": ", msg, "\n"), file = stderr())
+}
+
 log_file <- "/srv/shiny-server/init-scripts/logs/error_log.txt"
 
 sql_value <- function(x, is_numeric = FALSE) {
@@ -25,7 +33,7 @@ insert_data_sql <-
     ))
     
     ###################
-
+    
     # METADATA: Insert data into 'metadata' schema tables ----
     tryCatch({
       unique_metadata <- unique(site_tibble[, c(
@@ -684,29 +692,37 @@ insert_data_sql <-
       log_file <- "/srv/shiny-server/init-scripts/logs/error_log.txt"
       
       # Extract unique combinations of relevant columns
+      # Ensure numeric values before the loop
       unique_data <- unique(site_tibble[, c(
         "order_element", "type", "upper_depth", "lower_depth",
         "specimen_code", "profile_code"
       )])
+      unique_data$upper_depth <- as.numeric(unique_data$upper_depth)
+      unique_data$lower_depth <- as.numeric(unique_data$lower_depth)
       
       for (row in 1:nrow(unique_data)) {
         current_row <- unique_data[row, ]
         
-        upper_depth <- as.numeric(current_row$upper_depth)
-        lower_depth <- as.numeric(current_row$lower_depth)
+        upper_depth <- current_row$upper_depth
+        lower_depth <- current_row$lower_depth
         type <- current_row$type
         profile_code <- current_row$profile_code
         specimen_code <- current_row$specimen_code
         
-        # Validate depth rules BEFORE DB insert
+        # Validate BEFORE DB insert
         if (is.na(upper_depth) || is.na(lower_depth)) {
           error_msg <- sprintf(
             "ERROR: Missing depth values in specimen '%s' (profile: '%s').",
             specimen_code, profile_code
           )
-        } else if (upper_depth > lower_depth) {
+        } else if (upper_depth < 0) {
           error_msg <- sprintf(
-            "ERROR: Upper depth (%d) is greater than lower depth (%d) in specimen '%s' (profile: '%s').",
+            "ERROR: Upper depth (%d) is negative in specimen '%s' (profile: '%s').",
+            upper_depth, specimen_code, profile_code
+          )
+        } else if (upper_depth >= lower_depth) {
+          error_msg <- sprintf(
+            "ERROR: Upper depth (%d) must be strictly less than lower depth (%d) in specimen '%s' (profile: '%s').",
             upper_depth, lower_depth, specimen_code, profile_code
           )
         } else if (lower_depth > 500) {
@@ -714,24 +730,23 @@ insert_data_sql <-
             "ERROR: Lower depth (%d) exceeds 500 mm in specimen '%s' (profile: '%s').",
             lower_depth, specimen_code, profile_code
           )
-        } else if (upper_depth < 0) {
-          error_msg <- sprintf(
-            "ERROR: Upper depth (%d) is negative in specimen '%s' (profile: '%s').",
-            upper_depth, specimen_code, profile_code
-          )
         } else {
-          error_msg <- NULL  # No error
+          error_msg <- NULL  # Valid entry
         }
         
-        # If validation failed, show notification and log it
+        # If invalid, notify and log
         if (!is.null(error_msg)) {
-          shiny::showNotification(error_msg, type = "error", duration = 20, session = session)
+          if (exists("session")) {
+            shiny::showNotification(error_msg, type = "error", duration = 30, session = session)
+          }
+          
           timestamped_msg <- sprintf("[%s] %s\n", Sys.time(), error_msg)
           write(timestamped_msg, file = log_file, append = TRUE)
-          next  # Skip this row
+          
+          next  # Skip invalid row
         }
         
-        # Retrieve 'profile_id' based on 'profile_code'
+        # Retrieve profile_id for valid rows
         profile_id_query <- sprintf(
           "SELECT profile_id FROM core.profile WHERE profile_code = %s",
           sql_value(profile_code)
@@ -741,16 +756,16 @@ insert_data_sql <-
         if (nrow(profile_id_result) > 0) {
           profile_id <- profile_id_result$profile_id[1]
           
-          # Construct and execute the insert query for core.element
+          # Build and execute insert query
           insert_element_query <- sprintf(
             "INSERT INTO core.element (profile_id, order_element, upper_depth, lower_depth, type)
-         VALUES (%s, %s, %s, %s, %s)
-         ON CONFLICT DO NOTHING;",
-         sql_value(profile_id, is_numeric = TRUE),
-         sql_value(current_row$order_element, is_numeric = TRUE),
-         sql_value(upper_depth, is_numeric = TRUE),
-         sql_value(lower_depth, is_numeric = TRUE),
-         sql_value(type)
+       VALUES (%s, %s, %s, %s, %s)
+       ON CONFLICT DO NOTHING;",
+       sql_value(profile_id, is_numeric = TRUE),
+       sql_value(current_row$order_element, is_numeric = TRUE),
+       sql_value(upper_depth, is_numeric = TRUE),
+       sql_value(lower_depth, is_numeric = TRUE),
+       sql_value(type)
           )
           
           dbExecute(con, insert_element_query)
@@ -759,8 +774,6 @@ insert_data_sql <-
     }, error = function(e) {
       message(sprintf("Error during element insertion: %s", e$message))
     })
-    
-    
     
     # ----
     # ELEMENT-RESULTS: Insert data into the 'result_desc_element' table ----
@@ -926,17 +939,29 @@ insert_data_sql <-
       procedure_phys_chem_id <- uploaded_df.procedure[[3]]
       unit_of_measure_id <- uploaded_df.procedure[[4]]
       
+      ############## NEW ##############  
+      
+      # unique_data <- site_tibble %>%
+      #   pivot_longer(
+      #     cols = all_of(property_phys_chem_id),
+      #     names_to = "property_phys_chem_id",
+      #     values_to = "value"
+      #   ) %>%
+      #   left_join(
+      #     uploaded_df.procedure %>%
+      #       select(property_phys_chem_id, procedure_phys_chem_id, observation_phys_chem_id),
+      #     by = "property_phys_chem_id"
+      #   )
+      
       unique_data <- site_tibble %>%
         pivot_longer(
           cols = all_of(property_phys_chem_id),
           names_to = "property_phys_chem_id",
           values_to = "value"
         ) %>%
-        left_join(
-          uploaded_df.procedure %>%
-            select(property_phys_chem_id, procedure_phys_chem_id, observation_phys_chem_id),
-          by = "property_phys_chem_id"
-        )
+        mutate(procedure_phys_chem_id = rep(procedure_phys_chem_id, length.out = n()))
+      
+      ############## END NEW ##############  
       
       for (row in 1:nrow(unique_data)) {
         current_row <- unique_data[row, ]
@@ -983,18 +1008,6 @@ insert_data_sql <-
             value_min <- bounds_result$value_min[1]
             value_max <- bounds_result$value_max[1]
             
-            # 5. Check bounds and show message if outside
-            # if ((!is.na(value_min) && value < value_min) || (!is.na(value_max) && value > value_max)) {
-            #   error_msg <- sprintf(
-            #     "ERROR: Value %.3f for property '%s' is outside admissible bounds [%.3f – %.3f].",
-            #     value,
-            #     current_row$property_phys_chem_id,
-            #     ifelse(is.na(value_min), -Inf, value_min),
-            #     ifelse(is.na(value_max),  Inf, value_max)
-            #   )
-            #   shiny::showNotification(error_msg, type = "error", duration = 10, session = session)
-            #   next
-            # }
             
             # 5. Check bounds and show message if outside
             
@@ -1056,4 +1069,3 @@ insert_data_sql <-
     # Notify the user it's ready
     shiny::showNotification("Data processed successfully!", type = "error")
   }
-    
